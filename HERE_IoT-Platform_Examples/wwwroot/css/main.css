@@ -1,0 +1,26 @@
+﻿/* #_div_MapContainer{ */
+/* height:500px; */
+/* width:500px; */
+/* } */
+
+#_div_HeaderContainer {
+    height: 15%;
+}
+
+#_div_HEREMapContainer {
+    position: relative;
+    height: 730px;
+    width: 730px;
+    /*overflow: hidden;*/
+}
+
+#_div_ChartsContainer {
+    position: relative;
+    height: 730px;
+    width: 730px;
+    /*overflow: hidden;*/
+}
+
+#_div_FooterContainer {
+    height: 10%;
+}

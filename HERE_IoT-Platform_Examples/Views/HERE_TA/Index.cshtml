@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "WaliedCheetos: HERE Maps - Traffic Analytics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WaliedCheetos: HERE Maps - Traffic Analytics</title>
+
+    <!-- to ensure best peroformance on mobile devices -->
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <link href="/css/main.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <!-- load the HERE maps required modules -->
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+
+</head>
+<body>
+    <div id="_div_MainContainer">
+        <div id="_div_HeaderContainer">
+            <h3>Walied Cheetos Header</h3>
+        </div>
+        <div id="_div_ChartsContainer">
+            <div id="_div_TestChart">
+                WaliedCheetos Charts
+            </div>
+        </div>
+        <div id="_div_HEREMapContainer"></div>
+
+        <div id="_div_FooterContainer">
+            <h3>Walied Cheetos Footer</h3>
+
+
+        </div>
+    </div>
+
+    @*load custom module*@
+    <script src="/js/config.js"></script>
+    <script src="/js/general.js"></script>
+    <script src="/js/HEREMap.js"></script>
+</body>
+</html>
