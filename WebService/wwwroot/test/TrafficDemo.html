@@ -1,0 +1,1050 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <!--<link rel="stylesheet" type="text/css" href="demo.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="../template.css" />
+    <script type="text/javascript" src='../test-credentials.js'></script>-->
+    <!-- Load jQuery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!-- Load d3.js -->
+    <!--<script src="https://d3js.org/d3.v4.js"></script>-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- Load here maps libs -->
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <!--<script type="text/javascript" src='../js-examples-rendering-helpers/iframe-height.js'></script>-->
+
+    <style type="text/css">
+        /* DivTable.com */
+        .divTable {
+            display: table;
+            width: 100%;
+        }
+
+        .divTableRow {
+            display: table-row;
+        }
+
+        .divTableHeading {
+            background-color: #EEE;
+            display: table-header-group;
+        }
+
+        .divTableCell, .divTableHead {
+            border: 1px solid #999999;
+            display: table-cell;
+            /*padding: 3px 3px;*/
+        }
+
+        .divTableHeading {
+            background-color: #EEE;
+            display: table-header-group;
+            font-weight: bold;
+        }
+
+        .divTableFoot {
+            background-color: #EEE;
+            display: table-footer-group;
+            font-weight: bold;
+        }
+
+        .divTableBody {
+            display: table-row-group;
+        }
+
+        .parent {
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .children {
+            display: inline-block;
+            /*margin-left: 20px;*/
+        }
+
+        #map {
+            /*width: 95%;*/
+            /*height: 150px;*/
+            height: 550px;
+            /*background: grey;*/
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+
+        <div class="divTable" style="border: 2px solid #000;">
+            <div class="divTableBody">
+                <div class="divTableRow">
+                    <div class="divTableCell" id="map" style="width:85%"></div>
+                    <div class="divTableCell" id="TrafficCongestion_Coverage" style="width:15%">
+                        <img src="../images/TrafficCongestion_Coverage_Dubai.png" />
+                    </div>
+
+                    <!--<div class="divTableCell" id="test"><input type="button" value="Test Ajax Call" id="TestAjaxCall" onclick="_fx_TestAjaxCall()" /></div>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="divTable" style="border: 2px solid #000;">
+            <div class="divTableBody">
+                <div class="divTableRow">
+                    <div class="divTableCell" id="chart_TrafficCongestionPerDay_North" style="width:40%;height:100%"></div>
+                    <div class="divTableCell" id="chartKPIs_TrafficCongestionPerDay" style="width:20%;height:100%"></div>
+                    <div class="divTableCell" id="chart_TrafficCongestionPerDay_South" style="width:40%;height:100%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divTable" style="border: 2px solid #000;">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell" id="chart_TrafficCongestionPerHour_North" style="width:40%;height:100%"></div>
+                <div class="divTableCell" id="chartKPIs_TrafficCongestionPerHour" style="width:20%;height:100%"></div>
+                <div class="divTableCell" id="chart_TrafficCongestionPerHour_South" style="width:40%;height:100%"></div>
+            </div>
+        </div>
+            </div>
+
+    </div>
+    <script type="text/javascript">
+
+        //import { isolineColors, opacity } from "../assets/data/mapStyle";
+        //import { svgMarker, svgLandmark, svgMoveMe } from "../assets/data/svgString";
+
+        //const icons = {
+        //    empty: new H.map.Icon('<svg></svg>'),
+        //    center: new H.map.Icon(svgMarker),
+        //    moveme: new H.map.Icon(svgMoveMe),
+        //    landmarks: new H.map.Icon(svgLandmark)
+        //};
+
+        var config = {
+            HEREIoT_AppID: "Lrw0yF4Z4nFpEe7jJxcd",
+            HEREIoT_AppCode: "9zhfUoi6kIHQqt85SunXuw",
+            HEREIoT_AppKey: "pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E",
+            HEREIoT_initial_zoom: 10,
+
+            ////dubai
+            HEREIoT_initial_longitude: 55.11025,//55.19,
+            HEREIoT_initial_latitude: 24.98241,//25.07,
+
+            
+
+            //HEREIoT_initial_longitude: -121.4252,
+            //HEREIoT_initial_latitude: 37.7397,
+
+            //HEREIoT_initial_longitude: 50,
+            //HEREIoT_initial_latitude: 5,
+
+            HEREIoT_DubamiMall_longitude: 55.27991,
+            HEREIoT_DubaiMall_latitude: 25.19893,
+
+
+
+            ////paris
+            //HEREIoT_initial_longitude: 2.29713,
+            //HEREIoT_initial_latitude: 48.8576,
+
+            HEREIoT_initial_tilt: 75,
+            HEREIoT_initial_heading: 213,
+            HEREIoT_UseCustomizedMapControl: true,
+
+            HEREIoT_Isoline_RestAPI: "https://isoline.route.api.here.com/routing/7.2/calculateisoline.json",
+            HEREIoT_Routing_RestAPI: "https://route.api.here.com/routing/7.2/calculateroute.json",
+
+            WCheetosAPI_EndPoint_URL: 'https://localhost:44361/api/AdminWebService/GenericJSONRequest',
+            WCheetosAPI_User: 'WaliedCheetos',
+            WCheetosAPI_Token: 'WaliedCheetos-Token'
+        };
+
+        var LogLevels = {
+            ERROR: 'ERROR',
+            DEBUG: 'DEBUG',
+            INFO: 'INFO',
+            TRACE: 'TRACE',
+            WARN: 'WARN'
+        };
+
+        var TrafficCongestionTimePatterns = {
+            PerDay: 'PerDay',
+            PerHour: 'PerHour'
+        };
+
+        var TrafficCongestionDirection = {
+            North: 'N',
+            South: 'S'
+        };
+
+        var bubble;
+        var isolinePolygon;
+
+        var dataPoints_TrafficCongestionPerDay = [];
+        var dataPoints_TrafficCongestionPerHour = [];
+
+        //var isolinestartMappedPosition;
+        //var x, y, z, xx, yy;
+
+        function _fx_TestAjaxCall() {
+            alert('Hollla');
+
+            postData = {
+                User: 'WaliedCheetos',
+                Token: 'WaliedCheetos-Token',
+                Method: 'GetCongestionFactorByLinkIds',
+                Data: { LinkIds: '117940272, 117940273', TimePattern: 'PerDay', Direction: 'N' }
+            };
+
+            try {
+                $.ajax({
+                    url: 'https://localhost:44361/api/AdminWebService/GenericJSONRequest',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    data: JSON.stringify(postData),
+                    success: function (data) {
+                        alert('Success: ' + data);
+                    }
+                    , failure: function (data) {
+                        alert('Failure: ' + data);
+                    }
+                    , error: function (data) {
+                        alert('Error: ' + data);
+                        reject();
+                    }
+                });
+            } catch (e) {
+                alert(e);
+            }
+        }
+
+        function _fx_Log(LogMessage, LogLevel) {
+            try {
+                switch (LogLevel) {
+                    case LogLevels.DEBUG:
+                        console.debug(LogMessage);
+                    case LogLevels.INFO:
+                        console.info(LogMessage);
+                    case LogLevels.ERROR:
+                        console.error(LogMessage);
+                    case LogLevels.TRACE:
+                        console.trace(LogMessage);
+                    case LogLevels.WARN:
+                        console.warn(LogMessage);
+                    default:
+                        console.log(LogMessage);
+                }
+            }
+            catch (e) {
+                console.error(e);
+            }
+        }
+
+        /**
+         * @param {H.mapevents.Event} e The event object
+         */
+        function onTap(evt) {
+
+            // calculate infobubble position from the cursor screen coordinates
+            let position = map.screenToGeo(
+                evt.currentPointer.viewportX,
+                evt.currentPointer.viewportY
+            );
+            // read the properties associated with the map feature that triggered the event
+            let props = evt.target.getData().properties;
+
+            // create a content for the infobubble
+            let content =
+                'It is a ' + props.kind + ' ' + (props.kind_detail || '')
+                + (props.population ? 'population: ' + props.population : '')
+                + 'local name is ' + props['name'] + (props['name:ar'] ? 'name in Arabic is ' + props['name:ar'] : '') + '';
+
+            // Create a bubble, if not created yet
+            if (!bubble) {
+                bubble = new H.ui.InfoBubble(position, {
+                    content: content
+                });
+                ui.addBubble(bubble);
+            } else {
+                // Reuse existing bubble object
+                bubble.setPosition(position);
+                bubble.setContent(content);
+                bubble.open();
+            }
+        }
+
+        /**
+        * @param  {H.Map} map      A HERE Map instance within the application
+        */
+        function setInteractive(map) {
+            // get the vector provider from the base layer
+            var provider = map.getBaseLayer().getProvider();
+
+            // get the style object for the base layer
+            var style = provider.getStyle();
+
+            var changeListener = (evt) => {
+                if (style.getState() === H.map.Style.State.READY) {
+                    style.removeEventListener('change', changeListener);
+
+                    // enable interactions for the desired map features
+                    style.setInteractive(['places', 'places.populated-places'], true);
+
+                    // add an event listener that is responsible for catching the
+                    // 'tap' event on the feature and showing the infobubble
+                    provider.addEventListener('tap', onTap);
+                }
+            };
+            style.addEventListener('change', changeListener);
+        }
+
+
+        /**
+         * Adds a  draggable marker to the map..
+         *
+         * @param {H.Map} map                      A HERE Map instance within the
+         *                                         application
+         * @param {H.mapevents.Behavior} behavior  Behavior implements
+         *                                         default interactions for pan/zoom
+         */
+        function addDraggableMarker(map, behavior) {
+            try {
+                var marker = new H.map.Marker(
+                    {
+                        lat: config.HEREIoT_initial_latitude,
+                        lng: config.HEREIoT_initial_longitude
+                    }, {
+                    // mark the object as volatile for the smooth dragging
+                    volatility: true,
+                    //set customer icon to the marker
+                    icon: new H.map.Icon("../images/marker_position.png", { size: { w: 33, h: 33 } })
+                });
+                // Ensure that the marker can receive drag events
+                marker.draggable = true;
+                map.addObject(marker);
+
+                // disable the default draggability of the underlying map
+                // and calculate the offset between mouse and target's position
+                // when starting to drag a marker object:
+                map.addEventListener('dragstart', function (ev) {
+                    //if (isolinestartMappedPosition)
+                    //    map.removeObject(isolinestartMappedPosition);
+
+                    //if (x)
+                    //    map.removeObject(x);
+                    //if (y)
+                    //    map.removeObject(y);
+                    //if (z)
+                    //    map.removeObject(z);
+                    //if (xx)
+                    //    map.removeObject(xx);
+                    //if (yy)
+                    //    map.removeObject(yy);
+
+                    if (isolinePolygon)
+                        map.removeObject(isolinePolygon);
+
+                    var target = ev.target,
+                        pointer = ev.currentPointer;
+                    if (target instanceof H.map.Marker) {
+                        var targetPosition = map.geoToScreen(target.getGeometry());
+                        target['offset'] = new H.math.Point(pointer.viewportX - targetPosition.x, pointer.viewportY - targetPosition.y);
+                        behavior.disable();
+                    }
+                }, false);
+
+
+                // re-enable the default draggability of the underlying map
+                // when dragging has completed
+                map.addEventListener('dragend', function (ev) {
+                    var target = ev.target;
+                    if (target instanceof H.map.Marker) {
+                        const center = map.screenToGeo(ev.currentPointer.viewportX, ev.currentPointer.viewportY);
+
+                        // Center and zoom the map so that the whole isoline polygon is in the viewport:
+                        map.setCenter(center, true);
+
+                        getIsoline(center.lat, center.lng, 1, 3, 3, map);
+
+                        behavior.enable();
+                    }
+                }, false);
+
+                // Listen to the drag event and move the position of the marker
+                // as necessary
+                map.addEventListener('drag', function (ev) {
+                    var target = ev.target,
+                        pointer = ev.currentPointer;
+                    if (target instanceof H.map.Marker) {
+                        //target.setGeometry(map.screenToGeo(pointer.viewportX - target['offset'].x, pointer.viewportY - target['offset'].y));
+                        target.setGeometry(map.screenToGeo(pointer.viewportX, pointer.viewportY));
+                    }
+                }, false);
+
+            } catch (e) {
+                _fx_Log(e, LogLevels.ERROR);
+            }
+        }
+
+        //function getIsoline({ lat, lng }: { lat: number, lng: number }, hour: number, range: string, quality: number) {
+        function getIsoline(lat, lng, hour, range, quality, map) {
+            return new Promise((resolve, reject) => {
+                // ref: https://developer.here.com/api-explorer/rest/routing/time-based-isoline-start-as-center
+                // ref: https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html
+                // ref: https://developer.here.com/documentation/routing/topics/resource-param-type-routing-mode.html
+                // Remove .cit and use the production environment when ready.
+                const now = new Date();
+                const dateString = now.toISOString().slice(0, 11) + (hour < 10 ? '0' : '') + String(hour) + ':00:00';
+                //console.log(dateString);
+
+                $.ajax({
+                    url: config.HEREIoT_Isoline_RestAPI,
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    jsonp: 'jsoncallback',
+                    data: {
+                        app_id: config.HEREIoT_AppID,
+                        app_code: config.HEREIoT_AppCode,
+                        mode: /*fastest*/'balanced;car;traffic:enabled',
+                        start: String(lat) + ',' + String(lng),
+                        rangetype: 'time',
+                        range: Number(range) * 60, // min = > in sec
+                        departure: dateString,//'now',
+                        singlecomponent: true,
+                        quality: quality, // 1 (best), 2, 3
+                        //maxpoints: 300 // to test
+                        //resolution=?
+                    },
+                    success: function (data) {
+                        // data
+                        if (!data.response) {
+                            _fx_Log("api can't get back isolines", LogLevels.ERROR);
+                            reject();
+                        } else {
+                            //console.log("api resolve:", data.response.metaInfo)
+                            _fx_Log(("api resolve: " + data.response.metaInfo), LogLevels.INFO);
+
+                            try {
+                                var center = new H.geo.Point(data.response.center.latitude, data.response.center.longitude);
+                                var startMappedPosition = new H.geo.Point(data.response.start.mappedPosition.latitude, data.response.start.mappedPosition.longitude);
+                                const shape = data.response.isoline[0].component[0].shape
+
+                                const points = shape.map(function (str) {
+                                    const point = str.split(",")
+                                    return { lat: parseFloat(point[0]), lng: parseFloat(point[1]) };
+                                });
+
+                                resolve(points);
+
+                                isolineCoords = data.response.isoline[0].component[0].shape;
+                                linestring = new H.geo.LineString();
+
+                                // Add the returned isoline coordinates to a linestring
+                                isolineCoords.forEach(function (coords) {
+                                    linestring.pushLatLngAlt.apply(linestring, coords.split(','));
+                                });
+
+                                // Create a polygon and a marker representing the isoline
+                                isolinePolygon = new H.map.Polygon(linestring);
+
+                                //x = new H.map.Marker(new H.geo.Point(isolinePolygon.getBoundingBox().getTop(), isolinePolygon.getBoundingBox().getLeft()));
+                                //y = new H.map.Marker(new H.geo.Point(isolinePolygon.getBoundingBox().getBottom(), isolinePolygon.getBoundingBox().getRight()));
+                                //z = new H.map.Marker(new H.geo.Point(isolinePolygon.getBoundingBox().getTop(), isolinePolygon.getBoundingBox().getRight()));
+                                //xx = new H.map.Marker(new H.geo.Point(isolinePolygon.getBoundingBox().getBottom(), isolinePolygon.getBoundingBox().getLeft()));
+                                //yy = new H.map.Rect(new H.geo.Rect(isolinePolygon.getBoundingBox().getTop(), isolinePolygon.getBoundingBox().getRight(), isolinePolygon.getBoundingBox().getBottom(), isolinePolygon.getBoundingBox().getLeft())); isolinePolygon.getBoundingBox();
+
+                                // Add the polygon and marker to the map
+                                map.addObjects([isolinePolygon]);
+                                //map.addObjects([x, y, z, xx, yy, isolinePolygon]);
+
+                                // Center and zoom the map so that the whole isoline polygon is in the viewport:
+                                //map.setViewBounds(isolinePolygon.getBounds());
+                                // get geo bounding box for the group and set it to the map
+                                map.getViewModel().setLookAtData({
+                                    bounds: isolinePolygon.getBoundingBox()
+                                });
+
+
+                                //caluculate the route between the mapped position point, and the configuration point for now
+                                getRoute(
+                                    data.response.start.mappedPosition.latitude,
+                                    data.response.start.mappedPosition.longitude,
+                                    config.HEREIoT_DubaiMall_latitude,
+                                    config.HEREIoT_DubamiMall_longitude,
+                                    "car",
+                                    1
+                                );
+                            } catch (e) {
+                                _fx_Log(e, LogLevels.ERROR);
+                            }
+                        }
+                        //console.log(JSON.stringify(shape));
+                        //console.log(points);
+                    }
+                    , error: function () {
+                        reject();
+                    }
+                });
+            });
+        }
+
+        function getRoute(Pnt0_lat, Pnt0_lng, Pnt1_lat, Pnt1_lng, transportMode, hour) {
+            return new Promise((resolve, reject) => {
+                // ref: https://developer.here.com/api-explorer/rest/routing/time-based-isoline-start-as-center
+                // ref: https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html
+                // ref: https://developer.here.com/documentation/routing/topics/resource-param-type-routing-mode.html
+                // Remove .cit and use the production environment when ready.
+                const now = new Date();
+                const dateString = now.toISOString().slice(0, 11) + (hour < 10 ? '0' : '') + String(hour) + ':00:00';
+                //console.log(dateString);
+
+                $.ajax({
+                    url: config.HEREIoT_Routing_RestAPI,
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    jsonp: 'jsoncallback',
+                    data: {
+                        app_id: config.HEREIoT_AppID,
+                        app_code: config.HEREIoT_AppCode,
+                        metricsystem: 'metric',
+                        mode: /*fastest*/'balanced;' + transportMode + ';traffic:enabled',
+                        waypoint0: 'geo!stopOver!' + String(Pnt0_lat) + ',' + String(Pnt0_lng),
+                        waypoint1: 'geo!stopOver!' + String(Pnt1_lat) + ',' + String(Pnt1_lng),
+                        departure: dateString,//'now',
+                        //arrival: dateString, //should always be sometime in the future
+                        linkAttributes: 'all',
+                        legAttributes: 'all',
+                    },
+                    success: function (data) {
+                        // data
+                        if (!data.response) {
+                            _fx_Log("api can't get back routes", LogLevels.ERROR);
+                            reject();
+                        } else {
+                            _fx_Log(("api resolve: " + data.response.metaInfo), LogLevels.INFO);
+
+                            try {
+                                var LinkIds_Array = [];
+
+                                for (var i = 0; i < data.response.route[0].leg[0].link.length; i++) {
+                                    LinkId = data.response.route[0].leg[0].link[i].linkId;
+                                    LinkId = LinkId.replace('+', '');
+                                    LinkId = LinkId.replace('-', '');
+                                    LinkIds_Array.push(LinkId);
+                                }
+
+                                getCongestionFactorsByLinkIds(LinkIds_Array.join(), TrafficCongestionTimePatterns.PerDay, 1);
+                                getCongestionFactorsByLinkIds(LinkIds_Array.join(), TrafficCongestionTimePatterns.PerHour, 1);
+                            } catch (e) {
+                                _fx_Log(e, LogLevels.ERROR);
+                            }
+                        }
+                    }
+                    , error: function (error) {
+                        _fx_Log(error, LogLevels.ERROR);
+                        reject();
+                    }
+                });
+            });
+        }
+
+        function getCongestionFactorByLinkIds(linkIds, timePattern, direction, hour) {
+            return new Promise((resolve, reject) => {
+                const now = new Date();
+                const dateString = now.toISOString().slice(0, 11) + (hour < 10 ? '0' : '') + String(hour) + ':00:00';
+                //console.log(dateString);
+
+                postData = {
+                    User: config.WCheetosAPI_User,
+                    Token: config.WCheetosAPI_Token,
+                    Method: 'GetCongestionFactorByLinkIds',
+                    Data: {
+                        LinkIds: linkIds,
+                        TimePattern: timePattern,
+                        Direction: direction
+                    }
+                };
+
+                $.ajax({
+                    url: config.WCheetosAPI_EndPoint_URL,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    data: JSON.stringify(postData),
+                    success: function (data) {
+                        //clear the chart data points array
+                        dataPoints_TrafficCongestionPerDay = [];
+                        dataPoints_TrafficCongestionPerHour = [];
+                        var responseData_JsonObject = JSON.parse(data.responseData)
+                        for (var i = 0; i < responseData_JsonObject.length; i++) {
+                            dataPoints_TrafficCongestionPerDay.push({
+                                label: responseData_JsonObject[i].WeekDay,
+                                y: parseFloat(responseData_JsonObject[i].Congestion_Factor),
+                            });
+                        }
+                        var chart_TrafficCongestionPerDay = new CanvasJS.Chart("chart_TrafficCongestionPerDay", {
+                            animationEnabled: true,
+                            theme: "light2",
+                            title: {
+                                text: "HERE Traffic Congestion Per Day"
+                            },
+                            axisx: {
+                                title: "Day of the Week",
+                                titleFontSize: 24
+                            },
+                            axisY: {
+                                title: "Traffic Congestion Factor (in %)",
+                                suffix: "%",
+                                includeZero: false,
+                                titleFontSize: 24
+                            },
+                            data: [{
+                                type: "column",
+                                //yValueFormatString: "#,### Units",
+                                dataPoints: dataPoints_TrafficCongestionPerDay
+                            }]
+                        });
+                        chart_TrafficCongestionPerDay.render();
+
+                        var dataPoints_TrafficCongestionPerDay_Max = dataPoints_TrafficCongestionPerDay.find(function (j) { return j['y'] = Math.max.apply(Math, dataPoints_TrafficCongestionPerDay.map(function (i) { return i['y']; })) });
+                        alert('Maximum Traffic Congestion Per Day: ' + dataPoints_TrafficCongestionPerDay_Max.label + ' - ' + dataPoints_TrafficCongestionPerDay_Max.y);
+                        //alert('Success: ' + data.responseData);
+                        //// data
+                        //if (!data.response) {
+                        //    _fx_Log("api can't get back routes", LogLevels.ERROR);
+                        //    reject();
+                        //} else {
+                        //    _fx_Log(("api resolve: " + data.response.metaInfo), LogLevels.INFO);
+
+                        //    try {
+                        //        var LinkIds_Array = [];
+
+                        //        for (var i = 0; i < data.response.route[0].leg[0].link.length; i++) {
+                        //            LinkId = data.response.route[0].leg[0].link[i].linkId;
+                        //            LinkId = LinkId.replace('+', '');
+                        //            LinkId = LinkId.replace('-', '');
+                        //            LinkIds_Array.push(LinkId);
+                        //        }
+                        //        alert(LinkIds_Array.join());
+                        //    } catch (e) {
+                        //        _fx_Log(e, LogLevels.ERROR);
+                        //    }
+                        //}
+                    }
+                    , failure: function (data) {
+                        _fx_Log(data, LogLevels.ERROR);
+                        alert('Failure: ' + data);
+                        reject();
+                    }
+                    , error: function (data) {
+                        _fx_Log(data, LogLevels.ERROR);
+                        alert('Error: ' + data);
+                        reject();
+                    }
+                });
+            });
+        }
+
+        function getCongestionFactorsByLinkIds(linkIds, timePattern, hour) {
+            return new Promise((resolve, reject) => {
+                const now = new Date();
+                const dateString = now.toISOString().slice(0, 11) + (hour < 10 ? '0' : '') + String(hour) + ':00:00';
+                //console.log(dateString);
+
+                postData = {
+                    User: config.WCheetosAPI_User,
+                    Token: config.WCheetosAPI_Token,
+                    Method: 'GetCongestionFactorsByLinkIds',
+                    Data: {
+                        LinkIds: linkIds,
+                        TimePattern: timePattern
+                    }
+                };
+
+                $.ajax({
+                    url: config.WCheetosAPI_EndPoint_URL,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    data: JSON.stringify(postData),
+                    success: function (data) {
+
+                        var responseData_JsonObject = JSON.parse(data.responseData)
+
+                        //#region Traffic Congestion PerDay
+                        if (timePattern == TrafficCongestionTimePatterns.PerDay) {
+                            //clear the chart data points array
+                            dataPoints_TrafficCongestionPerDay = [];
+                            for (var i = 0; i < responseData_JsonObject.length; i++) {
+                                dataPoints_TrafficCongestionPerDay.push({
+                                    label: responseData_JsonObject[i].WeekDay,
+                                    y: parseFloat(responseData_JsonObject[i].Congestion_Factor),
+                                    //x: i+1,
+                                    Travel_Direction: (responseData_JsonObject[i].Travel_Direction)
+                                });
+                            }
+
+                            var dataPoints_TrafficCongestionPerDay_North = dataPoints_TrafficCongestionPerDay.filter(function (v, i) {
+                                return v['Travel_Direction'] === 'T';
+                            });
+
+                            var dataPoints_TrafficCongestionPerDay_South = dataPoints_TrafficCongestionPerDay.filter(function (v, i) {
+                                return v['Travel_Direction'] === 'F';
+                            });
+
+                            var chart_TrafficCongestionPerDay_North = new CanvasJS.Chart("chart_TrafficCongestionPerDay_North", {
+                                animationEnabled: true,
+                                exportEnabled: true,
+                                theme: "light2",
+                                title: {
+                                    text: "HERE Traffic Congestion Per Day",
+                                    fontSize: 23
+                                },
+                                subtitles: [
+                                    {
+                                        text: "North Direction",
+                                        //Uncomment properties below to see how they behave
+                                        //fontColor: "red",
+                                        fontSize: 19
+                                    }],
+                                axisx: {
+                                    title: "Day of the Week",
+                                    titleFontSize: 13
+                                },
+                                axisY: {
+                                    title: "Traffic Congestion Factor (in %)",
+                                    suffix: "%",
+                                    includeZero: false,
+                                    titleFontSize: 13
+                                },
+                                data: [{
+                                    type: "column",
+                                    //yValueFormatString: "#,### Units",
+                                    dataPoints: dataPoints_TrafficCongestionPerDay_North
+                                }]
+                            });
+                            var chart_TrafficCongestionPerDay_South = new CanvasJS.Chart("chart_TrafficCongestionPerDay_South", {
+                                animationEnabled: true,
+                                exportEnabled: true,
+                                theme: "light2",
+                                title: {
+                                    text: "HERE Traffic Congestion Per Day",
+                                    fontSize: 23
+                                },
+                                subtitles: [
+                                    {
+                                        text: "South Direction",
+                                        //Uncomment properties below to see how they behave
+                                        //fontColor: "red",
+                                        fontSize: 19
+                                    }],
+                                axisx: {
+                                    title: "Day of the Week",
+                                    titleFontSize: 15
+                                },
+                                axisY: {
+                                    title: "Traffic Congestion Factor (in %)",
+                                    suffix: "%",
+                                    includeZero: false,
+                                    titleFontSize: 15
+                                },
+                                data: [{
+                                    type: "column",
+                                    //yValueFormatString: "#,### Units",
+                                    dataPoints: dataPoints_TrafficCongestionPerDay_South
+                                }]
+                            });
+
+                            chart_TrafficCongestionPerDay_North.render();
+                            chart_TrafficCongestionPerDay_South.render();
+
+
+
+                            var dataPoints_TrafficCongestionPerDay_North_Max = dataPoints_TrafficCongestionPerDay_North.filter(function (v, i) {
+                                return v['y'] === Math.max.apply(Math, dataPoints_TrafficCongestionPerDay_North.map(function (i) {
+                                    return i['y'];
+                                }));
+                            });
+
+                            var dataPoints_TrafficCongestionPerDay_North_Min = dataPoints_TrafficCongestionPerDay_North.filter(function (v, i) {
+                                return v['y'] === Math.min.apply(Math, dataPoints_TrafficCongestionPerDay_North.map(function (i) {
+                                    return i['y'];
+                                }));
+                            });
+
+                            var dataPoints_TrafficCongestionPerDay_South_Max = dataPoints_TrafficCongestionPerDay_South.filter(function (v, i) {
+                                return v['y'] === Math.max.apply(Math, dataPoints_TrafficCongestionPerDay_South.map(function (i) {
+                                    return i['y'];
+                                }));
+                            });
+
+                            var dataPoints_TrafficCongestionPerDay_South_Min = dataPoints_TrafficCongestionPerDay_South.filter(function (v, i) {
+                                return v['y'] === Math.min.apply(Math, dataPoints_TrafficCongestionPerDay_South.map(function (i) {
+                                    return i['y'];
+                                }));
+                            });
+
+                            $('#chartKPIs_TrafficCongestionPerDay').html(
+                                "<div class'parent'><img src='../images/Thumbs-down.png' alt='Thumbs-down' style'display: inline-block;'></img><h2 class=style'display: inline-block;'>Worst Day (North Direction): </h2>" + "<h4 style'display: inline-block;'>" + dataPoints_TrafficCongestionPerDay_North_Max[0].label + " (" + dataPoints_TrafficCongestionPerDay_North_Max[0].y + " %)" + "</h4></div>"
+                                + "</br>"
+                                + "<img src='../images/Thumbs-up.png' alt='Thumbs-up' style'display: inline-block;'></img><h2 style'display: inline-block;'>Best Day (North Direction): </h2>" + "<h4 style'display: inline-block;'>" + dataPoints_TrafficCongestionPerDay_North_Min[0].label + " (" + dataPoints_TrafficCongestionPerDay_North_Min[0].y + " %)" + "</h4>"
+                                + "</br>"
+                                + "<img src='../images/Thumbs-down.png' alt='Thumbs-down' style'display: inline-block;'></img><h2 style'display: inline-block;'>Worst Day (South Direction): </h2>" + "<h4 style'display: inline-block;'>" + dataPoints_TrafficCongestionPerDay_South_Max[0].label + " (" + dataPoints_TrafficCongestionPerDay_South_Max[0].y + " %)" + "</h4>"
+                                + "</br>"
+                                + "<img src='../images/Thumbs-up.png' alt='Thumbs-up' style'display: inline-block;'></img><h2 style'display: inline-block;'>Best Day (South Direction): </h2>" + "<h4 style'display: inline-block;'>" + dataPoints_TrafficCongestionPerDay_South_Min[0].label + " (" + dataPoints_TrafficCongestionPerDay_South_Min[0].y + " %)" + "</h4>"
+
+                            );
+
+                            //alert('Maximum Traffic Congestion Per Day (North Direction): ' + dataPoints_TrafficCongestionPerDay_North_Max[0].label + ' - ' + dataPoints_TrafficCongestionPerDay_North_Max[0].y);
+                            //alert('Maximum Traffic Congestion Per Day (South Direction): ' + dataPoints_TrafficCongestionPerDay_South_Max[0].label + ' - ' + dataPoints_TrafficCongestionPerDay_South_Max[0].y);
+
+
+                            
+                        }
+                        //#endregion
+
+
+                        //#region Traffic Congestion PerHour
+                        else if (timePattern == TrafficCongestionTimePatterns.PerHour) {
+                            //clear the chart data points array
+                            dataPoints_TrafficCongestionPerHour = [];
+
+                            for (var i = 0; i < responseData_JsonObject.length; i++) {
+                                dataPoints_TrafficCongestionPerHour.push({
+                                    WeekDay: responseData_JsonObject[i].WeekDay,
+                                    WeekDayDateTime: responseData_JsonObject[i].WeekDayDateTime,
+                                    label: responseData_JsonObject[i].WeekDayHour,
+                                    y: parseFloat(responseData_JsonObject[i].Congestion_Factor),
+                                    //x: i+1,
+                                    Travel_Direction: (responseData_JsonObject[i].Travel_Direction),
+                                    Travel_Day: (new Date(responseData_JsonObject[i].WeekDayHour)).getUTCDay()
+                                });
+                            }
+
+                            var dataPoints_TrafficCongestionPerHour_North = dataPoints_TrafficCongestionPerHour.filter(function (v, i) {
+                                return v['Travel_Direction'] === 'T';
+                            });
+                            var dataPoints_TrafficCongestionPerHour_South = dataPoints_TrafficCongestionPerHour.filter(function (v, i) {
+                                return v['Travel_Direction'] === 'F';
+                            });
+
+                            chart_TrafficCongestionPerHour_North = new CanvasJS.Chart("chart_TrafficCongestionPerHour_North", {
+                                animationEnabled: true,
+                                exportEnabled: true,
+                                theme: "light2",
+                                title: {
+                                    text: "HERE Traffic Congestion Per Hour",
+                                    fontSize: 23
+                                },
+                                subtitles: [
+                                    {
+                                        text: "North Direction",
+                                        //Uncomment properties below to see how they behave
+                                        //fontColor: "red",
+                                        fontSize: 19
+                                    }],
+                                axisY: {
+                                    title: "Traffic Congestion Factor (in %)",
+                                    suffix: "%",
+                                    includeZero: false,
+                                    titleFontSize: 15
+                                },
+                                toolTip: {
+                                    shared: true
+                                },
+                                legend: {
+                                    cursor: "pointer",
+                                    itemclick: toggleDataSeries
+                                },
+                                data: [{
+                                    type: "spline",
+                                    name: "Sunday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_North).Sunday
+                                }, {
+                                    type: "spline",
+                                    name: "Monday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_North).Monday
+                                }, {
+                                    type: "spline",
+                                    name: "Tuesday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_North).Tuesday
+                                }, {
+                                    type: "spline",
+                                    name: "Wednesday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_North).Wednesday
+                                }, {
+                                    type: "spline",
+                                    name: "Thursday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_North).Thursday
+                                }, {
+                                    type: "spline",
+                                    name: "Friday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_North).Friday
+                                }, {
+                                    type: "spline",
+                                    name: "Saturday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_North).Saturday
+                                }]
+                            });
+                            chart_TrafficCongestionPerHour_South = new CanvasJS.Chart("chart_TrafficCongestionPerHour_South", {
+                                animationEnabled: true,
+                                exportEnabled: true,
+                                theme: "light2",
+                                title: {
+                                    text: "HERE Traffic Congestion Per Hour",
+                                    fontSize: 23
+                                },
+                                subtitles: [
+                                    {
+                                        text: "South Direction",
+                                        //Uncomment properties below to see how they behave
+                                        //fontColor: "red",
+                                        fontSize: 19
+                                    }],
+                                axisY: {
+                                    title: "Traffic Congestion Factor (in %)",
+                                    suffix: "%",
+                                    includeZero: false,
+                                    titleFontSize: 15
+                                },
+                                toolTip: {
+                                    shared: true
+                                },
+                                legend: {
+                                    cursor: "pointer",
+                                    itemclick: toggleDataSeries
+                                },
+                                data: [{
+                                    type: "spline",
+                                    name: "Sunday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_South).Sunday
+                                }, {
+                                    type: "spline",
+                                    name: "Monday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_South).Monday
+                                }, {
+                                    type: "spline",
+                                    name: "Tuesday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_South).Tuesday
+                                }, {
+                                    type: "spline",
+                                    name: "Wednesday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_South).Wednesday
+                                }, {
+                                    type: "spline",
+                                    name: "Thursday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_South).Thursday
+                                }, {
+                                    type: "spline",
+                                    name: "Friday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_South).Friday
+                                }, {
+                                    type: "spline",
+                                    name: "Saturday",
+                                    showInLegend: true,
+                                    dataPoints: d3.nest().key(function (d) { return d.WeekDay; }).object(dataPoints_TrafficCongestionPerHour_South).Saturday
+                                }]
+                            });
+
+
+                            chart_TrafficCongestionPerHour_North.render();
+                            chart_TrafficCongestionPerHour_South.render();
+
+                            $('#chartKPIs_TrafficCongestionPerHour').html(
+                                "<img src='../images/Thumbs-down.png' alt='Thumbs-down'></img><h2>Worst Hour (North Direction): </h2>" + "<h4>" + '---' + " (" + '...' + " %)" + "</h4>"
+                                + "</br>"
+                                + "<img src='../images/Thumbs-up.png' alt='Thumbs-up'></img><h2>Best Hour (North Direction): </h2>" + "<h4>" + '---' + " (" + '...' + " %)" + " %)" + "</h4>"
+                                + "</br>"
+                                + "<img src='../images/Thumbs-down.png' alt='Thumbs-down'></img><h2>Worst Hour (South Direction): </h2>" + "<h4>" + '---' + " (" + '...' + " %)" + " %)" + "</h4>"
+                                + "</br>"
+                                + "<img src='../images/Thumbs-up.png' alt='Thumbs-up'></img><h2>Best Hour (South Direction): </h2>" + "<h4>" + '---' + " (" + '...' + " %)" + " %)" + "</h4>"
+
+                            );
+                        }
+                        //#endregion
+
+                    }
+                    , failure: function (data) {
+                        _fx_Log(data, LogLevels.ERROR);
+                        alert('Failure: ' + data);
+                        reject();
+                    }
+                    , error: function (data) {
+                        _fx_Log(data, LogLevels.ERROR);
+                        alert('Error: ' + data);
+                        reject();
+                    }
+                });
+            });
+        }
+
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+
+        /**
+         * Boilerplate map initialization code starts below:
+         */
+
+        //Step 1: initialize communication with the platform
+        // In your own code, replace variable window.apikey with your own apikey
+        var platform = new H.service.Platform({
+            apikey: config.HEREIoT_AppKey
+        });
+        var defaultLayers = platform.createDefaultLayers();
+
+        //Step 2: initialize a map
+        var map = new H.Map(document.getElementById('map'),
+            defaultLayers.vector.normal.map, {
+            center: { lat: config.HEREIoT_initial_latitude, lng: config.HEREIoT_initial_longitude },
+            zoom: config.HEREIoT_initial_zoom,
+            pixelRatio: window.devicePixelRatio || 1
+        });
+        // add a resize listener to make sure that the map occupies the whole container
+        window.addEventListener('resize', () => map.getViewPort().resize());
+
+        //Step 3: make the map interactive
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+        // Now use the map as required...
+        addDraggableMarker(map, behavior);
+        setInteractive(map);
+
+    </script>
+</body>
+</html>

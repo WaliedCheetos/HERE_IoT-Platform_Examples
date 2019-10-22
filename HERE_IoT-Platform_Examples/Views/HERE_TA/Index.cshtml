@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
     <link href="/css/main.css" rel="stylesheet" />
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -28,29 +29,121 @@
 
 
 
+
 </head>
 <body>
     <div id="_div_MainContainer">
-        <div id="_div_HeaderContainer">
-            <h3>Walied Cheetos Header</h3>
-        </div>
-        <div id="_div_ChartsContainer">
-            <div id="_div_TestChart">
-                WaliedCheetos Charts
-            </div>
-        </div>
-        <div id="_div_HEREMapContainer"></div>
 
-        <div id="_div_FooterContainer">
-            <h3>Walied Cheetos Footer</h3>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <div id="_div_MapContainer">
+                        <div id="_div_HeaderContainer">
+                            <h3>Walied Cheetos Header</h3>
+
+                            <h5>Going somewhere?</h5>
+                            <h3>See how far you can drive/travel from your location at</h3> <h2>Sunday 12 am</h2>
+
+                            <div>
+                                <select id="_div_TrafficWeekDays">
+                                    <option value="0">Sunday</option>
+                                    <option value="1">Monday</option>
+                                    <option value="2">Tuesday</option>
+                                    <option value="3">Wednesday</option>
+                                    <option value="4">Thursday</option>
+                                    <option value="5">Friday</option>
+                                    <option value="6">Saturday</option>
+                                </select>
+
+                                @*<div class="well" style="display: none">
+                                    <span id="ex18-label-1" class="hidden">Traffic Week Days Hours</span>
+                                    <input id="_div_TrafficWeekDaysHours" type="text"
+                                           data-provide="slider"
+                                           data-slider-ticks="[12:00, 01:00, 02:00, 03:00, 04:00, 05:00, 06:00, 07:00, 08:00, 09:00, 10:00, 11:00, 12:00, 13:00, 14:00, 15:00, 16:00, 17:00, 18:00, 19:00, 20:00, 21:00, 22:00, 23:00, 24:00]"
+                                           data-slider-ticks-labels='[12:00, 01:00, 02:00, 03:00, 04:00, 05:00, 06:00, 07:00, 08:00, 09:00, 10:00, 11:00, 12:00, 13:00, 14:00, 15:00, 16:00, 17:00, 18:00, 19:00, 20:00, 21:00, 22:00, 23:00, 24:00]'
+                                           data-slider-min="1"
+                                           data-slider-max="24"
+                                           data-slider-step="1"
+                                           data-slider-value="24"
+                                           data-slider-tooltip="hide" />
+                                </div>*@
+                            </div>
 
 
-        </div>
+                            <div class="ctrl-panel">
+                                <span id="toggle-ctrl-panel" class="glyphicon glyphicon-menu-left"></span>
+                                @*<p>Zoom in to see more traffic from higher functional classes.</p>
+                                <p>Links with traffic information show an info bubble with details when clicked.</p>*@
+                                <input type="hidden" id="endpoint" value="https://pde.cit.api.here.com" autocomplete="off" />
+                                <p>
+
+                                    <div id="patternTimeText">00:00</div>
+                                    <div id="_div_TrafficWeekDaysHours" style="position:relative">
+                                        
+                                    </div>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div id="_div_HEREMapContainer">
+                        </div>
+
+                        <div id="_div_FooterContainer">
+                            <h3>Walied Cheetos Footer</h3>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:50%">
+                    <div>
+                        <h3>7-day 85th %le Speed 2018 : - </h3>
+                        <h3>7-day Average Speed 2018 : -</h3>
+                    </div>
+                </td>
+
+                <td style="width:50%">
+                    <div id="_div_TestChart">
+                        WaliedCheetos Charts
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:50%">
+                    <div id="_div_WeeklyTrafficVolumePerDay_North">
+
+                    </div>
+                </td>
+                <td style="width:50%">
+                    <div id="_div_WeeklyTrafficVolumePerDay_South">
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+
+
+
+
+        @*<div id="_div_ChartsContainer">
+
+
+        </div>*@
+
+
+
+
     </div>
 
     @*load custom module*@
     <script src="/js/config.js"></script>
     <script src="/js/general.js"></script>
     <script src="/js/HEREMap.js"></script>
+    <script src="~/js/HERETraffic.js"></script>
 </body>
 </html>

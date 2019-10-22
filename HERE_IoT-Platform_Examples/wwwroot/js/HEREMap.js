@@ -40,7 +40,7 @@ window.addEventListener('resize', () => HERE_Map.getViewPort().resize());
 var HERE_MapEventsBehavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(HERE_Map));
 HERE_MapEventsBehavior.disable(H.mapevents.Behavior.WHEELZOOM);
 
-////Step 3B: adjust tilt and rotation of the map
+//Step 3B: adjust tilt and rotation of the map
 //HERE_Map.getViewModel().setLookAtData({
 //    tilt: AppConfig.HEREMaps_initial_tilt,
 //    heading: AppConfig.HEREMaps_initial_heading
@@ -162,7 +162,7 @@ function _fx_addDraggableMarker(map, mapEventsBehaviour, isDraggable, bubbleText
             // mark the object as volatile for the smooth dragging
             volatility: true,
             //set customer icon to the marker
-            icon: new H.map.Icon("/images/marker_pyramids.png", { size: { w: 56, h: 56 } })
+            icon: new H.map.Icon("/images/marker_position.png", { size: { w: 33, h: 33 } })
         });
 
         //ensure that the marker can receive drag events
@@ -189,8 +189,11 @@ function _fx_addDraggableMarker(map, mapEventsBehaviour, isDraggable, bubbleText
 
         //while map marker drag ends, enable default underlying map draggability
         map.addEventListener('dragend', function (eventObject) {
-            if (eventObject.target instanceof H.map.Marker)
+            if (eventObject.target instanceof H.map.Marker) {
                 mapEventsBehaviour.enable();
+                alert('Holllla');
+            }
+
         }, false);
 
         //listen to map marker drag event and move its position on the map accordingly.
@@ -366,6 +369,22 @@ function _fx_addDraggableMarker(map, mapEventsBehaviour, isDraggable, bubbleText
 
 // #endregion
 
+
+// #region charts business
+var chart_WeeklyTrafficVolumePerDay_North;
+var chart_WeeklyTrafficVolumePerDay_South;
+
+function toggleDataSeries(e) {
+    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    }
+    else {
+        e.dataSeries.visible = true;
+    }
+    e.chart.render();
+}
+// #endregion
+;
 // Now use the map as required...
 window.onload = function () {
     try {
@@ -382,6 +401,477 @@ window.onload = function () {
         // $('#_div_FooterContainer').text(pointer.changedPointers[0].viewportX + ', ' + pointer.changedPointers[0].viewportY + ', ' + pointer.changedPointers[0].type);					
         // }catch(e){alert(e);}
         // });
+
+        
+
+
+        
+        chart_WeeklyTrafficVolumePerDay_North = new CanvasJS.Chart("_div_WeeklyTrafficVolumePerDay_North", {
+            animationEnabled: true,
+            exportEnabled: true,
+            title: {
+                text: "Weekly Traffic Volume Per Day (North)"
+            },
+            axisY: {
+                title: "Vehicles"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                    type: "spline",
+                    name: "Sunday",
+                    showInLegend: true,
+                    dataPoints: [
+                        { label: "00:00", y: 24.00 },
+                        { label: "01:00", y: 24.00 },
+                        { label: "02:00", y: 24.00 },
+                        { label: "03:00", y: 24.00 },
+                        { label: "04:00", y: 24.00 },
+                        { label: "05:00", y: 24.00 },
+                        { label: "06:00", y: 14.50 },
+                        { label: "07:00", y: 22.00 },
+                        { label: "08:00", y: 15.00 },
+                        { label: "09:00", y: 13.00 },
+                        { label: "10:00", y: 13.00 },
+                        { label: "11:00", y: 13.00 },
+                        { label: "12:00", y: 13.00 },
+                        { label: "13:00", y: 13.00 },
+                        { label: "14:00", y: 13.00 },
+                        { label: "15:00", y: 13.00 },
+                        { label: "16:00", y: 13.00 },
+                        { label: "17:00", y: 13.00 },
+                        { label: "18:00", y: 13.00 },
+                        { label: "19:00", y: 14.00 },
+                        { label: "20:00", y: 14.00 },
+                        { label: "21:00", y: 14.00 },
+                        { label: "22:00", y: 15.00 },
+                        { label: "23:00", y: 20.00 },
+                    ]
+                }, {
+                    type: "spline",
+                    name: "Monday",
+                    showInLegend: true,
+                    dataPoints: [
+                        { label: "00:00", y: 24.00 },
+                        { label: "01:00", y: 23.00 },
+                        { label: "02:00", y: 23.00 },
+                        { label: "03:00", y: 23.00 },
+                        { label: "04:00", y: 23.00 },
+                        { label: "05:00", y: 23.00 },
+                        { label: "06:00", y: 23.00 },
+                        { label: "07:00", y: 27.00 },
+                        { label: "08:00", y: 21.00 },
+                        { label: "09:00", y: 18.00 },
+                        { label: "10:00", y: 20.00 },
+                        { label: "11:00", y: 20.00 },
+                        { label: "12:00", y: 20.00 },
+                        { label: "13:00", y: 19.00 },
+                        { label: "14:00", y: 19.00 },
+                        { label: "15:00", y: 19.00 },
+                        { label: "16:00", y: 18.00 },
+                        { label: "17:00", y: 18.00 },
+                        { label: "18:00", y: 17.00 },
+                        { label: "19:00", y: 17.00 },
+                        { label: "20:00", y: 17.00 },
+                        { label: "21:00", y: 17.00 },
+                        { label: "22:00", y: 17.00 },
+                        { label: "23:00", y: 19.00 },
+                    ]
+                }, {
+                type: "spline",
+                name: "Tuesday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 23.00 },
+                    { label: "01:00", y: 23.00 },
+                    { label: "02:00", y: 23.00 },
+                    { label: "03:00", y: 23.00 },
+                    { label: "04:00", y: 23.00 },
+                    { label: "05:00", y: 22.00 },
+                    { label: "06:00", y: 17.30 },
+                    { label: "07:00", y: 17.00 },
+                    { label: "08:00", y: 15.00 },
+                    { label: "09:00", y: 15.00 },
+                    { label: "10:00", y: 15.00 },
+                    { label: "11:00", y: 15.00 },
+                    { label: "12:00", y: 15.00 },
+                    { label: "13:00", y: 16.00 },
+                    { label: "14:00", y: 20.00 },
+                    { label: "15:00", y: 16.00 },
+                    { label: "16:00", y: 26.30 },
+                    { label: "17:00", y: 16.00 },
+                    { label: "18:00", y: 16.00 },
+                    { label: "19:00", y: 16.00 },
+                    { label: "20:00", y: 16.00 },
+                    { label: "21:00", y: 16.00 },
+                    { label: "22:00", y: 16.00 },
+                    { label: "23:00", y: 20.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Wednesday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 23.00 },
+                    { label: "01:00", y: 23.00 },
+                    { label: "02:00", y: 23.00 },
+                    { label: "03:00", y: 23.00 },
+                    { label: "04:00", y: 23.00 },
+                    { label: "05:00", y: 22.00 },
+                    { label: "06:00", y: 21.00 },
+                    { label: "07:00", y: 11.00 },
+                    { label: "08:00", y: 15.00 },
+                    { label: "09:00", y: 15.00 },
+                    { label: "10:00", y: 25.50 },
+                    { label: "11:00", y: 15.00 },
+                    { label: "12:00", y: 15.00 },
+                    { label: "13:00", y: 20.50 },
+                    { label: "14:00", y: 16.00 },
+                    { label: "15:00", y: 16.00 },
+                    { label: "16:00", y: 21.50 },
+                    { label: "17:00", y: 16.00 },
+                    { label: "18:00", y: 16.00 },
+                    { label: "19:00", y: 16.00 },
+                    { label: "20:00", y: 16.00 },
+                    { label: "21:00", y: 16.00 },
+                    { label: "22:00", y: 16.00 },
+                    { label: "23:00", y: 20.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Thursday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 24.00 },
+                    { label: "01:00", y: 24.00 },
+                    { label: "02:00", y: 24.00 },
+                    { label: "03:00", y: 24.00 },
+                    { label: "04:00", y: 24.00 },
+                    { label: "05:00", y: 24.00 },
+                    { label: "06:00", y: 20.50 },
+                    { label: "07:00", y: 14.00 },
+                    { label: "08:00", y: 17.00 },
+                    { label: "09:00", y: 17.00 },
+                    { label: "10:00", y: 16.00 },
+                    { label: "11:00", y: 16.00 },
+                    { label: "12:00", y: 16.70 },
+                    { label: "13:00", y: 16.00 },
+                    { label: "14:00", y: 16.00 },
+                    { label: "15:00", y: 16.00 },
+                    { label: "16:00", y: 19.00 },
+                    { label: "17:00", y: 16.00 },
+                    { label: "18:00", y: 16.00 },
+                    { label: "19:00", y: 16.00 },
+                    { label: "20:00", y: 17.00 },
+                    { label: "21:00", y: 17.00 },
+                    { label: "22:00", y: 18.00 },
+                    { label: "23:00", y: 21.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Friday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 24.00 },
+                    { label: "01:00", y: 23.00 },
+                    { label: "02:00", y: 23.00 },
+                    { label: "03:00", y: 23.00 },
+                    { label: "04:00", y: 23.00 },
+                    { label: "05:00", y: 23.00 },
+                    { label: "06:00", y: 22.50 },
+                    { label: "07:00", y: 23.00 },
+                    { label: "08:00", y: 21.00 },
+                    { label: "09:00", y: 21.00 },
+                    { label: "10:00", y: 20.00 },
+                    { label: "11:00", y: 20.00 },
+                    { label: "12:00", y: 23.00 },
+                    { label: "13:00", y: 23.50 },
+                    { label: "14:00", y: 19.00 },
+                    { label: "15:00", y: 19.00 },
+                    { label: "16:00", y: 18.00 },
+                    { label: "17:00", y: 18.00 },
+                    { label: "18:00", y: 17.00 },
+                    { label: "19:00", y: 17.00 },
+                    { label: "20:00", y: 28.00 },
+                    { label: "21:00", y: 17.00 },
+                    { label: "22:00", y: 17.00 },
+                    { label: "23:00", y: 19.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Saturday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 22.00 },
+                    { label: "01:00", y: 22.00 },
+                    { label: "02:00", y: 22.00 },
+                    { label: "03:00", y: 22.00 },
+                    { label: "04:00", y: 22.00 },
+                    { label: "05:00", y: 22.00 },
+                    { label: "06:00", y: 18.50 },
+                    { label: "07:00", y: 22.00 },
+                    { label: "08:00", y: 22.00 },
+                    { label: "09:00", y: 22.00 },
+                    { label: "10:00", y: 22.00 },
+                    { label: "11:00", y: 22.00 },
+                    { label: "12:00", y: 29.00 },
+                    { label: "13:00", y: 22.00 },
+                    { label: "14:00", y: 23.50 },
+                    { label: "15:00", y: 23.50 },
+                    { label: "16:00", y: 22.00 },
+                    { label: "17:00", y: 22.00 },
+                    { label: "18:00", y: 23.00 },
+                    { label: "19:00", y: 27.00 },
+                    { label: "20:00", y: 22.00 },
+                    { label: "21:00", y: 22.00 },
+                    { label: "22:00", y: 22.00 },
+                    { label: "23:00", y: 22.00 },
+                ]
+            }]
+        });
+
+        chart_WeeklyTrafficVolumePerDay_North.render();
+
+
+        chart_WeeklyTrafficVolumePerDay_South = new CanvasJS.Chart("_div_WeeklyTrafficVolumePerDay_South", {
+            animationEnabled: true,
+            exportEnabled: true,
+            title: {
+                text: "Weekly Traffic Volume Per Day (South)"
+            },
+            axisY: {
+                title: "Vehicles"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                click: function (e) {
+                    alert(e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: " + e.dataPoint.y + " }");
+                },
+                type: "spline",
+                name: "Sunday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 24.00 },
+                    { label: "01:00", y: 24.00 },
+                    { label: "02:00", y: 24.00 },
+                    { label: "03:00", y: 24.00 },
+                    { label: "04:00", y: 24.00 },
+                    { label: "05:00", y: 24.00 },
+                    { label: "06:00", y: 14.50 },
+                    { label: "07:00", y: 22.00 },
+                    { label: "08:00", y: 15.00 },
+                    { label: "09:00", y: 13.00 },
+                    { label: "10:00", y: 13.00 },
+                    { label: "11:00", y: 13.00 },
+                    { label: "12:00", y: 13.00 },
+                    { label: "13:00", y: 13.00 },
+                    { label: "14:00", y: 13.00 },
+                    { label: "15:00", y: 13.00 },
+                    { label: "16:00", y: 13.00 },
+                    { label: "17:00", y: 13.00 },
+                    { label: "18:00", y: 13.00 },
+                    { label: "19:00", y: 14.00 },
+                    { label: "20:00", y: 14.00 },
+                    { label: "21:00", y: 14.00 },
+                    { label: "22:00", y: 15.00 },
+                    { label: "23:00", y: 20.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Monday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 24.00 },
+                    { label: "01:00", y: 23.00 },
+                    { label: "02:00", y: 23.00 },
+                    { label: "03:00", y: 23.00 },
+                    { label: "04:00", y: 23.00 },
+                    { label: "05:00", y: 23.00 },
+                    { label: "06:00", y: 23.00 },
+                    { label: "07:00", y: 27.00 },
+                    { label: "08:00", y: 21.00 },
+                    { label: "09:00", y: 18.00 },
+                    { label: "10:00", y: 20.00 },
+                    { label: "11:00", y: 20.00 },
+                    { label: "12:00", y: 20.00 },
+                    { label: "13:00", y: 19.00 },
+                    { label: "14:00", y: 19.00 },
+                    { label: "15:00", y: 19.00 },
+                    { label: "16:00", y: 18.00 },
+                    { label: "17:00", y: 18.00 },
+                    { label: "18:00", y: 17.00 },
+                    { label: "19:00", y: 17.00 },
+                    { label: "20:00", y: 17.00 },
+                    { label: "21:00", y: 17.00 },
+                    { label: "22:00", y: 17.00 },
+                    { label: "23:00", y: 19.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Tuesday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 23.00 },
+                    { label: "01:00", y: 23.00 },
+                    { label: "02:00", y: 23.00 },
+                    { label: "03:00", y: 23.00 },
+                    { label: "04:00", y: 23.00 },
+                    { label: "05:00", y: 22.00 },
+                    { label: "06:00", y: 17.30 },
+                    { label: "07:00", y: 17.00 },
+                    { label: "08:00", y: 15.00 },
+                    { label: "09:00", y: 15.00 },
+                    { label: "10:00", y: 15.00 },
+                    { label: "11:00", y: 15.00 },
+                    { label: "12:00", y: 15.00 },
+                    { label: "13:00", y: 16.00 },
+                    { label: "14:00", y: 20.00 },
+                    { label: "15:00", y: 16.00 },
+                    { label: "16:00", y: 26.30 },
+                    { label: "17:00", y: 16.00 },
+                    { label: "18:00", y: 16.00 },
+                    { label: "19:00", y: 16.00 },
+                    { label: "20:00", y: 16.00 },
+                    { label: "21:00", y: 16.00 },
+                    { label: "22:00", y: 16.00 },
+                    { label: "23:00", y: 20.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Wednesday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 23.00 },
+                    { label: "01:00", y: 23.00 },
+                    { label: "02:00", y: 23.00 },
+                    { label: "03:00", y: 23.00 },
+                    { label: "04:00", y: 23.00 },
+                    { label: "05:00", y: 22.00 },
+                    { label: "06:00", y: 21.00 },
+                    { label: "07:00", y: 11.00 },
+                    { label: "08:00", y: 15.00 },
+                    { label: "09:00", y: 15.00 },
+                    { label: "10:00", y: 25.50 },
+                    { label: "11:00", y: 15.00 },
+                    { label: "12:00", y: 15.00 },
+                    { label: "13:00", y: 20.50 },
+                    { label: "14:00", y: 16.00 },
+                    { label: "15:00", y: 16.00 },
+                    { label: "16:00", y: 21.50 },
+                    { label: "17:00", y: 16.00 },
+                    { label: "18:00", y: 16.00 },
+                    { label: "19:00", y: 16.00 },
+                    { label: "20:00", y: 16.00 },
+                    { label: "21:00", y: 16.00 },
+                    { label: "22:00", y: 16.00 },
+                    { label: "23:00", y: 20.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Thursday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 24.00 },
+                    { label: "01:00", y: 24.00 },
+                    { label: "02:00", y: 24.00 },
+                    { label: "03:00", y: 24.00 },
+                    { label: "04:00", y: 24.00 },
+                    { label: "05:00", y: 24.00 },
+                    { label: "06:00", y: 20.50 },
+                    { label: "07:00", y: 14.00 },
+                    { label: "08:00", y: 17.00 },
+                    { label: "09:00", y: 17.00 },
+                    { label: "10:00", y: 16.00 },
+                    { label: "11:00", y: 16.00 },
+                    { label: "12:00", y: 16.70 },
+                    { label: "13:00", y: 16.00 },
+                    { label: "14:00", y: 16.00 },
+                    { label: "15:00", y: 16.00 },
+                    { label: "16:00", y: 19.00 },
+                    { label: "17:00", y: 16.00 },
+                    { label: "18:00", y: 16.00 },
+                    { label: "19:00", y: 16.00 },
+                    { label: "20:00", y: 17.00 },
+                    { label: "21:00", y: 17.00 },
+                    { label: "22:00", y: 18.00 },
+                    { label: "23:00", y: 21.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Friday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 24.00 },
+                    { label: "01:00", y: 23.00 },
+                    { label: "02:00", y: 23.00 },
+                    { label: "03:00", y: 23.00 },
+                    { label: "04:00", y: 23.00 },
+                    { label: "05:00", y: 23.00 },
+                    { label: "06:00", y: 22.50 },
+                    { label: "07:00", y: 23.00 },
+                    { label: "08:00", y: 21.00 },
+                    { label: "09:00", y: 21.00 },
+                    { label: "10:00", y: 20.00 },
+                    { label: "11:00", y: 20.00 },
+                    { label: "12:00", y: 23.00 },
+                    { label: "13:00", y: 23.50 },
+                    { label: "14:00", y: 19.00 },
+                    { label: "15:00", y: 19.00 },
+                    { label: "16:00", y: 18.00 },
+                    { label: "17:00", y: 18.00 },
+                    { label: "18:00", y: 17.00 },
+                    { label: "19:00", y: 17.00 },
+                    { label: "20:00", y: 28.00 },
+                    { label: "21:00", y: 17.00 },
+                    { label: "22:00", y: 17.00 },
+                    { label: "23:00", y: 19.00 },
+                ]
+            }, {
+                type: "spline",
+                name: "Saturday",
+                showInLegend: true,
+                dataPoints: [
+                    { label: "00:00", y: 22.00 },
+                    { label: "01:00", y: 22.00 },
+                    { label: "02:00", y: 22.00 },
+                    { label: "03:00", y: 22.00 },
+                    { label: "04:00", y: 22.00 },
+                    { label: "05:00", y: 22.00 },
+                    { label: "06:00", y: 18.50 },
+                    { label: "07:00", y: 22.00 },
+                    { label: "08:00", y: 22.00 },
+                    { label: "09:00", y: 22.00 },
+                    { label: "10:00", y: 22.00 },
+                    { label: "11:00", y: 22.00 },
+                    { label: "12:00", y: 29.00 },
+                    { label: "13:00", y: 22.00 },
+                    { label: "14:00", y: 23.50 },
+                    { label: "15:00", y: 23.50 },
+                    { label: "16:00", y: 22.00 },
+                    { label: "17:00", y: 22.00 },
+                    { label: "18:00", y: 23.00 },
+                    { label: "19:00", y: 27.00 },
+                    { label: "20:00", y: 22.00 },
+                    { label: "21:00", y: 22.00 },
+                    { label: "22:00", y: 22.00 },
+                    { label: "23:00", y: 22.00 },
+                ]
+            }]
+        });
+
+        chart_WeeklyTrafficVolumePerDay_South.render();
+
 
         var chart = new CanvasJS.Chart("_div_TestChart", {
             theme: "light2",

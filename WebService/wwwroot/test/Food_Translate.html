@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WaliedCheetos</title>
+
+    <!-- Load jQuery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" id="SearchText" size="99" value="Pasta" />
+    <input type="button" id="SearchSubmit" value="Search" onclick="SearchFoodSubmit();" />
+
+    <div id="SearchResult">
+        <!--<table id="SearchResult"></table>-->
+    </div>
+    <script type="text/javascript">
+        function SearchFoodSubmit() {
+            try {
+                var SearchText = $('#SearchText').val();
+
+                postData = {
+                    generalSearchInput: $('#SearchText').val()
+                };
+
+                $.ajax({
+                    url: 'https://api.nal.usda.gov/fdc/v1/search?api_key=KCFsbTzyK96kvMztrFsMY8KzGB00EzfhRhjo0zFy',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    data: JSON.stringify(postData),
+                    success: function (data) {
+                        alert("success: " + data);
+
+                        var x = "<table>";
+                        for (var i = 0; i < data.foods.length; i++) {
+
+                            
+
+                            var foodDescription = data.foods[i].description;
+                            var fdcId = data.foods[i].fdcId;
+                            var URL = "https://api.nal.usda.gov/fdc/v1/" + fdcId + "?api_key=KCFsbTzyK96kvMztrFsMY8KzGB00EzfhRhjo0zFy";
+
+                            x += ("<tr><td>{1}</td><td>{2}</td></tr>", foodDescription, URL);
+                            //var foodDescription_Ar = translate(foodDescription);
+                            //alert(foodDescription_Ar);
+                        }
+
+                        x += "</table>";
+
+                        $("#SearchResult").html(x);
+                    }
+                    , failure: function (data) {
+                        alert('Failure: ' + data);
+                        reject();
+                    }
+                    , error: function (data) {
+                        alert('Error: ' + data);
+                        reject();
+                    }
+                });
+
+            } catch (e) {
+                alert("Exception: " + e);
+            }
+        }
+    </script>
+</body>
+</html>

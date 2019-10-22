@@ -7,7 +7,7 @@ var config = /** @class */ (function () {
         this.HEREMaps_initial_longitude = 55.19;
         this.HEREMaps_initial_latitude = 25.07;
         this.HEREMaps_initial_tilt = 75;
-        this.HEREMaps_initial_heading = 120;
+        this.HEREMaps_initial_heading = 213;
         this.HEREMaps_UseCustomizedMapControl = true;
     }
     return config;

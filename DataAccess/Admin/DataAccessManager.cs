@@ -1,9 +1,11 @@
 ﻿using EncryptDecryptMagic.EncryptDecrypt;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Text;
-using System.Configuration;
+
 
 
 
@@ -22,20 +24,13 @@ namespace DataAccess.Admin
         public static SqlConnection _fx_GetSqlConnection(LoggingFramework.ILog iLog, string UserTag)
         {
             SqlConnection sqlConnection = null;
-            string ConnectionString = string.Empty;
             try
             {
-                ConnectionString = EncryptDecrypt._fx_Decrypt(
-                    ConfigurationManager.ConnectionStrings["ConnectionString_1"].ConnectionString, 
-                    EncryptDecrypt._enum_EncryptionDecryptionSecret.SECRET1, 
-                    iLog, 
-                    string.Empty);
-
                 sqlConnection = new SqlConnection(_fx_GetConnectionString(iLog));
                 if (sqlConnection.State != System.Data.ConnectionState.Open)
                     sqlConnection.Open();
 
-                iLog.WriteDebug("Database connection with connection String: {0} has been opened", _connectionString);
+                iLog.WriteDebug("Database connection with connection String: {0} has been opened", sqlConnection.ConnectionString);
 
             }
             catch (Exception exception)
@@ -58,7 +53,18 @@ namespace DataAccess.Admin
 
             try
             {
-                ConnectionString = EncryptDecrypt._fx_Decrypt(ConfigurationManager.ConnectionStrings["ConnectionString_1"].ConnectionString, EncryptDecrypt._enum_EncryptionDecryptionSecret.SECRET1, iLog, string.Empty);
+                IConfigurationBuilder builder = new ConfigurationBuilder();
+                builder.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json"));
+
+                var root = builder.Build();
+                var connString = root.GetConnectionString("WaliedCheetos-HERE_DB");
+
+                ConnectionString = EncryptDecrypt._fx_Decrypt(
+                    connString,
+                    EncryptDecrypt._enum_EncryptionDecryptionSecret.SECRET1,
+                    iLog,
+                    string.Empty);
+
                 iLog.WriteDebug("Connection String: {0}", ConnectionString);
             }
             catch (Exception exception)

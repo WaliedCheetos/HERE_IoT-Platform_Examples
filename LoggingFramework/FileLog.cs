@@ -138,7 +138,7 @@ namespace LoggingFramework
                         writer = File.AppendText(m_logFile);
                         writer.Write("ERROR - {0}", DateTime.Now.ToString(TIME_FORMAT));
                         writer.WriteLine(format, messages);
-                        
+                        writer.WriteLine(System.Environment.NewLine);
                         writer.Flush();                        
                     }
                 }
@@ -146,7 +146,8 @@ namespace LoggingFramework
                 {
                     writer = File.AppendText(m_logFile);
                     writer.Write("ERROR - {0}", DateTime.Now.ToString(TIME_FORMAT));
-                    writer.WriteLine(format, messages);                    
+                    writer.WriteLine(format, messages);
+                    writer.WriteLine(System.Environment.NewLine);
                     writer.Flush();                 
                 }
             }
@@ -231,7 +232,8 @@ namespace LoggingFramework
                     {
                         writer = File.AppendText(m_logFile);
                         writer.Write(DateTime.Now.ToString(TIME_FORMAT));
-                        writer.WriteLine(format, messages);                       
+                        writer.WriteLine(format, messages);
+                        writer.WriteLine(System.Environment.NewLine);
                         writer.Flush();                        
                     }
                     catch (Exception ex)
@@ -253,7 +255,8 @@ namespace LoggingFramework
                 {
                     writer = File.AppendText(m_logFile);
                     writer.Write(DateTime.Now.ToString(TIME_FORMAT)); 
-                    writer.WriteLine(format, messages);                    
+                    writer.WriteLine(format, messages);
+                    writer.WriteLine(System.Environment.NewLine);
                     writer.Flush();                    
                 }
                 catch (Exception ex)
