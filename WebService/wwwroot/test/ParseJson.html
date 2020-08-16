@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WaliedCheetos - Parse JSON</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <textarea id="jsonInput"></textarea>
+    <input id="jsonParse" type="button" title="Parse JSON" onclick="_fx_ParseJSON" />
+
+    <script type="text/javascript">
+        function _fx_ParseJSON() {
+            try {
+                //console.log("WaliedCheetos --> Info: " + document.getElementById('jsonInput').innerText);
+                console.log("WaliedCheetos --> Info: " + $("#jsonInput").val());
+            } catch (e) {
+                console.error("WaliedCheetos --> Exception: " + e);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WaliedCheetos: HERE MarkersClustering</title>
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
+
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core-legacy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service-legacy.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" src="../js/MarkersInfo_XMLString.js"></script>
+
+</head>
+<body>
+    <div id="map" style="position: absolute; width:93%; height:93%;"></div>
+    
+    <script type="text/javascript">
+
+        var config = {
+            HEREIoT_APIKey: "pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E",
+
+            HEREIoT_initial_longitude: 55.26637,
+            HEREIoT_initial_latitude: 25.19345,
+            HEREIoT_initial_zoom: 7,
+            HEREIoT_initial_tilt: 63,
+            HEREIoT_initial_heading: 60,
+
+        HEREIoT_initial_UseCustomizedMapControl: true
+        }
+
+        var infoBubble = null;
+
+        function getXMLDocFromString(r) {
+
+    if (!r)
+        return null;
+
+    var parser = new DOMParser();
+    var xmlobject = parser.parseFromString(r, "text/xml").documentElement;
+    return xmlobject;
+
+}
+
+        /**
+ * Changes XML to JSON
+ * Modified version from here: http://davidwalsh.name/convert-xml-json
+ * @param {string} xml XML DOM tree
+ */
+function xmlToJson(xml) {
+  // Create the return object
+  var obj = {};
+
+  if (xml.nodeType == 1) {
+    // element
+    // do attributes
+    if (xml.attributes.length > 0) {
+      obj["@attributes"] = {};
+      for (var j = 0; j < xml.attributes.length; j++) {
+        var attribute = xml.attributes.item(j);
+        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+      }
+    }
+  } else if (xml.nodeType == 3) {
+    // text
+    obj = xml.nodeValue;
+  }
+
+  // do children
+  // If all text nodes inside, get concatenated text from them.
+  var textNodes = [].slice.call(xml.childNodes).filter(function(node) {
+    return node.nodeType === 3;
+  });
+  if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
+    obj = [].slice.call(xml.childNodes).reduce(function(text, node) {
+      return text + node.nodeValue;
+    }, "");
+  } else if (xml.hasChildNodes()) {
+    for (var i = 0; i < xml.childNodes.length; i++) {
+      var item = xml.childNodes.item(i);
+      var nodeName = item.nodeName;
+      if (typeof obj[nodeName] == "undefined") {
+        obj[nodeName] = xmlToJson(item);
+      } else {
+        if (typeof obj[nodeName].push == "undefined") {
+          var old = obj[nodeName];
+          obj[nodeName] = [];
+          obj[nodeName].push(old);
+        }
+        obj[nodeName].push(xmlToJson(item));
+      }
+    }
+  }
+  return obj;
+}
+
+
+
+
+        /**
+ * Display clustered markers on a map
+ *
+ * Note that the maps clustering module https://js.api.here.com/v3/3.1/mapsjs-clustering.js
+ * must be loaded to use the Clustering
+
+ * @param {H.Map} map A HERE Map instance within the application
+ * @param {Object[]} data Raw data that contains airports' coordinates
+*/
+function startClustering(map, data) {
+
+try{
+
+  // First we need to create an array of DataPoint objects,
+  // for the ClusterProvider
+  var dataPoints = data["marker"].map(function (item) {
+    return new H.clustering.DataPoint(item["@attributes"].lat, item["@attributes"].lng);
+  });
+       
+        /*
+              // SVG template to use for cluster icons
+var clusterSvgTemplate = '<svg xmlns="http://www.w3.org/2000/svg" height="{diameter}" width="{diameter}">' +
+    '<circle cx="{radius}px" cy="{radius}px" r="{radius}px" fill="red" />' +
+    '</svg>';
+        */
+
+
+              var clusterSvgTemplate = '<svg version="1.1" width="200" height="100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="enable-background:new 0 0 792 792;" xml:space="preserve" >'+
+    '<defs>'+
+        '<clipPath id="circleView">'+
+         '   <circle cx="50" cy="50" r="50" fill="#FFFFFF" /> '+           
+         //'   <circle cx="{radius}" cy="{radius}" r="{radius}" fill="#FFFFFF" /> '+           
+        '</clipPath>'+
+    '</defs>'+
+'<image width="200" height="100" xlink:href="https://www.amrita.edu/sites/default/files/news-images/new/news-events/images/l-nov/grass.jpg" clip-path="url(#circleView)" />'+
+      '<text x="55" y="55" font-size="23pt" font-family="arial" font-weight="bold" text-anchor="middle" fill="Red">{text}</text>' +
+ '</svg>'
+        
+
+
+var clusteringProvider = new H.clustering.Provider(dataPoints, {
+    min: 1,
+    max: 15,
+    clusteringOptions: {
+        minWeight: 1,
+        eps: 32
+    },
+    theme: {
+        getClusterPresentation: function (markerCluster) {
+
+            // Use cluster weight to change icon size:
+            //var svgString = clusterSvgTemplate.replace('{radius}', markerCluster.getWeight() * 5);
+            //svgString = svgString.replace('{text}', + markerCluster.getWeight());
+
+         var svgString = clusterSvgTemplate.replace('{text}', markerCluster.getWeight());
+
+            var w, h;
+            var weight = markerCluster.getWeight();
+
+            //Set cluster size depending on the weight
+            if (weight <= 6)
+            {
+                w = 35;
+                h = 35;
+            }
+            else if (weight <= 12) {
+                w = 50;
+                h = 50;
+            }
+            else {
+                w = 75;
+                h = 75;
+            }
+
+            var clusterIcon = new H.map.DomIcon(svgString, {
+                size: { w: w, h: h },
+                anchor: { x: (w/2), y: (h/2) }
+            });           
+        
+
+
+            // Create a marker for clusters:
+            var clusterMarker = new H.map.DomMarker(markerCluster.getPosition(), {
+                icon: clusterIcon,
+                // Set min/max zoom with values from the cluster, otherwise
+                // clusters will be shown at all zoom levels:
+                min: markerCluster.getMinZoom(),
+                max: markerCluster.getMaxZoom()
+            });
+
+            // Bind cluster data to the marker:
+            clusterMarker.setData(markerCluster);
+
+            clusterMarker.addEventListener("pointerenter", function (event) {
+        map.getViewPort().element.style.cursor = 'pointer';
+                var point = event.target.b, //event.target.getPosition(),
+                    screenPosition = map.geoToScreen(point),
+                    t = event.target,
+                    data = t.getData(),
+                    tooltipContent = ""; 
+                data.forEachEntry(
+                    function(p) 
+                    { 
+                        tooltipContent += p.getPosition().lat + " " + p.getPosition().lng + "</br>";
+                    }
+                ); 
+                infoBubble = new H.ui.InfoBubble(map.screenToGeo(screenPosition.x, screenPosition.y), { content: tooltipContent });
+                HERE_ui.addBubble(infoBubble);
+            });
+
+            clusterMarker.addEventListener("pointerleave", function (event) { 
+        map.getViewPort().element.style.cursor = 'default';
+                if(infoBubble)
+                {
+                    HERE_ui.removeBubble(infoBubble);
+                    infoBubble = null;
+                }
+            });             
+
+            return clusterMarker;
+        },
+        getNoisePresentation: function (noisePoint) {
+
+        /*
+                    var noiseIcon = new H.map.Icon('X', {
+                size: { w: 23, h: 23 },
+                anchor: { x: (23/2), y: (23/2) }
+            });  
+        */
+            // Create a marker for noise points:
+            var noiseMarker = new H.map.Marker(noisePoint.getPosition(), {
+                //icon: noiseIcon,
+
+                // Use min zoom from a noise point to show it correctly at certain
+                // zoom levels:
+                min: noisePoint.getMinZoom(),
+                max: 20
+            });
+
+            // Bind cluster data to the marker:
+            noiseMarker.setData(noisePoint);
+
+            noiseMarker.addEventListener("pointerenter", function (event) { 
+        map.getViewPort().element.style.cursor = 'pointer';
+                var point = event.target.b;//event.target.getPosition();
+                var tooltipContent = ["Noise --> ", "Latitude: ", point.lat, ", Longitude: ", point.lng].join("");
+
+                var screenPosition = map.geoToScreen(point);
+
+                infoBubble = new H.ui.InfoBubble(map.screenToGeo(screenPosition.x, screenPosition.y), { content: tooltipContent });
+                HERE_ui.addBubble(infoBubble);
+
+            });
+            noiseMarker.addEventListener("pointerleave", function (event) { 
+        map.getViewPort().element.style.cursor = 'default';
+                if(infoBubble)
+                {
+                    HERE_ui.removeBubble(infoBubble);
+                    infoBubble = null;
+                }
+            });
+
+
+            return noiseMarker;
+        }
+    }
+
+});
+
+
+
+    // Create a layer tha will consume objects from our clustering provider
+        var clusteringLayer = new H.map.layer.ObjectLayer(clusteringProvider);
+
+  // To make objects from clustering provder visible,
+  // we need to add our layer to the map
+  map.addLayer(clusteringLayer);
+}
+catch(e){
+console.error('WaliedCheetos --> ' + 'Exception: ' + e);
+}
+}
+
+
+
+            
+
+
+
+
+        // initialize communication with the platform
+        // In your own code, replace variable config.HEREIoT_APIKey with your own apikey
+        var platform = new H.service.Platform({
+            apikey: config.HEREIoT_APIKey
+        });
+
+        var HERE_DefaultLayers = platform.createDefaultLayers();
+
+
+                //Step 2: initialize a map - 
+                // In your own code, replace variable config.WHATEVER with your own values
+        var map = new H.Map(document.getElementById('map'),
+            HERE_DefaultLayers.raster.normal.map, {
+            center: { lat: config.HEREIoT_initial_latitude, lng: config.HEREIoT_initial_longitude },
+            zoom: config.HEREIoT_initial_zoom,
+            pixelRatio: window.devicePixelRatio || 1,
+        engineType: H.map.render.RenderEngine.EngineType.P2D
+        });
+
+        /*
+        // adjust tilt and rotation of the map
+        map.getViewModel().setLookAtData({
+            tilt: config.HEREIoT_initial_tilt,
+            //heading:  config.HEREIoT_initial_heading
+        });
+        */
+
+        // add a resize listener to make sure that the map occupies the whole container
+        window.addEventListener('resize', () => map.getViewPort().resize());
+
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+
+                // create default UI with layers provided by the platform
+        var HERE_ui = H.ui.UI.createDefault(map, HERE_DefaultLayers);
+        //const HERE_MapSettings = HERE_ui.getControl('mapsettings');
+
+
+        if (config.HEREIoT_initial_UseCustomizedMapControl) {
+            try {
+                //remove default mapsettings control
+                HERE_ui.removeControl("mapsettings");
+                //HERE_ui.removeControl("zoom");
+                //HERE_ui.removeControl("scalebar");
+        
+        // create custom one
+                var HERE_MapSettingsControl = new H.ui.MapSettingsControl({
+                    baseLayers: [{
+                        label: "WaliedCheetos: Raster Tiles", layer: HERE_DefaultLayers.raster.normal.map
+                    }, {
+                        label: "WaliedCheetos: Satellite", layer: HERE_DefaultLayers.raster.satellite.map
+                    }, {
+                        label: "WaliedCheetos: Vector", layer: HERE_DefaultLayers.vector.normal.map
+                    }]
+                });
+
+
+                HERE_ui.addControl("HERE_CustomMapSettingsControl", HERE_MapSettingsControl);
+
+                HERE_MapSettingsControl.setAlignment('top-right');        
+
+            } catch (e) {
+                console.error('WaliedCheetos --> ' + 'Exception: ' + e);
+            }
+        }
+
+
+
+
+        //xmlToJson(getXMLDocFromString(MarkersInfo_XMLString));
+        startClustering(map, xmlToJson(getXMLDocFromString(MarkersInfo_XMLString)));
+
+    </script>
+</body >
+</html >

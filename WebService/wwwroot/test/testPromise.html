@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>test</title>
+    <!--<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>-->
+    <!-- Load jQuery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <div>
+        <input type="button" id="testPromise" value="test Promise"/>
+    </div>
+
+    <script type="text/javascript">
+        const here = {
+            apiKey: 'LIj36Ghe_ig99NQB51INNMwA1FQUaNAwbs6EDjWWWpg'
+        };
+
+        const location = 'Dubai';
+        const query = 'Sushi'
+
+        function getJSON(getURL) {
+            var jqxhr = $.getJSON(getURL, function () {
+                console.log("success");
+            })
+                .done(function (doneObj) {
+                    console.log("second success " + doneObj);
+                    return doneObj;
+                })
+                .fail(function (failObj) {
+                    console.log("error " + failObj);
+                })
+                .always(function () {
+                    console.log("complete");
+                });
+
+            // Perform other work here ...
+
+            // Set another completion function for the request above
+            jqxhr.always(function () {
+                console.log("second complete");
+            });
+        }
+
+
+
+
+        $("#testPromise").click(function () {
+
+
+            // Assign handlers immediately after making the request,
+            // and remember the jqxhr object for this request
+            var jqxhr = $.getJSON(`https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=${here.apiKey}&searchtext=${location}`, function () {
+                console.log("success");
+            })
+                .done(function (doneObj) {
+                    console.log("second success");
+
+                    const coordinates = doneObj.Response.View[0].Result[0].Location.DisplayPosition;
+                    console.log(coordinates);
+                    alert(coordinates);
+
+                    //alert(coordinates.Latitude);
+                    $.getJSON(`https://places.ls.hereapi.com/places/v1/discover/search?at=${coordinates.Latitude},${coordinates.Longitude}&q=${query}&apiKey=${here.apiKey}`, function () {
+                        console.log("success 02");
+                    })
+                        .done(function (doneObj) {
+                            console.log("second success 02");
+
+                            const places = doneObj.results.items;
+                            console.log(places);
+                            alert(places);
+                        })
+                        .fail(function (failObj) {
+                            console.log("error 02");
+                            alert(failObj);
+                        })
+                        .always(function () {
+                            console.log("complete 02");
+                        });
+
+                })
+                .fail(function (failObj) {
+                    console.log("error");
+                    alert(failObj);
+                })
+                .always(function () {
+                    console.log("complete");
+                });
+
+            // Perform other work here ...
+
+            // Set another completion function for the request above
+            jqxhr.always(function () {
+                console.log("second complete");
+            });
+
+
+        });
+
+
+        //const here = {
+        //    apiKey: 'LIj36Ghe_ig99NQB51INNMwA1FQUaNAwbs6EDjWWWpg'
+        //};
+
+        //function makeRequest(options) {
+        //    return new Promise(((resolve, reject) => {
+
+        //        const request = https.request(options, (response) => {
+        //            let data = '';
+        //            response.on('data', (chunk) => {
+        //                data += chunk;
+        //            });
+        //            response.on('end', () => {
+        //                resolve(JSON.parse(data));
+        //            });
+        //            response.on('error', (error) => {
+        //                reject(error);
+        //            });
+        //        });
+        //        request.on('error', function (error) {
+        //            reject(error);
+        //        });
+        //        request.end();
+        //    }));
+        //}
+
+        //    $("#testPromise").click(function () {
+        //    alert("The paragraph was clicked.");
+
+        //    const query ='Sushi';
+        //    const location = 'Dubai';
+
+        //    const geocodeOptions = {
+        //        host: 'geocoder.ls.hereapi.com',
+        //        path: `/6.2/geocode.json?apiKey=${here.apikey}&searchtext=${location}`,
+        //        method: 'GET'
+        //    };
+
+        //    const errorMessage = `We didn't find any ${query} in ${location}`;
+
+        //    return new Promise((resolve, reject) => {
+        //        makeRequest(geocodeOptions).then((geocodeResponse) => {
+        //            console.log(geocodeResponse.Response);
+        //            const coordinates = geocodeResponse.Response.View[0].Result[0].Location.DisplayPosition;
+
+        //            const placesOptions = {
+        //                host: 'places.ls.hereapi.com',
+        //                path: `/places/v1/discover/search?at=${coordinates.Latitude},${coordinates.Longitude}&q=${query.replace(/ /g, '+')}&apiKey=${here.apikey}`,
+        //                method: 'GET'
+        //            };
+
+        //            makeRequest(placesOptions).then((placeResponse) => {
+        //                const places = placeResponse.results.items;
+        //                const examplePlace = places[0];
+        //                if (examplePlace) {
+        //                    const successOutput = `We found a nearby ${query} place near ${location}! ${examplePlace.title} is ${(examplePlace.distance * metersToMiles).toFixed(1)} miles away and is located at ${examplePlace.vicinity}`;
+        //                    alert(successOutput);
+        //                    //resolve(handlerInput.responseBuilder.speak(successOutput).getResponse());
+        //                } else {
+        //                    alert(errorMessage);
+        //                    //resolve(handlerInput.responseBuilder.speak(errorMessage).getResponse());
+        //                }
+
+        //            }).catch((error) => {
+        //                //resolve(handlerInput.responseBuilder.speak(errorMessage).getResponse());
+        //                alert(errorMessage);
+        //            });
+
+        //        }).catch((error) => {
+        //            //resolve(handlerInput.responseBuilder.speak(error.message).getResponse());
+        //            alert(error);
+        //        });
+        //    });
+
+        //});
+    </script>
+</body>
+</html>

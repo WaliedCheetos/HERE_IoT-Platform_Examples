@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <title>Map at a specified location</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+</head>
+<body id="markers-on-the-map">
+    <!--<div class="page-header">
+        <h1>Map at a specified location</h1>
+        <p>Display a map at a specified location and zoom level</p>
+    </div>
+    <p>This example displays a movable map initially centered on the <b>Brandenburg Gate</b> in the centre of Berlin <i>(52.5159°N, 13.3777°E)</i></p>-->
+    <div id="map" style="position: absolute; width:100%; height:100%;"></div>
+    <!--<h3>Code</h3>
+    <p>
+        The <code>map.setCenter()</code> method and <code>map.setZoom() </code>method are able to control the location of the map.<br>
+    </p>-->
+    <script type="text/javascript">
+
+        var config = {
+            HEREIoT_AppID: "Lrw0yF4Z4nFpEe7jJxcd",
+            HEREIoT_AppCode: "9zhfUoi6kIHQqt85SunXuw",
+            HEREIoT_AppKey: "pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E",
+
+            HEREIoT_initial_longitude: 55.26637,//55.19,
+            HEREIoT_initial_latitude: 25.19345,//25.07,
+                        HEREIoT_initial_zoom: 16,
+            HEREIoT_initial_tilt: 63,
+            HEREIoT_initial_heading: 60,
+        }
+
+        function DoSomething() {
+            try {
+                alert('Hollla, map has been loaded');
+            } catch (e) {
+                alert('exception ' + e);
+            }
+        }
+
+        /**
+         * Boilerplate map initialization code starts below:
+         */
+
+        //Step 1: initialize communication with the platform
+        var platform = new H.service.Platform({
+            apikey: config.HEREIoT_AppKey
+            //app_id: config.HEREIoT_AppID,
+            //app_code: config.HEREIoT_AppCode
+        });
+
+        var defaultLayers = platform.createDefaultLayers();
+
+        //Step 2: initialize a map - this map is centered over Europe
+        var map = new H.Map(document.getElementById('map'),
+            defaultLayers.vector.normal.map, {
+            center: { lat: config.HEREIoT_initial_latitude, lng: config.HEREIoT_initial_longitude },
+            zoom: config.HEREIoT_initial_zoom,
+            pixelRatio: window.devicePixelRatio || 1
+        });
+
+                // adjust tilt and rotation of the map
+        map.getViewModel().setLookAtData({
+            tilt: config.HEREIoT_initial_tilt,
+            //heading:  config.HEREIoT_initial_heading
+        });
+
+        //WaliedCheetos
+        
+
+        // add a resize listener to make sure that the map occupies the whole container
+        window.addEventListener('resize', () => map.getViewPort().resize());
+
+        //Step 3: make the map interactive
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+        //#region add new UI element
+
+        inherits = function (childCtor, parentCtor) {
+            function tempCtor() { } tempCtor.prototype = parentCtor.prototype; childCtor.superClass_ = parentCtor.prototype; childCtor.prototype = new tempCtor(); childCtor.prototype.constructor = childCtor; childCtor.base = function (me, methodName, var_args) {
+                var args = new Array(arguments.length - 2);
+                for (var i = 2; i < arguments.length; i++) {
+                    args[i - 2] = arguments[i];
+                }
+                return parentCtor.prototype[methodName].apply(me, args);
+            };
+        };
+
+        var customUI = function (opt_options) {
+            'use strict'; var options = opt_options || {};
+
+            H.ui.Control.call(this);
+            this.onButtonClick = this.onButtonClick.bind(this);
+
+            // create a button element   
+            this.increaseBtn_ = new H.ui.base.Button({
+                'label': '<svg class="H_icon H_icon" viewBox="0 0 25 25">' +
+                    '<path d="M 18.5,11 H 14 V 6.5 c 0,-.8 -.7,-1.5 -1.5,-1.5 -.8,0 -1.5,.7 -1.5,1.5 V 11 H 6' +
+                    '.5 C 5.7,11 5,11.7 5,12.5 5,13.3 5.7,14 6.5,14 H 11 v 4.5 c 0,.8 .7,1.5 1.5,1.5 .8,0 1.5,' +
+                    '-.7 1.5,-1.5 V 14 h 4.5 C 19.3,14 20,13.3 20,12.5 20,11.7 19.3,11 18.5,11 z" />' +
+                    '</svg>',
+                'onStateChange': this.onButtonClick
+            });
+
+            //add the buttons as this control's children   
+            this.addChild(this.increaseBtn_);
+
+            this.setAlignment(options['alignment'] || 'top-right');
+
+            this.options_ = options;
+        };
+        inherits(customUI, H.ui.Control);
+
+        customUI.prototype.onButtonClick = function (evt) {
+            'use strict'; if (evt.currentTarget.getState() === 'down') {
+                console.log('Hollla, I am the new custom UI element.');
+            }
+        };
+
+        var WaliedCheetos_CustomUI = new customUI();
+        ui.addControl('WaliedCheetos_CustomUI', WaliedCheetos_CustomUI);
+
+        //#endregion
+
+       
+
+        // Now use the map as required...
+        window.onload = function () {
+            DoSomething();
+            map.getEngine().addEventListener('render', (evt) => {
+                if (map.getEngine() === evt.target) {
+                    console.log('rendered');
+                }
+            });
+        }                  
+
+    </script>
+</body>
+</html>

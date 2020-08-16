@@ -1,0 +1,800 @@
+{
+  "id": "Aramex_Dubai_Usecase",
+  "plan": {
+    "jobs": [
+      {
+        "id": "WaliedCheetos_Job1",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.212182673322623,
+              "lng": 55.25088791471956
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job2",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.213520683996666,
+              "lng": 55.26740233780533
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job3",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.20705349612387,
+              "lng": 55.279726534137986
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job4",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.20025142778576,
+              "lng": 55.272455258301726
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job5",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.192779865620455,
+              "lng": 55.28317730911113
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job6",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.188319012977303,
+              "lng": 55.272455258301726
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job7",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.1918877081608,
+              "lng": 55.26518398246545
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job8",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.19579084880038,
+              "lng": 55.25963809411576
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job9",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.202704676577277,
+              "lng": 55.25729649681254
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job10",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.20471184336518,
+              "lng": 55.24829983348971
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job11",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.193337460714282,
+              "lng": 55.25002522097627
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job12",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.196906008864882,
+              "lng": 55.257666222702525
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job13",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.198801757538078,
+              "lng": 55.24115179961676
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job14",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.186869200696023,
+              "lng": 55.2765222430915
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job15",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.174043186913583,
+              "lng": 55.25335275398609
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job16",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.170250889537492,
+              "lng": 55.260131061969055
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job17",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.168689321037572,
+              "lng": 55.24484905851656
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job18",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.159431039931537,
+              "lng": 55.271839048485084
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job19",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.157088471865745,
+              "lng": 55.25187385042618
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job20",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.15809243511647,
+              "lng": 55.245588510296514
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job21",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.164116041103203,
+              "lng": 55.243493396919966
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job22",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.160434983903087,
+              "lng": 55.23511294341375
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job23",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.165231491047834,
+              "lng": 55.22759518365083
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job24",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.176720031681448,
+              "lng": 55.227348699724175
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job25",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.177835366318252,
+              "lng": 55.22402116671435
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job26",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.16913548550689,
+              "lng": 55.21761258462138
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job27",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.167127732538688,
+              "lng": 55.22365144082438
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job28",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.15753467877498,
+              "lng": 55.22254226315444
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job29",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.151064518865535,
+              "lng": 55.25778946466585
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job30",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.171923976450778,
+              "lng": 55.25803594859251
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job31",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.19066098098395,
+              "lng": 55.23338755592718
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job32",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.18051212780443,
+              "lng": 55.2256233122376
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job33",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.1752700813958,
+              "lng": 55.22167956941116
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job34",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.160881178571515,
+              "lng": 55.21625692302477
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job35",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.15630760584754,
+              "lng": 55.22476061849432
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job36",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.153072536244167,
+              "lng": 55.249409011159635
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job37",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.231470904138945,
+              "lng": 55.26666288602537
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job38",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.21708864053302,
+              "lng": 55.25606407717929
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job39",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.202704676577277,
+              "lng": 55.28613511623097
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job40",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.204154300354737,
+              "lng": 55.264321288722165
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job41",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.203708264107856,
+              "lng": 55.252613302206136
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job42",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.20638445707508,
+              "lng": 55.24706741385644
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job43",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.169804729149693,
+              "lng": 55.26087051374901
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job44",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.156530710934152,
+              "lng": 55.21909148818129
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job45",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.14001983269727,
+              "lng": 55.25335275398612
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job46",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.14972582225597,
+              "lng": 55.235236185377104
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job47",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.15630760584754,
+              "lng": 55.25446193165605
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job48",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.161104275293628,
+              "lng": 55.21182021234505
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job49",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.15574984134597,
+              "lng": 55.27368767793501
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job50",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.174935475034374,
+              "lng": 55.280219501991326
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job51",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.190995544166498,
+              "lng": 55.264444530685516
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job52",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.174266259556095,
+              "lng": 55.22747194168753
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job53",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.165008401875088,
+              "lng": 55.21453153553824
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job54",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.14191646603722,
+              "lng": 55.20664404988533
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job55",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.14001983269727,
+              "lng": 55.19826359637913
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job56",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.112682727960735,
+              "lng": 55.20676729184867
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job57",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.1098928835845,
+              "lng": 55.21785906854807
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "WaliedCheetos_Job58",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.155526734831366,
+              "lng": 55.20775322755529
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      }
+    ]
+  },
+  "fleet": {
+    "types": [
+      {
+        "id": "vehicle1",
+        "profile": "car",
+        "amount": 10,
+        "capacity": [ 15 ],
+        "costs": {
+          "distance": 0.0002,
+          "time": 0.004805555555556,
+          "fixed": 22
+        },
+        "shifts": [
+          {
+            "start": {
+              "location": {
+                "lat": 25.2394074,
+                "lng": 55.3713804
+              },
+              "time": "2020-05-14T09:00:00+04:00"
+            },
+            "end": {
+              "location": {
+                "lat": 25.2394074,
+                "lng": 55.3713804
+              },
+              "time": "2020-05-14T18:00:00+04:00"
+            }
+          }
+        ]
+      }
+    ],
+    "profiles": [
+      {
+        "name": "car",
+        "type": "car"
+      }
+    ]
+  }
+}

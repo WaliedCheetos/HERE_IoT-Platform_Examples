@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="initial-scale=1.0,
+      width=device-width" />
+          <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+<style>
+#myAnimation {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  left: 10px;
+  position: absolute;
+  background-color: red;
+}
+</style>
+<body>
+<div style="width: 640px; height: 480px;position: relative;" id="mapContainer">
+</div>
+ <div id ="myAnimation"></div>
+
+        <script type="text/javascript">
+
+        var config = {
+            HEREIoT_AppID: "Lrw0yF4Z4nFpEe7jJxcd",
+        HEREIoT_AppCode: "9zhfUoi6kIHQqt85SunXuw",
+        HEREIoT_APIKey: "pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E",
+
+        HEREIoT_initial_longitude: 55.26637,//55.19,
+        HEREIoT_initial_latitude: 25.19345,//25.07,
+        HEREIoT_initial_zoom: 16,
+        HEREIoT_initial_tilt: 63,
+        HEREIoT_initial_heading: 60,
+    }
+
+
+function myMove() {
+  var elem = document.getElementById("myAnimation");   
+  var pos = 0;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      elem.style.top = pos + 'px'; 
+      elem.style.left = pos + 'px'; 
+    }
+  }
+}
+var platform = new H.service.Platform({
+                apikey: config.HEREIoT_APIKey
+        });
+        
+        // Get the default map types from the Platform object:
+        var defaultLayers = platform.createDefaultLayers();
+        
+          // Instantiate the map:
+        var map = new H.Map(
+          document.getElementById('mapContainer'),
+          defaultLayers.vector.normal.map,
+  {
+    zoom: 15,
+    center: { lng: 13.8, lat: 52.3 }
+  });
+</script>
+
+<button onclick="myMove()">Click Me</button> 
+</body>
+</html>

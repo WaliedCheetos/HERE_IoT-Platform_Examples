@@ -1,0 +1,220 @@
+{
+  "id": "problem_id",
+  "plan": {
+    "jobs": [
+      {
+        "id": "delivery1",
+        "places": {
+          "delivery": {
+            "location": [
+              25.2121818034,
+              55.3595998682
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery2",
+        "places": {
+          "delivery": {
+            "location": [
+              24.9378274172,
+              55.4876364907
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery3",
+        "places": {
+          "delivery": {
+            "location": [
+              24.9808776005,
+              55.1890807635
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery4",
+        "places": {
+          "delivery": {
+            "location": [
+              25.0515120088,
+              55.1558832367
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery5",
+        "places": {
+          "delivery": {
+            "location": [
+              25.2309359687,
+              55.3219928606
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery6",
+        "places": {
+          "delivery": {
+            "location": [
+              25.0811604517,
+              55.1387578422
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery7",
+        "places": {
+          "delivery": {
+            "location": [
+              25.2734848911,
+              55.3369091788
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery8",
+        "places": {
+          "delivery": {
+            "location": [
+              25.1295636965,
+              55.3935813377
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery9",
+        "places": {
+          "delivery": {
+            "location": [
+              24.9603740869,
+              55.0169981278
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      },
+      {
+        "id": "delivery10",
+        "places": {
+          "delivery": {
+            "location": [
+              24.8812156992,
+              55.2434694358
+            ],
+            "duration": 120
+          }
+        },
+        "demand": [
+          1
+        ]
+      }
+    ]
+  },
+  "fleet": {
+    "types": [
+      {
+        "id": "vehicle1",
+        "profile": "car",
+        "costs": {
+          "distance": 0.0002,
+          "time": 0.004805555555556,
+          "operation": 2,
+          "fixed": 22
+        },
+        "places": {
+          "start": {
+            "time": "2019-01-01T08:00:00.000Z",
+            "location": [
+              25.2394074,
+              55.3713804
+            ]
+          },
+          "end": {
+            "time": "2019-01-01T20:00:00.000Z",
+            "location": [
+              25.2394074,
+              55.3713804
+            ]
+          }
+        },
+        "capacity": [
+          5
+        ],
+        "amount": 1
+      },
+      {
+        "id": "vehicle2",
+        "profile": "car",
+        "costs": {
+          "distance": 0.0002,
+          "time": 0.004805555555556,
+          "fixed": 33
+        },
+        "places": {
+          "start": {
+            "time": "2019-01-01T08:00:00.000Z",
+            "location": [
+              25.2394074,
+              55.3713804
+            ]
+          },
+          "end": {
+            "time": "2019-01-01T20:00:00.000Z",
+            "location": [
+              25.2394074,
+              55.3713804
+            ]
+          }
+        },
+        "capacity": [
+          5
+        ],
+        "amount": 1
+      }
+    ]
+  }
+}

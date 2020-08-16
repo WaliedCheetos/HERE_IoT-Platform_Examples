@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script type="text/javascript"
+            src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript"
+            src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript"
+            src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript"
+            src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+</head>
+<body>
+    <div id="map" style="width: 600px; height: 600px; background: grey" />
+    <script type="text/javascript" charset="UTF-8">
+
+    var locations, shape;
+    var coord;
+
+    function reverseGeocode(platform) {
+        // set up Geocoder API
+        // the adminInfo parameter ensures that information about the driving side is returned
+        var geocoder = platform.getGeocodingService();
+        var prox = coord.lat + ',' + coord.lng;
+
+        var reverseGeocodingParameters = {
+            prox: prox,
+            mode: 'retrieveAddresses',
+            //mode: 'retrieveAreas',
+            //level: 'district',
+            //gen:9,
+            maxresults: '1',
+            additionaldata: 'IncludeShapeLevel,city'
+        };
+
+        geocoder.reverseGeocode(
+            reverseGeocodingParameters,
+            onSuccess,
+            onError
+        );
+    }
+
+    function onSuccess(result) {
+        // parse results from Geocoder API and retrieve shape information
+        locations = result.Response.View[0].Result;
+        shape = locations[0].Location.Shape.Value;
+        addCountryOutline(map);
+    }
+
+    function onError(error) {
+        alert('Ooops!');
+    }
+
+    function addCountryOutline(map) {
+
+        // clear map
+        markerGroup.removeAll();
+
+        // set up polygon style
+        var customStyle = {
+            strokeColor: 'black',
+            fillColor: 'rgba(0,175,170,0.5)',
+            lineWidth: 2,
+            lineJoin: 'bevel'
+        };
+
+        // the shape is returned as WKT and we need to convert it a Geometry
+        var geometry = H.util.wkt.toGeometry(shape);
+
+        // geometry is either a single or multi-polygon
+        if (geometry instanceof H.geo.MultiGeometry) {
+            var geometryArray = geometry.getGeometries();
+            for (var i = 0; i < geometryArray.length; i++) {
+                markerGroup.addObject(new H.map.Polygon(geometryArray[i].getExterior(), { style: customStyle }));
+            }
+        } else { // instanceof H.geo.Polygon
+            markerGroup.addObject(new H.map.Polygon(geometry.getExterior(), { style: customStyle }));
+        }
+    }
+
+    // step 1: initialize communication with the platform
+    var platform = new H.service.Platform({
+        apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+    });
+    var defaultLayers = platform.createDefaultLayers();
+
+    // step 2: initialize a map - this map is centered over California
+    var map = new H.Map(
+        document.getElementById('map'),
+        defaultLayers.vector.normal.map,
+        {
+            zoom: 4,
+            center: { lat: 25.19893, lng: 55.27991 }
+    });
+
+    // step 3: make the map interactive
+    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+    // step 4: create the default UI components
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+    var markerGroup = new H.map.Group();
+    map.addObject(markerGroup);
+
+    function setUpClickListener(map) {
+        // register a tap listener on the map and start geocoder on click
+        map.addEventListener('tap', function (evt) {
+            coord = map.screenToGeo(evt.currentPointer.viewportX, evt.currentPointer.viewportY);
+            reverseGeocode(platform, coord);
+        });
+    }
+
+    setUpClickListener(map);
+
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,124 @@
+﻿<!--<!doctype html>
+<html>
+<head>
+    <title>WaliedCheetos_HERE &Aacute; Leaflet</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+    <style type="text/css">
+        #map {
+        height: 600px;
+        width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <p><strong>Here</strong> we go!</p>
+    <div id="map">Map goes here</div>
+    <script>
+      var map = L.map('map', {
+        center: [25.19345, 55.26637],
+        zoom: 6
+      });
+
+      //var layer = L.tileLayer("http://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?app_id=0FTURGZoWPYxBtqn6Jht&app_code=KRzKipEZJLjS2lBw8zWLZw"
+      //var layer = L.tileLayer("https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day.grey/{z}/{x}/{y}/256/png8?pois=true&apikey=pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E"
+      var layer = L.tileLayer("https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?pois=true&apikey=pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E"
+        , {
+        styleId: 997
+      }).addTo(map);
+    </script>
+</body>
+</html>-->
+
+
+    <html>
+    <head>
+        <title>WaliedCheetos_HERE with Leaflet</title>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.css" />
+    <script src="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.js"></script>
+
+        <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+        <link rel="stylesheet" href="https://rawgit.com/perliedman/leaflet-routing-machine/master/dist/leaflet-routing-machine.css" />
+
+        <script src="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.js"></script>
+        <script src="https://rawgit.com/perliedman/leaflet-routing-machine/master/dist/leaflet-routing-machine.js"></script>-->
+
+        <!--<script src="AnimatedMarker.js"></script>-->
+
+        <style type="text/css">
+            html, body, #map {
+                height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <div id="map">
+
+            <script type="text/javascript">
+
+                var config = {
+                    HEREIoT_APIKey: "pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E",
+                    HEREIoT_AppID: "Lrw0yF4Z4nFpEe7jJxcd",
+                    HEREIoT_AppCode: "9zhfUoi6kIHQqt85SunXuw",
+
+                    HEREIoT_initial_longitude: 55.26637,
+                    HEREIoT_initial_latitude: 25.19345,
+                    HEREIoT_initial_zoom: 13,
+                    HEREIoT_initial_tilt: 63,
+                    HEREIoT_initial_heading: 60,
+                }
+
+                //var map = L.map('map').setView([config.HEREIoT_initial_latitude, config.HEREIoT_initial_longitude], config.HEREIoT_initial_zoom);
+
+                /*
+                var map = L.map('map');                
+
+                L.tileLayer(
+                    'https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?pois=true&apikey' + config.HEREIoT_APIKey,
+                    {
+                        attribution: '&copy; <a href="https://www.facebook.com/Walied.Cheetos">WaliedCheetos</a>, 2020'
+                    })
+                    .addTo(map);
+                    */
+                var map = L.map( 'map', {
+    center: [config.HEREIoT_initial_longitude, config.HEREIoT_initial_latitude],
+    minZoom: 2,
+    zoom: config.HEREIoT_initial_zoom
+});
+
+L.tileLayer('https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?pois=true&apiKey=' + config.HEREIoT_APIKey, {
+    attribution: '&copy; <a href="https://www.facebook.com/Walied.Cheetos">WaliedCheetos, HERE 2020</a>',
+ subdomains: ['a','b','c']
+}).addTo( map );
+
+
+
+
+                //L.Routing.control({
+                //    waypoints: [
+                //        L.latLng(57.74, 11.94),
+                //        L.latLng(57.6792, 11.949)
+                //    ],
+                //    geocoder: L.Control.Geocoder.nominatim(),
+                //    router: L.Routing.here(config.HEREIoT_AppID, config.HEREIoT_AppCode),
+                //    routeWhileDragging: false
+                //}).addTo(map);
+
+
+                //var line = L.polyline([[40.68510, -73.94136], [40.68576, -73.94149], [40.68649, -73.94165]]);
+                //map.addLayer(line);
+
+                //var animatedMarker = L.animatedMarker(line.getLatLngs());
+                //map.addLayer(animatedMarker);
+
+            </script>
+            </div>
+
+    </body>
+    </html>

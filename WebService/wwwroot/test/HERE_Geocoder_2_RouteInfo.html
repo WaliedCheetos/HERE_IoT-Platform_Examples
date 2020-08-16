@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1549984893" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+
+
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 900px; background: grey" />
+    <script type="text/javascript" charset="UTF-8">
+
+    var locations, country, adminInfo, timeZoneOffset, localtime, currency, drivingSide, systemOfMeasure;
+    var coord;
+
+    function reverseGeocode(platform) {
+        //Set up Geocoder API
+        //The adminInfo parameter ensures that information about the driving side is returned
+        var geocoder = platform.getGeocodingService();
+        var prox = coord.lat + ',' + coord.lng;
+
+        var reverseGeocodingParameters = {
+            prox: prox,
+            mode: 'retrieveAddresses',
+            maxresults: '1',
+            locationattributes: 'adminInfo'
+        };
+
+        geocoder.reverseGeocode(
+            reverseGeocodingParameters,
+            onSuccess,
+            onError
+        );
+    }
+
+    function onSuccess(result) {
+        //Parse results from Geocoder API and format strings for marker
+        locations = result.Response.View[0].Result;
+        country = locations[0].Location.Address.AdditionalData[0].value;
+        adminInfo = locations[0].Location.AdminInfo;
+        timeZoneOffset = adminInfo.TimeZoneOffset;
+        localTime = adminInfo.LocalTime.substring(11,16);
+        currency = adminInfo.Currency;
+        drivingSide = ((adminInfo.DrivingSide == 'right') ? 'right' : 'left');
+        systemOfMeasure = ((adminInfo.SystemOfMeasure == 'metric') ? 'ml' : 'fl oz');
+
+        addAdminInfoMarker(map);
+    }
+
+    function onError(error) {
+        alert('Ooops!');
+    }
+
+    function addAdminInfoMarker(map) {
+
+        //Create description text
+        var countryText = '🗺️ Welcome to '+ country +'!';
+        var localTimeText = '⌚ The local time is ' + localTime + '.';
+        var drivingSideText = '🚗 The people here drive on the ' + drivingSide + ' side.';
+        var systemofMeasureText = '☕ They measure their coffee sizes in '+  systemOfMeasure + '.';
+        var currencyText = '💳 They pay for their coffee in ' + currency + '.';
+
+        //Create the svg mark-up
+        var svgMarkup = '<svg width="271" height="95" xmlns="http://www.w3.org/2000/svg">' +
+        '<rect stroke="#383C45" fill="#00AFAA" x="0" y="0" width="270" height="95" />' +
+        '<text x="10" y="18" font-size="10pt" font-family="Arial" fill="#383C45" >${COUNTRYTEXT}</text>' +
+        '<text x="10" y="35" font-size="10pt" font-family="Arial" fill="#383C45" >${LOCALTIMETEXT}</text>' +
+        '<text x="10" y="52" font-size="10pt" font-family="Arial" fill="#383C45" >${DRIVINGSIDETEXT}</text>' +
+        '<text x="10" y="69" font-size="10pt" font-family="Arial" fill="#383C45" >${SYSTEMOFMEASURETEXT}</text>' +
+        '<text x="10" y="86" font-size="10pt" font-family="Arial" fill="#383C45" >${CURRENCYTEXT}</text></svg>';
+
+        //Replace text in SVG with info from the Geocoder API
+        svgMarkup = svgMarkup.replace('${COUNTRYTEXT}', countryText);
+        svgMarkup = svgMarkup.replace('${LOCALTIMETEXT}', localTimeText);
+        svgMarkup = svgMarkup.replace('${DRIVINGSIDETEXT}', drivingSideText);
+        svgMarkup = svgMarkup.replace('${SYSTEMOFMEASURETEXT}', systemofMeasureText);
+        svgMarkup = svgMarkup.replace('${CURRENCYTEXT}', currencyText);
+
+        //Remove any old markers and add new marker to map
+        var adminInfoIcon = new H.map.Icon(svgMarkup);
+        var adminInfoMarker = new H.map.Marker({lat: coord.lat, lng: coord.lng },{icon: adminInfoIcon});
+        markerGroup.removeAll();
+        markerGroup.addObject(adminInfoMarker);
+    }
+
+    //Step 1: initialize communication with the platform
+    var platform = new H.service.Platform({
+        app_id: 'Lrw0yF4Z4nFpEe7jJxcd',
+        app_code: '9zhfUoi6kIHQqt85SunXuw',
+        useCIT: false,
+        useHTTPS: true
+    });
+    var defaultLayers = platform.createDefaultLayers();
+
+    //Step 2: initialize a map - this map is centered over California
+    var map = new H.Map(document.getElementById('map'),
+        defaultLayers.normal.map,{
+            center: { lat: 25.2841478, lng: 51.4419567},
+            zoom: 4
+        });
+
+    //Step 3: make the map interactive
+    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+    //Step 4: Create the default UI components
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+    var markerGroup = new H.map.Group();
+    map.addObject(markerGroup);
+
+    function setUpClickListener(map) {
+        //Register a tap listener on the map and start geocoder on click
+        map.addEventListener('tap', function (evt) {
+            coord = map.screenToGeo(evt.currentPointer.viewportX, evt.currentPointer.viewportY);
+        reverseGeocode(platform, coord);
+    });
+    }
+
+    setUpClickListener(map);
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WaliedCheetos: HERE MarkersClustering</title>
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
+
+    <script type="text/javascript" src="../js/MarkersInfo_XMLString.js"></script>
+
+</head>
+<body>
+    <div id="map" style="position: absolute; width:93%; height:93%;"></div>
+
+    <script type="text/javascript">
+
+        var config = {
+            HEREIoT_AppKey: "pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E",
+
+            HEREIoT_initial_longitude: 55.26637,
+            HEREIoT_initial_latitude: 25.19345,
+            HEREIoT_initial_zoom: 7,
+            HEREIoT_initial_tilt: 63,
+            HEREIoT_initial_heading: 60,
+        }
+
+
+
+        function getXMLDocFromString(r) {
+
+    if (!r)
+        return null;
+
+    var parser = new DOMParser();
+    var xmlobject = parser.parseFromString(r, "text/xml").documentElement;
+    return xmlobject;
+
+}
+
+        /**
+ * Changes XML to JSON
+ * Modified version from here: http://davidwalsh.name/convert-xml-json
+ * @param {string} xml XML DOM tree
+ */
+function xmlToJson(xml) {
+  // Create the return object
+  var obj = {};
+
+  if (xml.nodeType == 1) {
+    // element
+    // do attributes
+    if (xml.attributes.length > 0) {
+      obj["@attributes"] = {};
+      for (var j = 0; j < xml.attributes.length; j++) {
+        var attribute = xml.attributes.item(j);
+        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+      }
+    }
+  } else if (xml.nodeType == 3) {
+    // text
+    obj = xml.nodeValue;
+  }
+
+  // do children
+  // If all text nodes inside, get concatenated text from them.
+  var textNodes = [].slice.call(xml.childNodes).filter(function(node) {
+    return node.nodeType === 3;
+  });
+  if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
+    obj = [].slice.call(xml.childNodes).reduce(function(text, node) {
+      return text + node.nodeValue;
+    }, "");
+  } else if (xml.hasChildNodes()) {
+    for (var i = 0; i < xml.childNodes.length; i++) {
+      var item = xml.childNodes.item(i);
+      var nodeName = item.nodeName;
+      if (typeof obj[nodeName] == "undefined") {
+        obj[nodeName] = xmlToJson(item);
+      } else {
+        if (typeof obj[nodeName].push == "undefined") {
+          var old = obj[nodeName];
+          obj[nodeName] = [];
+          obj[nodeName].push(old);
+        }
+        obj[nodeName].push(xmlToJson(item));
+      }
+    }
+  }
+  return obj;
+}
+
+
+
+
+        /**
+ * Display clustered markers on a map
+ *
+ * Note that the maps clustering module https://js.api.here.com/v3/3.1/mapsjs-clustering.js
+ * must be loaded to use the Clustering
+
+ * @param {H.Map} map A HERE Map instance within the application
+ * @param {Object[]} data Raw data that contains airports' coordinates
+*/
+function startClustering(map, data) {
+
+try{
+
+  // First we need to create an array of DataPoint objects,
+  // for the ClusterProvider
+  var dataPoints = data["marker"].map(function (item) {
+    return new H.clustering.DataPoint(item["@attributes"].lat, item["@attributes"].lng);
+  });
+
+  // Create a clustering provider with custom options for clusterizing the input
+  var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
+    clusteringOptions: {
+      // Maximum radius of the neighbourhood
+      eps: 32,
+      // minimum weight of points required to form a cluster
+      minWeight: 1,
+strategy: H.clustering.Provider.Strategy.FASTGRID
+    }
+  });
+
+  // Create a layer tha will consume objects from our clustering provider
+  var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider);
+
+  // To make objects from clustering provder visible,
+  // we need to add our layer to the map
+  map.addLayer(clusteringLayer);
+}
+catch(e){
+console.error('WaliedCheetos --> ' + 'Exception: ' + e);
+}
+}
+
+
+
+
+        // initialize communication with the platform
+        // In your own code, replace variable window.apikey with your own apikey
+        var platform = new H.service.Platform({
+            apikey: config.HEREIoT_AppKey
+        });
+        var defaultLayers = platform.createDefaultLayers();
+
+
+                //Step 2: initialize a map - this map is centered over Europe
+        var map = new H.Map(document.getElementById('map'),
+            //defaultLayers.vector.normal.map, {
+            defaultLayers.raster.normal.map, {
+            center: { lat: config.HEREIoT_initial_latitude, lng: config.HEREIoT_initial_longitude },
+            zoom: config.HEREIoT_initial_zoom,
+            pixelRatio: window.devicePixelRatio || 1
+        });
+
+                        // adjust tilt and rotation of the map
+        //map.getViewModel().setLookAtData({
+        //    tilt: config.HEREIoT_initial_tilt,
+        //    //heading:  config.HEREIoT_initial_heading
+        //});
+
+        // add a resize listener to make sure that the map occupies the whole container
+        window.addEventListener('resize', () => map.getViewPort().resize());
+
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // create default UI with layers provided by the platform
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+
+
+
+        /**
+ * Assuming that "map" and "platform" are already initialized
+ */
+ // Create default map layers:
+var service = platform.getPlatformDataService();
+
+style = new mapsjs.map.SpatialStyle();
+// create tile provider and layer that displays postcode boundaries
+var boundariesProvider = new mapsjs.service.extension.platformData.TileProvider(service,
+{
+  layer: 'POI_BIGGER', level: 12
+}, {
+  resultType: mapsjs.service.extension.platformData.TileProvider.ResultType.MARKER,
+  styleCallback: function(data) {return style}
+});
+var boundaries = new mapsjs.map.layer.TileLayer(boundariesProvider);
+map.addLayer(boundaries);
+
+
+       
+    </script>
+</body >
+</html >

@@ -1,0 +1,156 @@
+{
+  "id": "7f3423c2-784a-4983-b472-e14107d5a54a",
+  "plan": {
+    "jobs": [
+      {
+        "id": "7f3423c2-784a-4983-b472-e14107d5a54a",
+        "places": {
+          "pickup": {
+            "times": [
+              [
+                "2019-07-04T08:00:00Z",
+                "2019-07-04T10:00:00Z"
+              ],
+              [
+                "2019-07-04T16:00:00Z",
+                "2019-07-04T18:00:00Z"
+              ]
+            ],
+            "location": {
+              "lat": 25.2394074,
+              "lng": 55.3713804
+            },
+            "duration": 180,
+            "tag": {
+              "tag": "some tag"
+            }
+          },
+          "delivery": {
+            "times": [
+              [
+                "2019-07-04T08:00:00Z",
+                "2019-07-04T10:00:00Z"
+              ],
+              [
+                "2019-07-04T16:00:00Z",
+                "2019-07-04T18:00:00Z"
+              ]
+            ],
+            "location": {
+              "lat": 25.2121818034,
+              "lng": 55.3595998682
+            },
+            "duration": 180,
+            "tag": {
+              "tag": "some tag"
+            }
+          }
+        },
+        "demand": [
+          10,
+          5
+        ],
+        "skills": [
+          "fridge"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "sequence",
+        "jobs": [
+          "departure",
+          "job1",
+          "break",
+          "job2"
+        ],
+        "vehicleId": "7f3423c2-784a-4983-b472-e14107d5a54a"
+      }
+    ]
+  },
+  "fleet": {
+    "types": [
+      {
+        "id": "7f3423c2-784a-4983-b472-e14107d5a54a",
+        "profile": {
+          "tag": "big truck"
+        },
+        "costs": {
+          "fixed": 22,
+          "distance": 0.0001,
+          "time": 0.0048
+        },
+        "shifts": [
+          {
+            "start": {
+              "time": "2019-07-04T00:00:00Z",
+              "location": {
+                "lat": 52.53088,
+                "lng": 13.38471
+              }
+            },
+            "end": {
+              "time": "2019-07-04T00:00:00Z",
+              "location": {
+                "lat": 52.53088,
+                "lng": 13.38471
+              }
+            },
+            "breaks": [
+              {
+                "times": [
+                  [
+                    "2019-07-04T08:00:00Z",
+                    "2019-07-04T10:00:00Z"
+                  ],
+                  [
+                    "2019-07-04T16:00:00Z",
+                    "2019-07-04T18:00:00Z"
+                  ]
+                ],
+                "duration": 180,
+                "location": {
+                  "lat": 52.53088,
+                  "lng": 13.38471
+                }
+              }
+            ]
+          }
+        ],
+        "capacity": [
+          10,
+          5
+        ],
+        "skills": [
+          "fridge"
+        ],
+        "limits": {
+          "maxDistance": 20000,
+          "shiftTime": 21600
+        },
+        "amount": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": {
+          "tag": "big truck"
+        },
+        "avoidRoutes": {
+          "features": [
+            "tollRoad"
+          ]
+        },
+        "type": "car"
+      }
+    ]
+  },
+  "configuration": {
+    "optimizations": {
+      "waitingTime": {
+        "reduce": true,
+        "bufferTime": 15
+      }
+    }
+  }
+}

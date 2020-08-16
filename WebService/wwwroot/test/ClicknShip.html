@@ -121,7 +121,7 @@
                         // mark the object as volatile for the smooth dragging
                         volatility: true,
                         //set customer icon to the marker
-                        //icon: new H.map.Icon("../images/marker_position.png", { size: { w: 33, h: 33 } })
+                        icon: new H.map.Icon("../images/marker_position.png", { size: { w: 33, h: 33 } })
                     });
 
                     map.addObject(_marker);
@@ -166,6 +166,12 @@
 
         // Create the default UI components
         var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+
+        // Assumption: the platform is instantiated
+var mapTiler = platform.getMapTileService({type: 'base'}),
+  tileLayer = mapTiler.createTileLayer('maptile', 'reduced.night', 256, 'jpg');
+map.setBaseLayer(tileLayer);
 
         _fx_SetUpClickListener(map);
 

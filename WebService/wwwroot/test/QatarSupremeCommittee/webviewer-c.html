@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv='Content-Language' content='en' />
+    <title>WCheetos - Supreme Committee - Qatar 2020</title>
+
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="../../css/QatarSupremeCommittee/index.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/QatarSupremeCommittee/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/QatarSupremeCommittee/search.css" />
+
+    <!-- Load jQuery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Load canvas js -->
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <!-- Load d3 js -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- JS API -->
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+
+    <!-- Turf for area calculations -->
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+
+    <!-- Social -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../resources/favicon.ico" />
+
+    <!-- Date -->
+    <script src="https://unpkg.com/better-dom@4.0.0/dist/better-dom.min.js"></script>
+    <script src="https://unpkg.com/better-dateinput-polyfill@3.2.7/dist/better-dateinput-polyfill.min.js"></script>
+
+
+    <!--QR Code-->
+    <!--<script src="../../js/QatarSupremeCommittee/qrcode.js"></script>-->
+</head>
+
+<body>
+
+    <div id="map"></div>
+    <div id="sidebar">
+        <div class="gradient-line"></div>
+        <div class="header">
+            <img class="_img_header" src="../../resources/HERE Logo.png" />
+            <img class="_img_header" src="../../images/QatarSupremeCommittee/QatarSupremeCommittee_Qatar2020_logo.png" style="width: 71%;height: 19vh;" />
+
+            <h1>Supreme Committee - Qatar 2020</h1>
+
+            <p>
+                Determine ARAMEX stem In-Out bound operations time, distance, and cost values using HERE's live/historical traffic ifnromation.
+                <!--<a target="_blank" href="https://developer.here.com/">Learn more</a>-->
+            </p>
+            <p>
+                To explore different locations, search for a place below or maybe you can drag the map marker around.
+            </p>
+
+            <div class="gradient-line"></div>
+
+            <div class="search-container">
+                <h2 class="city-label">Search a place</h2>
+                <div class="outer-city-field-container">
+                    <img src="../../resources/outline-search-24px.svg">
+                    <div class="inner-city-field-container">
+                        <div contenteditable="true" class="city-field" x-webkit-speech></div>
+                        <!--<input type="text" contenteditable="true" class="city-field" x-webkit-speech />-->
+                        <div class="city-field-suggestion"></div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <div class="gradient-line"></div>
+
+        </div>
+        <div class="tabs">
+            <div class="tab-container">
+                <div class="tab tab-active" id="tab-1">
+                    Stem operation options
+                </div>
+                <div class="tab" id="tab-2">
+                    Display Options
+                </div>
+            </div>
+            <div class="tab-bar"></div>
+        </div>
+
+
+        <div class="content">
+            <div class="content-group" id="content-group-1">
+                <div class="group" style="display:none">
+                    <div class="h2-row">
+                        <h2>Range</h2>
+                        <div id="slider-val" class="h2-val"></div>
+                    </div>
+                    <input class="isoline-controls slider" id="range" type="range" min="0" max="4000" value="1200" />
+                </div>
+                <div class="group columns">
+                    <div class="col">
+                        <h2>Mode</h2>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="car" name="mode" checked>
+                            <span class="checkmark"></span>
+                            Car
+                        </label>
+                        <label class="radio-container" style="display:none">
+                            <input class="isoline-controls" type="radio" id="pedestrian" name="mode">
+                            <span class="checkmark"></span>
+                            Pedestrian
+                        </label>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="truck" name="mode">
+                            <span class="checkmark"></span>
+                            Truck
+                        </label>
+                    </div>
+
+
+                    <div class="col">
+                        <h2>Vehicle Type</h2>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="gasoline" name="vehicle-type" checked>
+                            <span class="checkmark"></span>
+                            Gasoline (5.5)
+                        </label>
+
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="diesel" name="vehicle-type">
+                            <span class="checkmark"></span>
+                            Diesel (5.5)
+                        </label>
+
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="electric" name="vehicle-type">
+                            <span class="checkmark"></span>
+                            Electric
+                        </label>
+                    </div>
+
+
+                    <div class="col" style="display:none">
+                        <h2>Range type</h2>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="time" name="range-type" checked>
+                            <span class="checkmark"></span>
+                            Time
+                        </label>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="distance" name="range-type">
+                            <span class="checkmark"></span>
+                            Distance
+                        </label>
+                    </div>
+
+                    <div class="col">
+                        <h2>Traffic type</h2>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="traffic_enabled" name="traffic-type" checked>
+                            <span class="checkmark"></span>
+                            Traffic enabled
+                        </label>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="traffic_disabled" name="traffic-type">
+                            <span class="checkmark"></span>
+                            Traffic disabled
+                        </label>
+                    </div>
+
+                    <div class="col">
+                        <h2>Stem operation dir.</h2>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="OutboundStem" name="stem-direction" checked>
+                            <span class="checkmark"></span>
+                            Outbound
+                        </label>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="InboundStem" name="stem-direction">
+                            <span class="checkmark"></span>
+                            Inbound
+                        </label>
+                    </div>
+
+                    <div class="col">
+                        <h2>Language</h2>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="english_language" name="language-type" checked>
+                            <span class="checkmark"></span>
+                            English (en-US)
+                        </label>
+                        <label class="radio-container">
+                            <input class="isoline-controls" type="radio" id="arabic_language" name="language-type">
+                            <span class="checkmark"></span>
+                            Arabic (ar-AE)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="gradient-line"></div>
+
+                <div class="group">
+                    <h2>Date</h2>
+                    <input class="isoline-controls text-input" id="date-value" type="date" name="date">
+                </div>
+
+                <div class="group">
+                    <div class="h2-row">
+                        <h2>Time</h2>
+                        <div id="hour-slider-val" class="h2-val">12:00 PM</div>
+                    </div>
+                    <div class="graph-container" style="display:none">
+                        <div class="no-graph-text">Distribution is only available in range type time and mode car.</div>
+                        <div class="graph"></div>
+                    </div>
+                    <input class="isoline-controls slider" id="hour-slider" type="range" min="0" max="23" value="12" />
+                </div>
+
+                <!--<div class="group">
+                    <div class="h2-row">
+                        <div style="width:600px; height:600px;" id="chart_TrafficCongestionPerDay_North">
+
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+
+            <div class="content-group" id="content-group-2">
+                <div class="group">
+                    <h2>Map Theme</h2>
+                    <div class="theme-tiles">
+                        <div id="day" class="theme-tile theme-tile-active">
+                            <img src="../../resources/day-theme.png">
+                        </div>
+                        <div id="night" class="theme-tile">
+                            <img src="../../resources/night-theme.png">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h2>Map View</h2>
+                    <label class="radio-container">
+                        <input class="view-controls" type="radio" id="static" name="map-view" checked>
+                        <span class="checkmark"></span>
+                        Static top-down
+                    </label>
+                    <label class="radio-container">
+                        <input class="view-controls" type="radio" id="rotating" name="map-view">
+                        <span class="checkmark"></span>
+                        Rotating angle
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+        <script type="module" src="../../js/QatarSupremeCommittee/app.js"></script>
+</body>
+
+</html>

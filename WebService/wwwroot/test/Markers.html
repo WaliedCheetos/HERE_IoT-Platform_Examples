@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>HERE Maps Markers</title>
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+    <style type="text/css">
+        .map {
+        width: 100vw;
+        height: 100vh; 
+        }
+    </style>
+</head>
+<body>
+    <div id="mapHERE" class="map"></div>
+
+    <script type="text/javascript">
+
+//#region configuration
+        const HEREInitials = {
+            Center: {
+                lat: 25.19893,
+                lng: 55.27991,
+                text: 'WaliedCheetos'
+            },
+            Zoom: 16,
+            Heading: 180,
+            Tilt: 65,
+            Credentials: {
+                AppID: 'Lrw0yF4Z4nFpEe7jJxcd',
+                AppCode: '9zhfUoi6kIHQqt85SunXuw',
+                APIKey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+            },
+            Attribution: '&copy; HERE 2020'
+        }
+        //#endregion
+
+
+
+
+        //#region init HERE Maps
+
+        // Initialize HERE Map
+        const platform = new H.service.Platform({ apikey: HEREInitials.Credentials.APIKey });
+        const defaultLayers = platform.createDefaultLayers();
+
+        const mapHERE = new H.Map(
+            document.getElementById('mapHERE'),
+            defaultLayers.vector.normal.map,
+            {
+                center: HEREInitials.Center,
+                zoom: HEREInitials.Zoom,
+                tilt: HEREInitials.Tilt,
+                heading: HEREInitials.Heading,
+                pixelRatio: window.devicePixelRatio || 1
+            });
+
+        const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(mapHERE));
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(mapHERE, defaultLayers);
+
+        var mapSettings = ui.getControl('mapsettings');
+        var zoom = ui.getControl('zoom');
+        var scalebar = ui.getControl('scalebar');
+
+        mapSettings.setAlignment('bottom-right');
+        zoom.setAlignment('bottom-right');
+        scalebar.setAlignment('bottom-right');
+
+        //#endregion
+
+        //#region add a marker, and register tab event
+
+        var markerHERE_01 = new H.map.Marker(
+            HEREInitials.Center,
+            {
+                //icon: new H.map.Icon("assets/js/icons/bank.png", { size: { h: 45, w: 45 } }),
+                //title: 'WaliedCheetos'
+            }
+        );
+
+        markerHERE_title = '<div>' +
+            '<h2>Tooltip with HTML content<\/h2>' +
+            '<img width=\'666\' height=333 src=' +
+            '\'https://www.arabianbusiness.com/public/styles/full_img/public/images/2018/06/01/The-Dubai-Mall-2.jpg?itok=8b42iuHv' +
+            '\' ' +
+            'alt=\'\'/><br/><b>The Dubai Mall<\/b>' +
+            '<\/div>';
+
+        markerHERE_01.title = markerHERE_title;
+
+        mapHERE.addObject(markerHERE_01);
+
+        markerHERE_01.addEventListener('tap', (evt) => {
+
+            const infoBubble1 = new H.ui.InfoBubble(evt.target.getGeometry(), {
+                content: `<div class="info-bubble-label"> ${evt.target.title}
+                    <hr />
+
+                </div >`
+            });
+
+            ui.addBubble(infoBubble1);
+        }, false);
+
+        //#endregion
+
+
+        //#region add a marker, and register pointer move event
+
+        var markerHERE_02 = new H.map.Marker(
+            { lat: 25.195, lng: 55.28344 },
+            {
+                //icon: new H.map.Icon("assets/js/icons/bank.png", { size: { h: 45, w: 45 } }),
+                //title: 'WaliedCheetos'
+            }
+        );
+
+        markerHERE_title = '<div>' +
+            '<h2>Tooltip with HTML content<\/h2>' +
+            '<img width=\'666\' height=333 src=' +
+            '\'https://www.dubai-online.com/wp-content/uploads/2012/05/dubai-misc-65.jpg' +
+            '\' ' +
+            'alt=\'\'/><br/><b>Souk al Bahar<\/b>' +
+            '<\/div>';
+
+        markerHERE_02.title = markerHERE_title;
+
+        mapHERE.addObject(markerHERE_02);
+
+
+        markerHERE_02.addEventListener('pointermove', (evt) => {
+            //remove infobubbles
+            ui.getBubbles().forEach(bub => ui.removeBubble(bub));
+
+            const infoBubble_02 = new H.ui.InfoBubble(evt.target.getGeometry(), {
+                content: `<div class="info-bubble-label"> ${evt.target.title}
+                    <hr />
+
+                </div >`
+            });
+
+            ui.addBubble(infoBubble_02);
+        }, false);
+
+
+        //mapHERE.addEventListener('pointermove', function (evt) {
+        //    if (evt.target instanceof H.map.Marker) {
+
+        //        //remove infobubbles
+        //        ui.getBubbles().forEach(bub => ui.removeBubble(bub));
+        //        mapHERE.getViewPort().element.style.cursor = 'pointer';
+
+        //        const infoBubble_02 = new H.ui.InfoBubble(evt.target.getGeometry(), {
+        //            content: `<div class="info-bubble-label"> ${evt.target.title}
+        //            <hr />
+
+        //        </div >`
+        //        });
+
+        //        ui.addBubble(infoBubble_02);
+
+        //    } else {
+        //        mapHERE.getViewPort().element.style.cursor = 'auto';
+        //    }
+        //}, false);
+
+
+        //#endregion
+
+    </script>
+</body>
+</html>

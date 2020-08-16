@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv='Content-Language' content='en' />
+    <title>WCheetos - Supreme Committee - Qatar 2020</title>
+
+    <!-- Social -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../resources/favicon.ico" />
+
+    <!--jQuery-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- custom styles -->
+    <link rel="stylesheet" type="text/css" href="../../css/QatarSupremeCommittee/index.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/QatarSupremeCommittee/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/QatarSupremeCommittee/search.css" />
+
+    <!--MapKey leaflet plugin-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mapshakers/leaflet-mapkey-icon/master/dist/MapkeyIcons.css" />
+
+
+
+
+    <!--mapillary-->
+    <link href='https://unpkg.com/mapillary-js@2.20.0/dist/mapillary.min.css' rel='stylesheet' />
+
+    <!--Leaflet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+
+    <!--Leaflet context menu plugin-->
+    <link rel="stylesheet" href="https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.css" />
+
+    <!--Leaflet markers clustering plugin-->
+    <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
+
+    <!--Leaflet geoman plugin-->
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />
+
+
+
+
+    <!--jQuery-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!--mapillary-->
+    <script src='https://unpkg.com/mapillary-js@2.20.0/dist/mapillary.min.js'></script>
+
+    <!--Leaflet-->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+    <!--Leaflet context menu plugin-->
+    <script src="https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.js"></script>
+
+    <!--Leaflet markers clustering plugin-->
+    <script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+
+    <!--Leaflet geoman plugin-->
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+
+    <!--Tangram-->
+    <script src="https://unpkg.com/tangram/dist/tangram.min.js"></script>
+
+    <!--Turf-->
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+
+    <!--MapKey leaflet plugin-->
+    <script src="https://cdn.rawgit.com/mapshakers/leaflet-mapkey-icon/master/dist/L.Icon.Mapkey.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+
+        });
+
+    </script>
+
+</head>
+<body>
+
+    <div id="dialog-form" title="Update shape attributes">
+        <p class="validateTips">All form fields are required.</p>
+
+        <form>
+            <fieldset>
+                <label for="name" class="hiddenContent">Name</label>
+                <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-al hiddenContent">
+                <label for="email" class="hiddenContent">Email</label>
+                <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all hiddenContent">
+                <label for="password" class="hiddenContent">Password</label>
+                <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all hiddenContent">
+
+
+                <label for="ZoneName">Zone Name</label>
+                <input type="text" name="ZoneName" id="ZoneName" value="Zone 1" class="text ui-widget-content ui-corner-all">
+
+                <label for="ZoneType">Zone Type</label>
+                <input type="text" name="ZoneType" id="ZoneType" value="Commercial" class="text ui-widget-content ui-corner-all">
+
+                <label for="ZoneViewers">Viewed by</label>
+                <select name="Zoneviewers" id="ZoneViewers">
+                    <optgroup label="World Cup volunteers">
+                        <option value="WaliedCheetos">WaliedCheetos</option>
+                        <option value="AiyshaAhmad">Aiysha Ahmad</option>
+                        <option value="ChristopheHugus">Christophe Hugus</option>
+                    </optgroup>
+                    <optgroup label="Executives">
+                        <option value="FaroukIbrahim">Farouk Ibrahim</option>
+                        <option value="AliHassan">Ali Hassan</option>
+                        <option value="SarmadKhatib">Sarmad Khatib</option>
+                    </optgroup>
+                    <optgroup label="Consultants">
+                        <option value="ASPIRE">Consultant x users</option>
+                        <option value="Farouk">Consultant y users</option>
+                        <option value="Farouk">Consultant z users</option>
+                    </optgroup>
+                </select>
+
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+    </div>
+
+
+    <div id="map"></div>
+
+    <div id="sidebar" style="z-index:2;">
+        <div class="gradient-line"></div>
+        <div class="header">
+            <img class="_img_header" src="../../resources/HERE Logo.png" />
+            <br />
+            <img src="../../images/QatarSupremeCommittee/QatarSupremeCommittee_Qatar2020_logo.png" />
+
+            <div class="gradient-line"></div>
+            <br />
+
+            <h1>Supreme Committee - Qatar 2022</h1>
+
+            <p>
+                Qatar, your host for the FIFA World Cup 2022™, welcomes you to a land of culture and heritage combined with innovation and a great love for football.
+                <a target="_blank" href="https://www.qatar2022.qa/en/home">Learn more</a>
+            </p>
+
+            <div class="gradient-line"></div>
+            <br />
+
+
+            <div class="tabs">
+                <div class="tab-container">
+                    <div class="tab tab-active" id="tab-1">
+                        Search
+                    </div>
+                    <div class="tab" id="tab-2">
+                        Display Options
+                    </div>
+                </div>
+                <div class="tab-bar"></div>
+            </div>
+
+            <div class="content">
+                <div class="content-group" id="content-group-1">
+                    <div class="group">
+                        <!--<div class="h2-row">
+        <p>
+            To explore different locations, search for a place below.
+        </p>
+    </div>-->
+
+                        <div class="h2-row">
+                            <div class="search-container">
+                                <h2 class="city-label">Select a city, place, address, POI, ... etc.</h2>
+                                <div class="outer-city-field-container">
+                                    <img src="../../resources/outline-search-24px.svg">
+                                    <div class="inner-city-field-container">
+                                        <input class="city-field text-input" style="z-index:3;" id="full" type="text" placeholder="Search Something...">
+                                        <div class="city-field-suggestion"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <br />
+                        <br />
+                        <div class="gradient-line"></div>
+
+                        <div class="h2-row">
+                            <div class="search-container">
+                                <h2 class="city-label">Select a CAD file to process, and overlay with the map</h2>
+                                <br />
+                                <br />
+                                <img src="../../images/QatarSupremeCommittee/let_us_CAD.png" class="letsCAD" />
+                                <br />
+                                <br />
+                                <div class="outer-city-field-container">
+                                    <img src="../../resources/outline-fileConversion.svg">
+
+                                    <div class="inner-city-field-container">
+                                        <input class="city-field text-input" style="z-index:3;" id="fileUpload" type="file" text="Pick a CAD"
+                                               accept=".dwg, .dxf">
+                                    </div>
+                                </div>
+
+                                <br />
+                                <br />
+                                    <img src="../../resources/loading.gif" id="loadingIMG" class="loading" style="display:none;" />
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--</div>
+
+        <div class="content">-->
+                <div class="content-group" id="content-group-2">
+                    <div class="group">
+                        <!--<div class="h2-row">-->
+                        <div class="gradient-line"></div>
+
+                        <div id='mly'></div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <div class="gradient-line"></div>
+
+
+
+
+        </div>
+
+
+
+                    </div>
+    
+    <script type="module" src="../../js/QatarSupremeCommittee/app-admin.js"></script>
+
+</body>
+</html>

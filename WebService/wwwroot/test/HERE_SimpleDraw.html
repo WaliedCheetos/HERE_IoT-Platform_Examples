@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WaliedCheetos</title>
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core-legacy.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="map" style="position: absolute; width:100%; height:100%;"></div>
+
+    <script type="text/javascript">
+
+
+         var config = {
+            HEREIoT_AppID: "Lrw0yF4Z4nFpEe7jJxcd",
+            HEREIoT_AppCode: "9zhfUoi6kIHQqt85SunXuw",
+            HEREIoT_APIKey: "pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E",
+
+            HEREIoT_initial_longitude: 55.26637,//55.19,
+            HEREIoT_initial_latitude: 25.19345,//25.07,
+            HEREIoT_initial_zoom: 16,
+            HEREIoT_initial_tilt: 63,
+            HEREIoT_initial_heading: 60,
+        }
+
+        function DoSomething() {
+            try {
+                alert('Hollla, map has been loaded');
+            } catch (e) {
+                alert('exception ' + e);
+            }
+        }
+
+        /**
+         * Boilerplate map initialization code starts below:
+         */
+
+        //Step 1: initialize communication with the platform
+        var platform = new H.service.Platform({
+            apikey: config.HEREIoT_APIKey
+        });
+
+        var defaultLayers = platform.createDefaultLayers();
+
+        //Step 2: initialize a map - this map is centered over Europe
+        var map = new H.Map(document.getElementById('map'),
+            defaultLayers.vector.normal.map, {
+            center: { lat: config.HEREIoT_initial_latitude, lng: config.HEREIoT_initial_longitude },
+            zoom: config.HEREIoT_initial_zoom,
+            pixelRatio: window.devicePixelRatio || 1
+        });
+
+        /*
+                // adjust tilt and rotation of the map
+        map.getViewModel().setLookAtData({
+            tilt: config.HEREIoT_initial_tilt,
+            //heading:  config.HEREIoT_initial_heading
+        });
+        */
+
+        //WaliedCheetos
+        
+
+        // add a resize listener to make sure that the map occupies the whole container
+        window.addEventListener('resize', () => map.getViewPort().resize());
+
+        //Step 3: make the map interactive
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+        // disable fractional zooming for Behavior
+behavior.disable(H.mapevents.Behavior.Feature.FRACTIONAL_ZOOM);
+
+        var growingShape = null;
+  //var growingStrip = new H.geo.Strip();
+  var growingStrip = new H.geo.LineString();
+
+  // Current Layer polygons.
+  var polygons = [];
+
+         var NORMAL_STYLE = {
+    strokeColor: "#f00",
+    lineWidth: 1
+  };
+  var SELECTED_STYLE = {
+    strokeColor: 'red',
+    lineWidth: 2
+  };
+
+  var polygonOptions = {style: NORMAL_STYLE};
+
+
+         map.addEventListener('dbltap', finalizePolygon);
+  map.addEventListener('tap', initializeOraddPointToPolygon);
+  map.addEventListener('pointermove', refreshNonFinalizedPolygon);
+
+
+
+         function finalizePolygon(e) {
+    if (e.originalEvent.which == 1 && growingShape == null) {
+      var point = map.screenToGeo(e.currentPointer.viewportX, e.currentPointer.viewportY);
+
+      var handleMarker = new H.map.Marker(point);
+      makeDraggable(handleMarker, console.log);
+
+      var name = window.prompt("Please specify value for key attribute NAME:");
+      //var strip = new H.geo.Strip();
+      var strip = new H.geo.LineString();
+      strip.pushPoint(point);
+
+      polygons.push({
+        $name: name,
+        getStrip: function () {
+          return strip;
+        }
+      });
+
+      map.addObject(handleMarker);
+      e.originalEvent.stopImmediatePropagation();
+      return;
+    }
+
+    if (e.originalEvent.which !== 3) {
+      return;// Only right click.
+    }
+    e.originalEvent.stopImmediatePropagation();
+
+    //growingShape.setStrip(growingStrip);
+    growingShape.setGeometry(growingStrip);
+
+    map.removeObject(growingShape);// will be added as a group
+
+    makePolygonModifiableAndDraggable(growingShape);
+
+    var name = window.prompt("Please specify value for key attribute NAME:");
+    growingShape.$name = name;
+
+    growingShape = null;
+    //growingStrip = new H.geo.Strip();
+    growingStrip = new H.geo.LineString();
+  }
+
+  function refreshNonFinalizedPolygon(e) {
+    var point = map.screenToGeo(e.currentPointer.viewportX, e.currentPointer.viewportY);
+    //var strip = new H.geo.Strip(growingStrip.getLatLngAltArray().concat(point.lat, point.lng, point.alt));
+    var strip = new H.geo.LineString(growingStrip.getLatLngAltArray().concat(point.lat, point.lng, point.alt));
+    if (growingStrip.getPointCount() == 1) {
+      // We placed first point, want to show line on cursor move.
+      if (!growingShape) {
+        growingShape = new H.map.Polyline(strip, polygonOptions);
+        map.addObject(growingShape);
+      } else {
+        //growingShape.setStrip(strip);
+        growingShape.setGeometry(strip);
+      }
+    } else if (growingStrip.getPointCount() === 2) {
+      if (growingShape instanceof H.map.Polyline) {
+        map.removeObject(growingShape);
+        growingShape = new H.map.Polygon(strip, polygonOptions);
+        map.addObject(growingShape);
+      } else {
+        //growingShape.setStrip(strip);
+        growingShape.setGeometry(strip);
+      }
+    } else if (growingStrip.getPointCount() > 2) {
+      //growingShape.setStrip(strip);
+      growingShape.setGeometry(strip);
+    }
+  }
+
+  function initializeOraddPointToPolygon(e) {
+    // Only right click, left click for navigation.
+    if (e.originalEvent.which !== 3) {
+      return;
+    }
+
+    growingStrip.pushPoint(map.screenToGeo(e.currentPointer.viewportX, e.currentPointer.viewportY));
+  }
+
+          function makeHandles(polygon, polygonHandles) {
+    var polygonStrip = polygon.getStrip();
+    for (var k = 0; k < polygonStrip.getPointCount(); k++) {
+      var handleCenter = polygonStrip.extractPoint(k);
+      var handleMarker = new H.map.Marker(handleCenter);
+      handleMarker.draggable = true;
+
+      handleMarker.addEventListener('dragstart', function () {
+        document.body.style.cursor = 'pointer';
+        behavior.disable();
+      }, false);
+      handleMarker.addEventListener('dragend', function () {
+        polygonHandles.removeObjects(polygonHandles.getObjects());
+        makeHandles(polygon, polygonHandles);
+        document.body.style.cursor = 'auto';
+        behavior.enable();
+        behavior.disable(H.mapevents.Behavior.DBLTAPZOOM);
+      }, false);
+      (function (closureK) {// funny closures.
+        handleMarker.addEventListener('drag', function (ev) {
+          var target = ev.target;
+          var pointer = ev.currentPointer;
+          var screenToGeo = map.screenToGeo(pointer.viewportX, pointer.viewportY);
+          target.setPosition(screenToGeo);
+          //var newStrip = new H.geo.Strip();
+          var newStrip = new H.geo.LineString();
+          polygonStrip.eachLatLngAlt(function (lat, lng, alt, idx) {
+            if (idx !== closureK) {
+              newStrip.pushLatLngAlt(lat, lng, 0);
+            } else {
+              newStrip.pushLatLngAlt(screenToGeo.lat, screenToGeo.lng, 0);
+            }
+          });
+          //polygon.setStrip(newStrip);
+          polygon.setGeometry(newStrip);
+        }, false);
+      })(k);
+      polygonHandles.addObject(handleMarker);
+    }
+  }
+
+  function makePolygonModifiableAndDraggable(polygon) {
+    var polygonStuff = new H.map.Group();
+    polygonStuff.addObject(polygon);
+    var polygonHandles = new H.map.Group();
+    polygonStuff.addObject(polygonHandles);
+
+    var oldStrip = polygon.getStrip();
+    //var newStrip = new H.geo.Strip();
+    var newStrip = new H.geo.LineString();
+    // fix the dbltap adding two points in last place, removing last.
+    for (var i = 0; i < oldStrip.getPointCount() - 1; i++) {
+      newStrip.pushPoint(oldStrip.extractPoint(i));
+    }
+    //polygon.setStrip(newStrip);
+    polygon.setGeometry(newStrip);
+
+
+    makeHandles(polygon, polygonHandles);
+    makeDraggable(polygon, function (newStrip) {
+      polygonHandles.removeObjects(polygonHandles.getObjects());
+      makeHandles(polygon, polygonHandles);
+    });
+
+    map.addObject(polygonStuff);
+
+    polygons.push(polygon);
+  }
+
+         function makeDraggable(object, draggedCallback) {
+    object.draggable = true;
+    object.addEventListener('drag', function (evt) {
+      var newCoord = map.screenToGeo((evt.pointers[0].viewportX), (evt.pointers[0].viewportY));
+      if (newCoord.lat != startCoord.lat || newCoord.lng != startCoord.lng) {
+        if (object.getStrip != null) {
+          var strip = object.getStrip();
+          //var newStrip = new H.geo.Strip();
+          var newStrip = new H.geo.LineString();
+          strip.eachLatLngAlt(function (lat, lng, alt, idx) {
+            var diffLat = (lat - startCoord.lat);
+            var diffLng = (lng - startCoord.lng);
+            newStrip.pushLatLngAlt(newCoord.lat + diffLat, newCoord.lng + diffLng, 0);
+          });
+          //object.setStrip(newStrip);
+          object.setGeometry(newStrip);
+          draggedCallback(newStrip);
+        } else {
+          object.setPosition(newCoord);
+        }
+        if (!map.getViewBounds().containsPoint(newCoord)) {
+          map.setCenter(newCoord, true);
+        }
+        startCoord = newCoord;
+      }
+    });
+
+    object.addEventListener('dragstart', function (evt) {
+      document.body.style.cursor = 'pointer';
+      startCoord = map.screenToGeo((evt.pointers[0].viewportX), (evt.pointers[0].viewportY));
+      behavior.disable();
+    });
+
+    object.addEventListener('dragend', function (evt) {
+      document.body.style.cursor = 'auto';
+      behavior.enable();
+      behavior.disable(H.mapevents.Behavior.DBLTAPZOOM);
+    });
+  }
+
+    </script>
+</body>
+</html>

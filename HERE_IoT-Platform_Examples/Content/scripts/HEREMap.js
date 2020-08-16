@@ -78,8 +78,5 @@ window.onload = function () {
         // }catch(e){alert(e);}
         // });
 
-
-
-
     } catch (e) { alert(e); }
 }

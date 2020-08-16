@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--Firebase core
+    (required)
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+
+    Analytics
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+    Authentication
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+
+    Cloud Firestore
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-firestore.js"></script>
+    Cloud Functions for Firebase Client SDK
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-functions.js"></script>
+     Cloud Messaging
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-messaging.js"></script>
+    For an optimal experience using Cloud Messaging, also add the Firebase SDK for Analytics.
+    Cloud Storage
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-storage.js"></script>
+    Performance Monitoring
+    (beta release)
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-performance.js"></script>
+    Visit the Performance Monitoring Get Started to add a standalone, lightweight Performance Monitoring SDK option.
+    Realtime Database
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+
+    Remote Config
+    (beta release)
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-remote-config.js"></script>
+    For an optimal experience using Remote Config, also add the Firebase SDK for Analytics.-->
+    <!--WebApp Code-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+
+    <!--Authentication-->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+
+    <!--Cloud Functions for Firebase Client SDK-->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-functions.js"></script>
+
+    <!--Realtime Database-->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+
+
+
+
+</head>
+<body>
+    <script>
+
+        try {
+
+
+
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAm8erna2Kveiuzr04s9O2LE2plRJjX8-M",
+            authDomain: "waliedcheetos-trackingapp.firebaseapp.com",
+            databaseURL: "https://waliedcheetos-trackingapp.firebaseio.com",
+            projectId: "waliedcheetos-trackingapp",
+            storageBucket: "waliedcheetos-trackingapp.appspot.com",
+            messagingSenderId: "1064815929628",
+            appId: "1:1064815929628:web:fb7593513026a47cd972d9",
+            measurementId: "G-NL2Y1QFYB2"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        // Get a reference to the database service
+        var database = firebase.database();
+        
+        //var starCountRef = firebase.database().ref('posts/' + postId + '/starCount');        
+        //starCountRef.on('value', function (snapshot) {
+        //updateStarCount(postElement, snapshot.val());
+        //});
+
+        var trackerId = '123';
+        var realtimeAttribute = 'time';
+        var realtimeAttributeRef = firebase.database().ref('WaliedCheetos-TrackingApp' + '/' + trackerId + '/' + realtimeAttribute);
+
+        realtimeAttributeRef.on('value', function (snapshot) {
+            //do ur magic
+            console.log('Hollla');
+        });
+
+        } catch (e) {
+            alert('exception: ' + e);
+        }
+    </script>
+</body>
+</html>

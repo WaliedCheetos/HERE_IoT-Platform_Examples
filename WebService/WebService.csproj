@@ -39,4 +39,12 @@
     </Reference>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\helpers\" />
+    <Folder Include="wwwroot\images\QatarSupremeCommittee\" />
+    <Folder Include="wwwroot\images\PDEs\" />
+    <Folder Include="wwwroot\test\AutoSuggest\" />
+  </ItemGroup>
+
 </Project>

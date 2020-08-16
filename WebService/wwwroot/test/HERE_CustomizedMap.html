@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>HERE Customized Map Control</title>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script type="text/javascript"
+            src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript"
+            src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript"
+            src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript"
+            src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+</head>
+<body>
+    <div id="map" style="position: absolute; width:93%; height:93%;"></div>
+
+    <script type="text/javascript">
+        var config = {
+            HEREIoT_APIKey: "pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E",
+            HEREIoT_AppID: "Lrw0yF4Z4nFpEe7jJxcd",
+            HEREIoT_AppCode: "9zhfUoi6kIHQqt85SunXuw",
+
+            HEREIoT_initial_longitude: 55.26637,
+            HEREIoT_initial_latitude: 25.19345,
+            HEREIoT_initial_zoom: 11,
+            HEREIoT_initial_tilt: 63,
+            HEREIoT_initial_heading: 60,
+
+            HEREIoT_initial_UseCustomizedMapControl : true
+        };
+
+        var platform = new H.service.Platform({
+            apikey: config.HEREIoT_APIKey
+        });
+        var HERE_DefaultLayers = platform.createDefaultLayers();
+
+        var tileProvider = new H.map.provider.ImageTileProvider({
+            providesOverlays: true,
+            getURL: function (column, row, zoom) {
+                //return 'https://1.base.maps.api.here.com/maptile/2.1/maptile/newest/normal.day/' + zoom + '/' + column + '/' + row + '/256/png8?app_id=' + config.HEREIoT_AppID + '&app_code=' + config.HEREIoT_AppCode + '&pois';
+                //return 'https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/' + zoom + '/' + column + '/' + row + '/256/png8?apiKey=' + config.HEREIoT_APIKey;
+                return 'https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/' + zoom + '/' + column + '/' + row + '/512/png8?pois=true&apiKey=' + config.HEREIoT_APIKey;
+            }
+        });
+
+        var overlayLayer = new H.map.layer.TileLayer(tileProvider,
+            {
+                opacity: 1
+            });
+
+        var map = new H.Map(
+            document.getElementById("map"),
+            overlayLayer,
+            {
+                center: {
+                    lat: config.HEREIoT_initial_latitude,
+                    lng: config.HEREIoT_initial_longitude
+                },
+                zoom: config.HEREIoT_initial_zoom,
+                pixelRatio: window.devicePixelRatio || 1
+            });
+
+
+        window.addEventListener("resize", () => map.getViewPort().resize());
+
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // create default UI with layers provided by the platform
+        var HERE_ui = H.ui.UI.createDefault(map, HERE_DefaultLayers);
+        const HERE_MapSettings = HERE_ui.getControl('mapsettings');
+
+        if (config.HEREIoT_initial_UseCustomizedMapControl) {
+            try {
+                //remove default mapsettings control
+                HERE_ui.removeControl("mapsettings");
+                // create custom one
+
+                var HERE_MapSettingsControl = new H.ui.MapSettingsControl({
+                    baseLayers: [{
+                        label: "WaliedCheetos: Tile", layer: overlayLayer
+                    }, {
+                        label: "WaliedCheetos: Satellite", layer: HERE_DefaultLayers.raster.satellite.map
+                    }, {
+                        label: "WaliedCheetos: Vector", layer: HERE_DefaultLayers.vector.normal.map
+                    }]
+                });
+
+
+                //var HERE_MapSettingsControl = new H.ui.MapSettingsControl({
+                //    baseLayers: [{
+                //        label: "WaliedCheetos: Normal", layer: HERE_DefaultLayers.raster.normal.map
+                //    }, {
+                //        label: "WaliedCheetos: Satellite", layer: HERE_DefaultLayers.raster.satellite.map
+                //    }, {
+                //        label: "WaliedCheetos: Terrain", layer: HERE_DefaultLayers.raster.terrain.map
+                //    }]
+                //});
+
+                HERE_ui.addControl("HERE_CustomMapSettingsControl", HERE_MapSettingsControl);
+
+                HERE_MapSettingsControl.setAlignment('top-right');
+            } catch (e) {
+                console.error('WaliedCheetos --> ' + 'Exception: ' + e);
+            }
+        }
+
+            //map.addLayer(overlayLayer);
+
+
+
+
+        /*
+         var maptypes = new Object();
+maptypes.normal = new Object();
+maptypes.normal.map = normalLayer;
+maptypes.satellite = new Object();
+maptypes.satellite.map = satelliteLayer;
+var ui = H.ui.UI.createDefault(map, maptypes);
+var menuEntries = ui.getControl('mapsettings').getChildren()[1].getChildren();
+menuEntries[0].getElement().style.borderBottom = 'none';
+for (let i=1; i<menuEntries.length; i++)
+        menuEntries[i].setVisibility(false);
+        */
+
+    </script>
+</body>
+</html>

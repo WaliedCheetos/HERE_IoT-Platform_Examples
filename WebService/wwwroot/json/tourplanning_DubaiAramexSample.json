@@ -1,0 +1,189 @@
+{
+  "id": "Aramex_Dubai_Usecase",
+  "plan": {
+    "jobs": [
+      {
+        "id": "job0",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 24.9808776005,
+              "lng": 55.1890807635
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job1",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.0515120088,
+              "lng": 55.1558832367
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job2",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.2309359687,
+              "lng": 55.3219928606
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job3",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.0811604517,
+              "lng": 55.1387578422
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job4",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.2734848911,
+              "lng": 55.3369091788
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job5",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.1295636965,
+              "lng": 55.3935813377
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job6",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 24.9603740869,
+              "lng": 55.0169981278
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job7",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 24.8812156992,
+              "lng": 55.2434694358
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job8",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 24.8929326725,
+              "lng": 54.9977554394
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job9",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 24.9805478676,
+              "lng": 55.0824883643
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      },
+      {
+        "id": "job10",
+        "places": {
+          "delivery": {
+            "location": {
+              "lat": 25.2147960391,
+              "lng": 55.2812629153
+            },
+            "duration": 180
+          }
+        },
+        "demand": [ 1 ]
+      }
+    ]
+  },
+  "fleet": {
+    "types": [
+      {
+        "id": "vehicle1",
+        "profile": "car",
+        "amount": 10,
+        "capacity": [ 15 ],
+        "costs": {
+          "distance": 0.0002,
+          "time": 0.004805555555556,
+          "fixed": 22
+        },
+        "shifts": [
+          {
+            "start": {
+              "location": {
+                "lat": 25.2394074,
+                "lng": 55.3713804
+              },
+              "time": "2020-04-30T06:00:00+04:00"
+            },
+            "end": {
+              "location": {
+                "lat": 25.2394074,
+                "lng": 55.3713804
+              },
+              "time": "2020-04-30T12:00:00+04:00"
+            }
+          }
+        ]
+      }
+    ],
+    "profiles": [
+      {
+        "name": "car",
+        "type": "car"
+      }
+    ]
+  }
+}

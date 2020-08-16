@@ -1,0 +1,450 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WaliedCheetos</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+
+
+    <style>
+        body, html {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        #map {
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        label, input {
+            display: block;
+        }
+
+            input.text {
+                margin-bottom: 12px;
+                width: 95%;
+                padding: .4em;
+            }
+
+        fieldset {
+            padding: 0;
+            border: 0;
+            margin-top: 25px;
+        }
+
+        h1 {
+            font-size: 1.2em;
+            margin: .6em 0;
+        }
+
+
+        #dialog-form {
+            z-index: 2;
+        }
+        .ui-dialog .ui-state-error {
+            padding: .3em;
+        }
+
+        .validateTips {
+            border: 1px solid transparent;
+            padding: 0.3em;
+        }
+
+        .hiddenContent {
+            display: none;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            var dialog, form,
+
+                // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+                emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                name = $("#name"),
+                email = $("#email"),
+                password = $("#password"),
+
+
+                ZoneName = $("#ZoneName"),
+                ZoneType = $("#ZoneType"),
+                ZoneViewer = $("#ZoneViewer"),
+                allFields = $([]).add(name).add(email).add(password).add(ZoneName).add(ZoneType).add(ZoneViewer),
+                tips = $(".validateTips");
+
+            function updateTips(t) {
+                tips
+                    .text(t)
+                    .addClass("ui-state-highlight");
+                setTimeout(function () {
+                    tips.removeClass("ui-state-highlight", 1500);
+                }, 500);
+            }
+
+            function checkLength(o, n, min, max) {
+                if (o.val().length > max || o.val().length < min) {
+                    o.addClass("ui-state-error");
+                    updateTips("Length of " + n + " must be between " +
+                        min + " and " + max + ".");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function checkRegexp(o, regexp, n) {
+                if (!(regexp.test(o.val()))) {
+                    o.addClass("ui-state-error");
+                    updateTips(n);
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function addUser() {
+                var currentGeoJSON = current.layer.toGeoJSON();
+                var valid = true;
+                allFields.removeClass("ui-state-error");
+
+                valid = valid && checkLength(name, "username", 3, 16);
+                valid = valid && checkLength(email, "email", 6, 80);
+                valid = valid && checkLength(password, "password", 5, 16);
+
+                valid = valid && checkLength(ZoneName, "ZoneName", 3, 15);
+                valid = valid && checkLength(ZoneType, "ZoneType", 3, 15);
+                //valid = valid && checkLength(ZoneViewer, "ZoneViewer", 3, 15);
+
+                valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+                valid = valid && checkRegexp(email, emailRegex, "eg. ui@jquery.com");
+                valid = valid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+
+                valid = valid && checkRegexp(ZoneName, /^[a-z]([0-9a-z_\s])+$/i, "Zone name may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+                valid = valid && checkRegexp(ZoneType, /^[a-z]([0-9a-z_\s])+$/i, "Zone type may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+               // valid = valid && checkRegexp(ZoneViewer, /^[a-z]([0-9a-z_\s])+$/i, "Zone viewer may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+
+                if (valid) {
+                    //$("#users tbody").append("<tr>" +
+                    //    "<td>" + name.val() + "</td>" +
+                    //    "<td>" + email.val() + "</td>" +
+                    //    "<td>" + password.val() + "</td>" +
+                    //    "</tr>");
+
+                    
+
+                    var properties = {};
+                    properties['ZoneName'] = ZoneName.val();
+                    properties['ZoneType'] = ZoneType.val();
+                    properties['ZoneViewer'] = $('#ZoneViewers option:selected').text();
+
+                    currentGeoJSON.properties = properties;
+
+                    alert(JSON.stringify(currentGeoJSON));
+
+
+                    dialog.dialog("close");
+                }
+                return valid;
+            }
+
+            dialog = $("#dialog-form").dialog({
+                autoOpen: false,
+                height: 400,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Create an account": addUser,
+                    Cancel: function () {
+                        dialog.dialog("close");
+                    }
+                },
+                close: function () {
+                    form[0].reset();
+                    allFields.removeClass("ui-state-error");
+                }
+            });
+
+            form = dialog.find("form").on("submit", function (event) {
+                event.preventDefault();
+                addUser();
+            });
+
+            $("#create-user").button().on("click", function () {
+                dialog.dialog("open");
+            });
+
+
+
+
+
+            //#region global variables
+            var tileLayers = [];
+            var tileLayersTOC = {};
+            //#endregion
+
+
+            //#region configuration
+            const HEREInitials = {
+                Center: {
+                    lat: 25.19893,
+                    lng: 55.27991,
+                    text: 'WaliedCheetos'
+                },
+                MapTileStyle_Default: 'reduced.night',
+                MapTileStyles: {
+                    ReducedNight: 'reduced.night',
+                    NormalDay: 'normal.day',
+                    NormalDayGrey: 'normal.day.grey',
+                    NormalDayTransit: 'normal.day.transit',
+                    ReducedDay: 'reduced.day',
+                    NormalNight: 'normal.night',
+                    ReducedNight: 'reduced.night',
+                    PedestrianDay: 'pedestrian.day'
+                },
+                //MapTileURLSuffix: `https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/${HEREInitials.MapTileStyle.ReducedDay}/{z}/{x}/{y}/512/png8?apiKey=${HEREInitials.Credentials.APIKey}&ppi=320`,
+                MapTileURLSuffix: 'https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest',
+                Zoom: 13,
+                Tilt: 65,
+                Credentials: {
+                    AppID: 'Lrw0yF4Z4nFpEe7jJxcd',
+                    AppCode: '9zhfUoi6kIHQqt85SunXuw',
+                    APIKey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+                },
+                Attribution: '&copy; HERE 2020'
+            }
+            //#endregion
+
+
+            //push all map tile styles configuration into one tileLayersTOC as a key value pair json object for layers control
+            for (mapTileStyle in HEREInitials.MapTileStyles) {
+                var tileLayer = L.tileLayer(HEREInitials.MapTileURLSuffix + `/${HEREInitials.MapTileStyles[mapTileStyle]}/{z}/{x}/{y}/512/png8?apiKey=${HEREInitials.Credentials.APIKey}&ppi=320`);
+                tileLayers.push(tileLayer);
+
+                tileLayersTOC[HEREInitials.MapTileStyles[mapTileStyle]] = tileLayer;
+            }
+
+
+            //init the map
+            const map = L.map('map', {
+                center: [HEREInitials.Center.lat, HEREInitials.Center.lng],
+                zoom: 11,
+                //layers: tileLayers
+                layers: [L.tileLayer(HEREInitials.MapTileURLSuffix + `/${HEREInitials.MapTileStyle_Default}/{z}/{x}/{y}/512/png8?apiKey=${HEREInitials.Credentials.APIKey}&ppi=320`)]
+            });
+
+            //init layers control
+            //add layers control to the map
+            var layerControl = L.control.layers(tileLayersTOC).addTo(map);
+
+            //init, and add attributions to the map
+            //map.attributionControl.addAttribution(HEREInitials.Center.text);
+            map.attributionControl.addAttribution(HEREInitials.Attribution);
+
+            // add leaflet-geoman controls with some options to the map
+            map.pm.addControls({
+                position: 'topleft',
+                //drawCircle: false,
+            });
+
+            map.pm.setPathOptions({
+                color: 'orange',
+                fillColor: 'green',
+                fillOpacity: 0.4,
+            })
+
+            //map.on('pm:drawend', e => {
+            //    console.log(e);
+            //});
+            var current;
+            var i = 0;
+            map.on('pm:create', e => {
+                current = e;
+                console.log(e);
+                e.layer._leaflet_id = 'WaliedCheetos_' + i++;
+                e.layer.options.title = { ZoneName: "WaliedCheetos_ZoneName" + i, ZoneType: "WaliedCheetos_ZoneType" + i };
+                const layer = e.layer
+                //add it to a control
+                //layerControl.addOverlay(e.layer, 'WaliedCheetos');
+                console.log(layer.toGeoJSON());
+
+                dialog.dialog("open");
+                //alert(turf.area(layer.toGeoJSON()))
+
+                map.eachLayer(function (layer) {
+                    //(layer._leaflet_id.toString().startsWith('WaliedCheetos_')) ? alert(layer._leaflet_id) : alert('Hollla');
+                    //(layer._leaflet_id.toString().startsWith('WaliedCheetos_')) ? alert(JSON.stringify(layer.toGeoJSON()) + JSON.stringify(e.layer.options.title)) : alert('Hollla');
+                    
+
+                });
+            });
+
+
+        });
+    </script>
+
+</head>
+<body>
+    <div id="dialog-form" title="Add shape properties">
+        <p class="validateTips">All form fields are required.</p>
+
+        <form>
+            <fieldset>
+                <label for="name" class="hiddenContent">Name</label>
+                <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-al hiddenContent">
+                <label for="email" class="hiddenContent">Email</label>
+                <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all hiddenContent">
+                <label for="password" class="hiddenContent">Password</label>
+                <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all hiddenContent">                
+                
+                
+                <label for="ZoneName">Zone Name</label>
+                <input type="text" name="ZoneName" id="ZoneName" value="Zone 1" class="text ui-widget-content ui-corner-all">
+               
+                <label for="ZoneType">Zone Type</label>
+                <input type="text" name="ZoneType" id="ZoneType" value="Commercial" class="text ui-widget-content ui-corner-all">
+               
+                <label for="ZoneViewers">Viewed by</label>
+                <select name="Zoneviewers" id="ZoneViewers">
+                    <optgroup label="Executives">
+                        <option value="Walied">Walied</option>
+                        <option value="Chris">Chris</option>
+                    </optgroup>
+                    <optgroup label="Consultants">
+                        <option value="ASPIRE">Aspire Users</option>
+                        <option value="Farouk">Farouk</option>
+                    </optgroup>
+                </select>
+
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+    </div>
+
+    <div id="map"></div>
+    <script>
+        /* Javascript from section below goes here */
+
+
+
+
+            ////#region global variables
+            //var tileLayers = [];
+            //var tileLayersTOC = {};
+            ////#endregion
+
+
+            ////#region configuration
+            //const HEREInitials = {
+            //    Center: {
+            //        lat: 25.19893,
+            //        lng: 55.27991,
+            //        text: 'WaliedCheetos'
+            //    },
+            //    MapTileStyle_Default: 'reduced.night',
+            //    MapTileStyles: {
+            //        ReducedNight: 'reduced.night',
+            //        NormalDay: 'normal.day',
+            //        NormalDayGrey: 'normal.day.grey',
+            //        NormalDayTransit: 'normal.day.transit',
+            //        ReducedDay: 'reduced.day',
+            //        NormalNight: 'normal.night',
+            //        ReducedNight: 'reduced.night',
+            //        PedestrianDay: 'pedestrian.day'
+            //    },
+            //    //MapTileURLSuffix: `https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/${HEREInitials.MapTileStyle.ReducedDay}/{z}/{x}/{y}/512/png8?apiKey=${HEREInitials.Credentials.APIKey}&ppi=320`,
+            //    MapTileURLSuffix: 'https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest',
+            //    Zoom: 13,
+            //    Tilt: 65,
+            //    Credentials: {
+            //        AppID: 'Lrw0yF4Z4nFpEe7jJxcd',
+            //        AppCode: '9zhfUoi6kIHQqt85SunXuw',
+            //        APIKey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+            //    },
+            //    Attribution: '&copy; HERE 2020'
+            //}
+            ////#endregion
+
+
+            ////push all map tile styles configuration into one tileLayersTOC as a key value pair json object for layers control
+            //for (mapTileStyle in HEREInitials.MapTileStyles) {
+            //    var tileLayer = L.tileLayer(HEREInitials.MapTileURLSuffix + `/${HEREInitials.MapTileStyles[mapTileStyle]}/{z}/{x}/{y}/512/png8?apiKey=${HEREInitials.Credentials.APIKey}&ppi=320`);
+            //    tileLayers.push(tileLayer);
+
+            //    tileLayersTOC[HEREInitials.MapTileStyles[mapTileStyle]] = tileLayer;
+            //}
+
+
+            ////init the map
+            //const map = L.map('map', {
+            //    center: [HEREInitials.Center.lat, HEREInitials.Center.lng],
+            //    zoom: 11,
+            //    //layers: tileLayers
+            //    layers: [L.tileLayer(HEREInitials.MapTileURLSuffix + `/${HEREInitials.MapTileStyle_Default}/{z}/{x}/{y}/512/png8?apiKey=${HEREInitials.Credentials.APIKey}&ppi=320`)]
+            //});
+
+            ////init layers control
+            ////add layers control to the map
+            //var layerControl = L.control.layers(tileLayersTOC).addTo(map);
+
+            ////init, and add attributions to the map
+            ////map.attributionControl.addAttribution(HEREInitials.Center.text);
+            //map.attributionControl.addAttribution(HEREInitials.Attribution);
+
+            //// add leaflet-geoman controls with some options to the map
+            //map.pm.addControls({
+            //    position: 'topleft',
+            //    //drawCircle: false,
+            //});
+
+            //map.pm.setPathOptions({
+            //    color: 'orange',
+            //    fillColor: 'green',
+            //    fillOpacity: 0.4,
+            //})
+
+            ////map.on('pm:drawend', e => {
+            ////    console.log(e);
+            ////});
+            //var x;
+            //map.on('pm:create', e => {
+            //    console.log(e);
+            //    const layer = e.layer
+            //    //add it to a control
+            //    layerControl.addOverlay(e.layer, 'WaliedCheetos');
+            //    x = layer.toGeoJSON();
+            //    console.log(layer.toGeoJSON());
+
+            //    dialog.dialog("open");
+            //    //alert(turf.area(layer.toGeoJSON()))
+            //});
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

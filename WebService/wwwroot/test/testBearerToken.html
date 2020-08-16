@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+<body>
+    <div>
+        <input type="button" value="Press HERE" onclick="testBearer();" />
+    </div>
+
+    <script type="text/javascript">
+
+
+        function testBearer() {
+            try {
+
+
+
+            //var settings = {
+            //    //"url": "https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/reduced.night/11/525/761/512/png8?ppi=320",
+            //    "url": "https://3.traffic.maps.ls.hereapi.com/maptile/2.1/flowtile/newest/normal.day/15/16359/10898/256/png8",
+            //    "method": "GET",
+            //    "timeout": 0,
+            //    "headers": {
+            //        //"Access-Control-Allow-Headers": "Authorization, Origin, Referer, User-Agent, If-None-Match",
+            //        //"Access-Control-Allow-Methods": "GET, OPTIONS",
+            //        //"Access-Control-Allow-Origin": "*",
+            //        "Authorization": "Bearer eyJhbGciOiJSUzUxMiIsImN0eSI6IkpXVCIsImlzcyI6IkhFUkUiLCJhaWQiOiJPd1VNTWpkbExvOFRxSkRZdm5JbSIsImlhdCI6MTU5NTE0OTc0MSwiZXhwIjoxNTk1MjM2MTQxLCJraWQiOiJqMSJ9.ZXlKaGJHY2lPaUprYVhJaUxDSmxibU1pT2lKQk1qVTJRMEpETFVoVE5URXlJbjAuLnNUYjNmbHRkLWtHZnluM1R6TDlMR2cuS0tDSHNaTmF6cTFnSzRidnVYbXpfYWNEX1ZMSG9SYjYxeGVNNzdmbTdmWXBpNlJJbDN5Q3dQT2RpRUh3UFVKZWlfcFdCZ3QzY2ItQ19ZQ0pmZjRVcEF6MEwwOXkwV3ZXRlVhTTYzSDZZSVhtYlRfZlJLaC1FcFp6M1Q5MWczQXJ2WWJIOGRvWDI1U1VxdFZfT1huZG1BLk5OQlctMU44Y3FmUVY4Tk9oNlRGTHZDLVctVElqMFdzdTBXN3RoYnp6NTg.Sx9TMlthsHvcGHSoD7REMKp0yQdExUCmp9EUDtqgH0_XTnVjhHJg0Vwl-VqzN81Uf_xJO9LepPySwzrHSc-piHW4J_FPPFX_EHkZqxFPlV8o3spq5rDnkFHKF1P6mdt4opXJLQetKOWUmPnqxxH5JiLiI2wnnsNMJJnQiOQz9YLvI-6jzal9rEBQHDtpBzdGT1NEzJiEspX3f_muzdxsrglrlMUiQgQ1kIzZJ7NnPkzVzOLEsTIrmary73Nn7JppeghdWUCWFQ_NYetWKCHTJl_YZiTv8DB1jJehsnguxslMtftJOHIW2NUP_DMnFYzoAQv9nWXNVm5XvndQeOvWUA"
+            //        //apiKey: 'H6XyiCT0w1t9GgTjqhRXxDMrVj9h78ya3NuxlwM7XUs'
+            //    },
+            //};
+
+            //    $.ajax(settings)
+            //        .done(function (doneResponse) {
+            //            console.log(doneResponse);
+            //        })
+            //        .fail(function (failResponse) {
+            //            console.log(failResponse);
+            //        })
+            //        ;
+
+                var settings = {
+                    "url": "https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/reduced.night/11/525/761/512/png8?ppi=320",
+                    //"url": "https://3.traffic.maps.ls.hereapi.com/maptile/2.1/flowtile/newest/normal.day/15/16359/10898/256/png8",
+                    "method": "GET",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Bearer eyJhbGciOiJSUzUxMiIsImN0eSI6IkpXVCIsImlzcyI6IkhFUkUiLCJhaWQiOiJPd1VNTWpkbExvOFRxSkRZdm5JbSIsImlhdCI6MTU5NTE0OTc0MSwiZXhwIjoxNTk1MjM2MTQxLCJraWQiOiJqMSJ9.ZXlKaGJHY2lPaUprYVhJaUxDSmxibU1pT2lKQk1qVTJRMEpETFVoVE5URXlJbjAuLnNUYjNmbHRkLWtHZnluM1R6TDlMR2cuS0tDSHNaTmF6cTFnSzRidnVYbXpfYWNEX1ZMSG9SYjYxeGVNNzdmbTdmWXBpNlJJbDN5Q3dQT2RpRUh3UFVKZWlfcFdCZ3QzY2ItQ19ZQ0pmZjRVcEF6MEwwOXkwV3ZXRlVhTTYzSDZZSVhtYlRfZlJLaC1FcFp6M1Q5MWczQXJ2WWJIOGRvWDI1U1VxdFZfT1huZG1BLk5OQlctMU44Y3FmUVY4Tk9oNlRGTHZDLVctVElqMFdzdTBXN3RoYnp6NTg.Sx9TMlthsHvcGHSoD7REMKp0yQdExUCmp9EUDtqgH0_XTnVjhHJg0Vwl-VqzN81Uf_xJO9LepPySwzrHSc-piHW4J_FPPFX_EHkZqxFPlV8o3spq5rDnkFHKF1P6mdt4opXJLQetKOWUmPnqxxH5JiLiI2wnnsNMJJnQiOQz9YLvI-6jzal9rEBQHDtpBzdGT1NEzJiEspX3f_muzdxsrglrlMUiQgQ1kIzZJ7NnPkzVzOLEsTIrmary73Nn7JppeghdWUCWFQ_NYetWKCHTJl_YZiTv8DB1jJehsnguxslMtftJOHIW2NUP_DMnFYzoAQv9nWXNVm5XvndQeOvWUA"
+                    },
+                };
+
+                $.ajax(settings)
+                    .done(function (doneResponse) {
+                        console.log(JSON.stringify(doneResponse));
+                    })
+                    .fail(function (failResponse) {
+                        console.log(JSON.stringify(failResponse));
+                    })
+                    ;
+
+
+                //$.ajax({
+                //    url: 'https://3.traffic.maps.ls.hereapi.com/maptile/2.1/flowtile/newest/normal.day/15/16359/10898/256/png8',
+                //    //"url": "https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/reduced.night/11/525/761/512/png8?ppi=320",
+                //    type: 'GET',
+                //    data: {
+                //        apiKey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+                //        //"Authorization": "Bearer eyJhbGciOiJSUzUxMiIsImN0eSI6IkpXVCIsImlzcyI6IkhFUkUiLCJhaWQiOiJPNTV1OFpQQXlJRHlJVnRvdDloUCIsImlhdCI6MTU5NDcxMTUzMCwiZXhwIjoxNTk0Nzk3OTMwLCJraWQiOiJqMSJ9.ZXlKaGJHY2lPaUprYVhJaUxDSmxibU1pT2lKQk1qVTJRMEpETFVoVE5URXlJbjAuLlJUa3B1VkdtSGQyN0djUVNoWW14QlEueDFqMHE5RVVnc2Zhc2lwZUVibk9xd1VWTERLUUZQdjJCS0RJNmU2RkRDVVljamxVbEFqcWxGVlV6UmVVOVVjM1hwR2l2STR4UUtRREtjMUFzTlJVblMzelNkYm5ydkE4SlVzS0U5eEdaYnltRVc3QnhHekZYaGttWDJaX1V3LUwuQ202aGh5M0wyQjFZVXI5TXVETWotdDZDZk84T3ZSVzBHWV84UFFZbWc5TQ.nBHSY_Jd12r4IAiJ_RoV7vOo8zCLEyo0NX0EsBshdDYfc08S48ljOyYl0fYs0G3Wblw2HtNi82zWR2cI4fdEJ412xZtiasDzlCYndTG6y1fDx8uXy0V07moHvj8C_cY9oNlal2Bdhsnwtnd95S20Me3Ban-pQAoVjeLuxqB7oSRroC8Kvk_8N1toGsRwTivnjyeLv5vStDHpESUWHDCfhQOsOA7JZemUFN8lMUcVgzTWmElYxtOzdyg5jz6Ta_PcURnCe0iFCrZuhOda7vysQr4Cgan5SYGdA6DKuexiwSksQX0GA_jAOfcu0RgjxEObJ_ObUJG7P_lfNOSg1yHPBg"
+                   
+                //    },
+                //    success: function (data) {
+                //        alert('success: ' + JSON.stringify(data));
+                //    },
+                //    error: function (error) {
+                //        alert('error: ' + JSON.stringify(error) );
+                //    }
+                //});
+
+
+            } catch (e) {
+                alert("Exception: " + e);
+            }
+        }
+
+
+    </script>
+</body>
+</html>

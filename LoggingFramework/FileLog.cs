@@ -25,7 +25,7 @@ namespace LoggingFramework
 
         public FileLog()
         {
-            m_logFile = Path.GetTempPath() + "\\RMEAppLog.txt";
+            m_logFile = Path.GetTempPath() + "\\WaliedCheetos_Log.txt";
         }
 
         public FileLog(string logFile, bool trace, bool debug)
@@ -36,7 +36,7 @@ namespace LoggingFramework
             }
             else
             {
-                m_logFile = Path.GetTempPath() + "\\RMEAppLog.txt";
+                m_logFile = Path.GetTempPath() + "\\WaliedCheetos_Log.txt";
             }
 
             m_trace = trace;
@@ -60,7 +60,7 @@ namespace LoggingFramework
                 }
                 else
                 {
-                    m_logFile = Path.GetTempPath() + "\\RMEAppLog.txt";
+                    m_logFile = Path.GetTempPath() + "\\WaliedCheetos_Log.txt";
                 }
             }
         }
