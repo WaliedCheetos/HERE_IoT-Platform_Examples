@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>HERE PDE - GetLinkSpeeds</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core-legacy.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service-legacy.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
+
+</head>
+<body>
+    <div id="mapContainer" style="width:600px; height:600px;"></div>
+
+    <script type="text/javascript">
+        const HEREInitials = {
+            Messages: {
+                NoImplemntation: 'WaliedCheetos says Hollla - Nothing implemented yet!',
+            },
+            Center: {
+                lat: 25.19893,
+                lng: 55.27991,
+                text: 'WaliedCheetos'
+            },
+            Zoom: 17,
+            Heading: 0,
+            Tilt: 65,
+            Credentials: {
+                AppID: 'Lrw0yF4Z4nFpEe7jJxcd',
+                AppCode: '9zhfUoi6kIHQqt85SunXuw',
+                APIKey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+            },
+            Attribution: '&copy; HERE 2020'
+        }
+
+
+        //#region globals
+
+        var linksToCheck = [], speeds = [], speedLimits = [], conditionalSpeeds = [], variableSpeeds = [], roadGeometry = [];
+        var marker;
+
+        var layers = new Object();
+        //layers["TRAFFIC_PATTERN_FC"] = { callback: getAverageSpeed, isFCLayer: true };
+        //layers["SPEED_LIMITS_FC"] = { callback: getSpeedLimits };
+        //layers["SPEED_LIMITS_COND_FC"] = { callback: getCONDSpeedLimits };
+        //layers["SPEED_LIMITS_VAR_FC"] = { callback: getVariableSpeedLimits };
+
+        //#endregion
+
+
+        //region biz logic
+
+        /**
+* An event listener is added to listen to tap events on the map.
+* Clicking on the map displays an alert box containing the latitude and longitude
+* of the location pressed.
+* @param  {H.Map} map      A HERE Map instance within the application
+*/
+        function setUpClickListener() {
+            // Attach an event listener to map display
+            // obtain the coordinates and do ur magic right after
+
+            map.addEventListener('tap', function (evt) {
+                var coord = map.screenToGeo(evt.currentPointer.viewportX, evt.currentPointer.viewportY);
+                startMagic(coord.lat, coord.lng);
+            });
+        }
+
+        function startMagic(lat, lng) {
+            linksToCheck = [], speeds = [], speedLimits = [], conditionalSpeeds = [], variableSpeeds = [];
+
+            let url_HEREReverseGeocoding = $.getJSON("https://revgeocode.search.hereapi.com/v1/revgeocode?locationattributes=linkinfo&at=" + lat + "," + lng + "&apikey=" + HEREInitials.Credentials.APIKey);
+
+            $.when(url_HEREReverseGeocoding).done(function (result) {
+
+                map.getViewModel().setLookAtData({
+                    position: result.items[0].position,
+                    zoom: HEREInitials.Zoom,
+                    heading: HEREInitials.Heading,
+                    tilt: HEREInitials.Tilt
+                }, true);
+
+
+                if (!marker) {
+                    marker = new H.map.Marker(result.items[0].access[0]);
+                    map.addObject(marker);
+                } else {
+                    marker.setGeometry(result.items[0].access[0]);
+                }
+                map.getViewModel().setLookAtData({
+                    position: result.items[0].position,
+                    zoom: HEREInitials.Zoom,
+                    heading: HEREInitials.Heading,
+                    tilt: HEREInitials.Tilt
+                }, true);
+
+            });
+        }
+        //#endregion
+
+
+        //#region init HERE Maps
+
+        // Initialize HERE Map
+        const platform = new H.service.Platform({ apikey: HEREInitials.Credentials.APIKey });
+        const defaultLayers = platform.createDefaultLayers();
+
+        const map = new H.Map(document.getElementById('mapContainer'), defaultLayers.vector.normal.map, {
+            center: HEREInitials.Center,
+            zoom: HEREInitials.Zoom,
+            pixelRatio: window.devicePixelRatio || 1
+        });
+
+        // Enable the map event system
+       // var mapevents = new H.mapevents.MapEvents(map);
+
+        // Enable map interaction (pan, zoom, pinch-to-zoom)
+        const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+        ui.getControl('mapsettings').setAlignment('bottom-right');
+        ui.getControl('zoom').setAlignment('bottom-right');
+        ui.getControl('scalebar').setAlignment('bottom-right');
+
+        setUpClickListener();
+
+//#endregion
+
+
+    </script>
+</body>
+</html>
