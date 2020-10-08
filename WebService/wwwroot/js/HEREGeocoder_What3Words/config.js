@@ -1,4 +1,4 @@
-
+﻿
 //#region configuration
 const HEREInitials = {
     Messages: {
@@ -40,6 +40,9 @@ const HEREInitials = {
 const What3WordsInitials = {
     Credentials: {
         APIKey: 'MMFFK8O1'
+    },
+    RegEx: {
+        w3wFormat: /^\/{0,}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}$/i
     }
 }
 

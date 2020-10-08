@@ -19,7 +19,7 @@
 .city-field {
    font-weight: 500;
    color: var(--primary-text);
-   font-size: 24px;
+   font-size: 19px;
    cursor: pointer;
    border-bottom: 3px solid transparent;
    transition: .3s all ease-in-out;
