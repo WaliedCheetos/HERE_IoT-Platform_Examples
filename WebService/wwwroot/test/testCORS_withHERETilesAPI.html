@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title></title>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   </head>
+   <body>
+      <div>
+         <input type="button" value="Test Traffic Tile (OAuth2)" onclick="testTile_Token('https://3.traffic.maps.ls.hereapi.com/maptile/2.1/flowtile/newest/normal.day/15/16359/10898/256/png8?ppi=320');" />
+</br>
+      <input type="button" value="Test Traffic Tile (APIKey)" onclick="testTile_APIKey(`https://1.traffic.maps.ls.hereapi.com/maptile/2.1/flowtile/newest/normal.day/15/16359/10898/256/png8?apiKey=${config.apiKey}`);" />
+</br>
+         <input type="button" value="Test Basemap Tile (OAuth2)" onclick="testTile_Token('https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/reduced.night/11/525/761/512/png8?ppi=320');" />
+</br>
+      <input type="button" value="Test Basemap Tile (APIKey)" onclick="testTile_APIKey(`https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/reduced.night/11/525/761/512/png8?ppi=320&apiKey=${config.apiKey}`);" />
+      </div>
+      <script type="text/javascript">
+      var config = {
+          token : "***",
+          apiKey : "***"
+      };
+
+function testTile_Token (tileURL){
+             try {
+         
+                 var settings = {
+                    
+         "url": tileURL,
+                     "method": "GET",
+                     "timeout": 0,
+                     "headers": {
+                         "Authorization": `Bearer ${config.token}`
+                         },
+                 };
+         
+                 $.ajax(settings)
+                     .done(function (doneResponse) {
+alert('ok');
+                         console.log(JSON.stringify(doneResponse));
+                     })
+                     .fail(function (failResponse) {
+alert('error');
+                         console.log(JSON.stringify(failResponse));
+                     })
+                     ;
+         
+         
+             } catch (e) {
+                 alert("Exception: " + e);
+             }
+            }
+
+function testTile_APIKey (tileURL){
+             try {
+         
+                 var settings = {
+                    
+         "url": tileURL,
+                     "method": "GET",
+                     "timeout": 0
+                 };
+         
+                 $.ajax(settings)
+                     .done(function (doneResponse) {
+alert('ok');
+                         console.log(JSON.stringify(doneResponse));
+                     })
+                     .fail(function (failResponse) {
+alert('error');
+                         console.log(JSON.stringify(failResponse));
+                     })
+                     ;
+         
+         
+             } catch (e) {
+                 alert("Exception: " + e);
+             }
+}
+
+      </script>
+   </body>
+</html>

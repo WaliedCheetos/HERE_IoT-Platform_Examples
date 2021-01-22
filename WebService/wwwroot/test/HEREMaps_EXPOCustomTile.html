@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="description" content="Display custom map tiles as an overlay">
+    <title>Adding an Overlay to the Map</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  </head>
+  <body>
+<div id="map" style="widows: 600px; height: 600px;"></div>
+
+    <script type="text/javascript">
+
+function _Hollla(){
+try{
+ // Create a tile provider from our images of historical Berlin
+ var tileProvider = new H.map.provider.ImageTileProvider({
+    // We have tiles only for zoom levels 12â€“15,
+    // so on all other zoom levels only base map will be visible
+    min: 12,
+    max: 15,
+    opacity: 0.5,
+    getURL: function (column, row, zoom) {
+
+      return `https://www.expo2020dubai.com/digital-map/${zoom}/${row}/${column}.png`;
+      //return `https://www.expo2020dubai.com/digital-map/${zoom}/${column}/${row}.png`;
+
+      /*
+if(zoom <14 || zoom>21){
+  return 'https://heremaps.github.io/maps-api-for-javascript-examples/custom-tile-overlay/tiles/blank.png';
+}
+else{
+  return `https://www.expo2020dubai.com/digital-map/${zoom}/${row}/${column}.png`;
+}
+*/
+    }
+  });
+  // Unless you own the map tile source,
+  // you need to comply with the licensing agreement of the map tile provider.
+  // Often this means giving attribution or copyright acknowledgment to the owner,
+  // even if the tiles are offered free of charge.
+  tileProvider.getCopyrights = function (bounds, level) {
+    // We should return an array of objects that implement H.map.ICopyright interface
+    return [{
+      label: "WaliedCheetos !",
+      alt: 'WaliedCheetos !'
+    }];
+  };
+  // Now let's create a layer that will consume tiles from our provider
+  var overlayLayer = new H.map.layer.TileLayer(tileProvider, {
+    // Let's make it semi-transparent
+    opacity: 0.5
+  });
+
+  // Finally add our layer containing old Berlin to a map
+  map.addLayer(overlayLayer);
+
+}
+catch(exception){
+  alert(`Exception: ${exception}`);
+}
+
+}
+
+    // Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+});
+var defaultLayers = platform.createDefaultLayers();
+
+// Step 2: initialize a map
+var map = new H.Map(document.getElementById('map'), defaultLayers.vector.normal.map, {
+  center: new H.geo.Point(24.9599418,55.1475067),
+  zoom: 14,
+  pixelRatio: window.devicePixelRatio || 1
+});
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+// Step 3: make the map interactive
+// mapEvents enables the event system
+// behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Step 4: create the default UI component, for displaying bubbles
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+_Hollla();
+
+    </script>
+  </body>
+</html>
