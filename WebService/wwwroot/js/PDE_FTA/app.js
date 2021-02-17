@@ -75,7 +75,7 @@ var requestPDE = function () {
 
     // Init HERE PDE/FTA
     var pdeManager = new PDEManager(null, null, layers, HEREInitials.Credentials.APIKey);
-    pdeManager.setBoundingBox(map.getViewModel().getLookAtData().bounds.getBoundingBox());
+    //pdeManager.setBoundingBox(map.getViewModel().getLookAtData().bounds.getBoundingBox());
     pdeManager.setOnTileLoadingFinished(pcmgenFinished);
     pdeManager.start();
 };
@@ -140,9 +140,9 @@ function pcmgenResponse(response) {
 
 
 			//if (response.Rows[r].NAME != 'Business Bay') {
-			if (response.Rows[r].NAME != 'Burj Khalifa') {
-			continue;
-        }
+		// 	if (response.Rows[r].NAME != 'Burj Khalifa') {
+		// 	continue;
+        // }
 			console.log(response.Rows[r].NAME);
 		var latString = response.Rows[r].LAT;
 		var lonString = response.Rows[r].LON;

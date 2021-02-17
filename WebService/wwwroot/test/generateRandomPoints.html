@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+    <title>WaliedCheetos - generate random points</title>
+
+  </head>
+  <body>
+    <textarea id='randomPointsResult'></textarea>
+<input type="button" id="generateRandomPoints" value="Generate Random Points" onclick="generateRandomPoints()">
+
+<script type="text/javascript">
+function generateRandomPoints(){
+    try {
+      createCoordsNear(38.895111, -77.036667, 25, 1, 'Washington');
+      // console.log(randomPoints.join());
+      // console.log(randomPoints.join('\n'));
+      document.getElementById('randomPointsResult').innerHTML = randomPoints.join('\n');
+      //document.getElementById('randomPointsResult').innerHTML = randomPoints.join('&');
+    } catch (error) {
+        console.error(error);
+    }
+}
+var randomPoints = [];
+randomPoints.push('LATITUDE,LONGITUDE');
+var randomPointNear = function (lat, lng, walk, text) {
+        var j;
+        for (j = 0; j  < 3; j += 1) {
+          lat = Math.max(lat - (Math.random() * walk), -80);
+          lat = Math.min(lat + (Math.random() * walk), 80);
+          lng = Math.max(lng - (Math.random() * walk), -175);
+          lng = Math.min(lng + (Math.random() * walk), 175);
+        }
+        // return {latitude: lat, longitude: lng, text: text};
+        //  return `waypoint${text}=${lat},${lng}`;
+        return `${lat},${lng}`;
+      };
+      
+var createCoordsNear = function (lat, long, size, spread, text) {
+        var i;
+        for (i = 0; i < size; i += 1) {
+          randomPoints.push(randomPointNear(lat, long, spread, (i)));
+        }
+      };
+
+</script>
+      
+
+  </body>

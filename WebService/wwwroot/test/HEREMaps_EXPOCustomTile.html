@@ -22,12 +22,16 @@ try{
  var tileProvider = new H.map.provider.ImageTileProvider({
     // We have tiles only for zoom levels 12â€“15,
     // so on all other zoom levels only base map will be visible
-    min: 12,
-    max: 15,
+    //min: 12,
+    //max: 15,
     opacity: 0.5,
     getURL: function (column, row, zoom) {
+      //return `http://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer/tile/${zoom}/${column}/${row}`
 
-      return `https://www.expo2020dubai.com/digital-map/${zoom}/${row}/${column}.png`;
+      return `http://tile.stamen.com/toner/${zoom}/${column}/${row}.png`
+      //return `http://api.maps.example.org/maptiles/olympic_park/normal.day/${zoom}/${column}/${row}.png`
+      //return `http://1.communitymaptiles.example.org/tilehub/live/map/png/${zoom}/${row}/${column}`
+      //return `https://www.expo2020dubai.com/digital-map/${zoom}/${row}/${column}.png`;
       //return `https://www.expo2020dubai.com/digital-map/${zoom}/${column}/${row}.png`;
 
       /*
@@ -76,7 +80,8 @@ var defaultLayers = platform.createDefaultLayers();
 
 // Step 2: initialize a map
 var map = new H.Map(document.getElementById('map'), defaultLayers.vector.normal.map, {
-  center: new H.geo.Point(24.9599418,55.1475067),
+  //center: new H.geo.Point(24.9599418,55.1475067),
+  center: new H.geo.Point(51.557000,-0.042772),
   zoom: 14,
   pixelRatio: window.devicePixelRatio || 1
 });

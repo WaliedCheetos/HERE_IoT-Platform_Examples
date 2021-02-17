@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+    <title>Map at a specified location</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
+     <script type="text/javascript" src="../js/airports.js"></script>
+
+  <body>
+    <div id="map" style="width: 600px; height: 600px;"></div>
+    <script type="text/javascript">
+        var config = {
+            mapInitials:{
+            APIKey:'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E',
+            center:{lat:24.9599418, lng:55.1475067},
+            zoom: 2
+            },
+            mapCustoms:{
+                location:{lat:24.9599418, lng:55.1475067},
+                zoomLevel: 13,
+                tilt: 45,
+                heading: 0,
+                isAnimated: true
+            }
+        }
+
+
+
+function startClustering(map, data) {
+  // First we need to create an array of DataPoint objects,
+  // for the ClusterProvider
+  var dataPoints = data.map(function (item) {
+    return new H.clustering.DataPoint(item.latitude, item.longitude);
+  });
+
+  // Create a clustering provider with custom options for clusterizing the input
+  var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
+    clusteringOptions: {
+      // Maximum radius of the neighbourhood
+      eps: 32,
+      // minimum weight of points required to form a cluster
+      minWeight: 2
+    }
+  });
+
+  // Create a layer tha will consume objects from our clustering provider
+  var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider);
+
+  // To make objects from clustering provder visible,
+  // we need to add our layer to the map
+  map.addLayer(clusteringLayer);
+
+  clusteredDataProvider.addEventListener('tap', logEvent);
+}
+
+function addMarker(map, data){
+
+var marker = new H.map.Marker(data);
+marker.setData('WaliedCheetos single marker!');
+map.addObject(marker);
+
+marker.addEventListener('tap', logEvent);
+
+map.getViewModel().addEventListener('sync', function() {
+  var center = map.getCenter();
+  // Set marker position here:
+  marker.setGeometry(center);
+});
+
+}
+
+// Helper for logging events
+function logEvent(evt) {
+    try {
+        alert (['event "', evt.type, '" @ '+ evt.target.getData()].join(''));
+    } catch (exception) {
+        console.error(exception);
+    }
+}
+
+var platform = new H.service.Platform({
+  apikey: config.mapInitials.APIKey,
+
+});
+var defaultLayers = platform.createDefaultLayers();
+var map = new H.Map(document.getElementById('map'),
+  defaultLayers.vector.normal.map,{
+  center: config.mapInitials.center,
+  zoom: config.mapInitials.zoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
+
+window.addEventListener('resize', () => map.getViewPort().resize());
+var mapEvents = new H.mapevents.MapEvents(map);
+var behavior = new H.mapevents.Behavior(mapEvents);
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+// Now use the map as required...
+window.onload = function () {
+
+startClustering(map, airports);
+addMarker(map, config.mapCustoms.location);
+map.addEventListener('tap', logEvent);
+
+}
+
+
+    </script>
+  </body>
+</html>

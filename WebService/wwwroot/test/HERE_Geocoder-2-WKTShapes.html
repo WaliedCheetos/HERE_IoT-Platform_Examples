@@ -20,6 +20,22 @@
     <div id="map" style="width: 600px; height: 600px; background: grey" />
     <script type="text/javascript" charset="UTF-8">
 
+var config = {
+            mapInitials:{
+            APIKey:'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E',
+            center:{lat:24.9599418, lng:55.1475067},
+            zoom: 2
+            },
+            mapCustoms:{
+                location:{lat:24.9599418, lng:55.1475067},
+                zoomLevel: 13,
+                tilt: 45,
+                heading: 0,
+                isAnimated: true
+            }
+        }
+
+
     var locations, shape;
     var coord;
 
@@ -36,7 +52,7 @@
             //level: 'district',
             //gen:9,
             maxresults: '1',
-            additionaldata: 'IncludeShapeLevel,city'
+            additionaldata: 'IncludeShapeLevel,state'
         };
 
         geocoder.reverseGeocode(
@@ -86,18 +102,17 @@
 
     // step 1: initialize communication with the platform
     var platform = new H.service.Platform({
-        apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+        apikey: config.mapInitials.APIKey
     });
     var defaultLayers = platform.createDefaultLayers();
 
     // step 2: initialize a map - this map is centered over California
-    var map = new H.Map(
-        document.getElementById('map'),
-        defaultLayers.vector.normal.map,
-        {
-            zoom: 4,
-            center: { lat: 25.19893, lng: 55.27991 }
-    });
+    var map = new H.Map(document.getElementById('map'),
+  defaultLayers.vector.normal.map,{
+  center: config.mapInitials.center,
+  zoom: config.mapInitials.zoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
 
     // step 3: make the map interactive
     var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
