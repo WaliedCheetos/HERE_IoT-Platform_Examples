@@ -9,8 +9,12 @@ const HEREInitials = {
         //lat: 25.19893,
         //lng: 55.27991,
 
-        lat: 25.2841478,
-        lng: 51.4419567,
+        // lat: 25.2841478,
+        // lng: 51.4419567,
+
+        lat: 51.50371,
+        lng: -0.12618,
+        
         text: 'WaliedCheetos'
     },
     MapTileStyle_Default: 'reduced.night',

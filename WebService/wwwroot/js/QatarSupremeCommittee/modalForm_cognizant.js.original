@@ -9,12 +9,9 @@ var dialog, form,
     password = $("#password"),
 
 
-    ZoneName = $("#desc"),
-    ZoneType = $("#owner"),
-    ZoneViewer = $("#iseditable"),
-    // ZoneName = $("#ZoneName"),
-    // ZoneType = $("#ZoneType"),
-    // ZoneViewer = $("#ZoneViewer"),
+    ZoneName = $("#ZoneName"),
+    ZoneType = $("#ZoneType"),
+    ZoneViewer = $("#ZoneViewer"),
     allFields = $([]).add(name).add(email).add(password).add(ZoneName).add(ZoneType).add(ZoneViewer),
     tips = $(".validateTips");
 
@@ -57,16 +54,16 @@ function addUser() {
     valid = valid && checkLength(email, "email", 6, 80);
     valid = valid && checkLength(password, "password", 5, 16);
 
-    valid = valid && checkLength(ZoneName, "desc", 3, 53);
-    valid = valid && checkLength(ZoneType, "owner", 3, 53);
+    valid = valid && checkLength(ZoneName, "ZoneName", 3, 15);
+    valid = valid && checkLength(ZoneType, "ZoneType", 3, 15);
     //valid = valid && checkLength(ZoneViewer, "ZoneViewer", 3, 15);
 
     valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
     valid = valid && checkRegexp(email, emailRegex, "eg. ui@jquery.com");
     valid = valid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
 
-    valid = valid && checkRegexp(ZoneName, /^[a-z]([0-9a-z_\s])+$/i, "Description may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
-    //valid = valid && checkRegexp(ZoneType, /^[a-z]([0-9a-z_\s])+$/i, "Owner name may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+    valid = valid && checkRegexp(ZoneName, /^[a-z]([0-9a-z_\s])+$/i, "Zone name may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+    valid = valid && checkRegexp(ZoneType, /^[a-z]([0-9a-z_\s])+$/i, "Zone type may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
     //valid = valid && checkRegexp(ZoneViewer, /^[a-z]([0-9a-z_\s])+$/i, "Zone viewer may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
 
     if (valid) {
@@ -79,12 +76,9 @@ function addUser() {
 
 
         var properties = {};
-        properties['desc'] = ZoneName.val();
-        properties['owner'] = $('#owner option:selected').val();
-        properties['iseditable'] = $('#iseditable option:selected').val();
-        // properties['ZoneName'] = ZoneName.val();
-        // properties['ZoneType'] = ZoneType.val();
-        // properties['ZoneViewer'] = $('#ZoneViewers option:selected').text();
+        properties['ZoneName'] = ZoneName.val();
+        properties['ZoneType'] = ZoneType.val();
+        properties['ZoneViewer'] = $('#ZoneViewers option:selected').text();
 
         var currentGeoJSON = featureGroup_Drawings.getLayers()[featureGroup_Drawings.getLayers().length - 1].toGeoJSON();
 
@@ -92,8 +86,6 @@ function addUser() {
 
         alert(JSON.stringify(currentGeoJSON));
         //var x = featureGroup_Drawings;
-
-        console.log(JSON.stringify(currentGeoJSON));
 
         dialog.dialog("close");
     }
