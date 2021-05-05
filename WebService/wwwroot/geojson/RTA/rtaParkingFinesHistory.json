@@ -1,0 +1,17 @@
+{ 
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+      "properties": {"id": 0, "name": "WaliedCheetos", "datetime": "2019-07-04T13:33:03.969Z", "type":"fine", "officer":"WaliedCheetos", "zone_number": "382F", "plate":"xyz"}
+      },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+      "properties": {"id": 0, "name": "WaliedCheetos", "datetime": "2019-07-04T13:33:03.969Z", "type":"warning", "officer":"WaliedCheetos", "zone_number": "382F", "plate":"xyz"}
+      },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+      "properties": {"id": 0, "name": "WaliedCheetos", "datetime": "2019-07-04T13:33:03.969Z", "type":"paid", "officer":"WaliedCheetos", "zone_number": "382F", "plate":"xyz"}
+      }
+  ]
+}

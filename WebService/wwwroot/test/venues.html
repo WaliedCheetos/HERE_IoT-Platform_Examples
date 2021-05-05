@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
+    <style>
+      #floorButtons {
+        position: absolute;
+        z-index: 20;
+      }
+
+      #floorButtons button {
+        display: block;
+        width: 100%;
+      }
+    </style>
+  </head>
+  
+  <body>
+  <div style="position: relative">
+    <div id="floorButtons">
+      <button type="button" onclick="topFloor()">Top Floor</button>
+      <button type="button" onclick="moveUp()">Move Up</button>
+      <button type="button" onclick="moveDown()">Move Down</button>
+      <button type="button" onclick="bottomFloor()">Bottom Floor</button>
+      <button type="button" onclick="exitIndoors()">Exit</button>
+    </div>
+
+    <div id="map" style="height: 400px"></div>
+    <script>
+      var map = L.Wrld.map("map", "your_api_key_here", {
+        center: [37.781949, -122.404784],
+        zoom: 17,
+        indoorsEnabled: true
+      });
+
+      var marker = L.marker([37.781941, -122.404752], {        
+        title: "This is indoors!",
+        indoorMapId: "intercontinental_hotel_8628",
+        indoorMapFloorId: 1
+      }).addTo(map);      
+
+      function topFloor() {
+        var indoorMap = map.indoors.getActiveIndoorMap();
+
+        if (indoorMap) {
+          map.indoors.setFloor(indoorMap.getFloorCount() - 1);
+        }
+      }
+
+      function moveUp() {
+        map.indoors.moveUp();
+      }
+
+      function moveDown() {
+        map.indoors.moveDown();
+      }
+
+      function bottomFloor() {
+        map.indoors.setFloor(0);
+      }
+
+      function exitIndoors() {
+        map.indoors.exit();
+      }
+    </script>
+  </div>
+  </body>
+</html>

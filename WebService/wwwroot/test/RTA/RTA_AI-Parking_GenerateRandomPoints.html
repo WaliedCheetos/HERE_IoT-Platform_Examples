@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>WaliedCheetos - Generate Randam Data</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  </head>
+  <body>
+    <input type="button" id='generateRandomData' onclick="generateRandomData()" value='Generate Random Data'>
+    <div id="map" style="width: 100vw; height: 100vh;"></div>
+    
+    
+    <script type="text/javascript">
+    
+//Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+});
+
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map - this map is centered over Berlin
+var map = new H.Map(document.getElementById('map'),
+  defaultLayers.vector.normal.map,{
+  center: {lat: 25.26952, lng: 55.30885},
+  zoom: 13,
+  pixelRatio: (window.devicePixelRatio && window.devicePixelRatio > 1) ? 2 : 1
+});
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', function () {
+  map.getViewPort().resize();
+});
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+var markers = [];
+
+function isPrime(value) {
+    for(var i = 2; i < value; i++) {
+        if(value % i === 0) {
+            return false;
+        }
+    }
+    return value > 1;
+}
+
+function generateRandomData(){
+  try {
+
+    // create SVG Dom Icon
+  var svg = `<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="10px" height="10px">
+    <circle cx="5" cy="5" r="4" fill="rgb(250, 127, 0)" stroke-width="1" stroke="black" opacity="1"/>
+    </svg>`;
+
+    var domIcon = new H.map.DomIcon(svg);
+    
+if (markers.length > 0) {
+  map.removeObjects(markers);
+}
+
+var geojson = {};
+geojson['type'] = 'FeatureCollection';
+geojson['features'] = [];
+            
+
+for (let index = 0; index < 100; index++) {
+  // get random position 0 - 1.3km from map's center in random direction
+  let randomPoint = map.getCenter().walk(Math.random() * 360, Math.random() * 1300);
+
+  markers.push(new H.map.DomMarker(randomPoint, {
+        icon: domIcon
+      }));
+
+      var observationType;
+if (isPrime(index)) {
+  observationType = 'fine';
+} else if( index % 2 == 0) {
+  observationType = 'warning';
+}else{
+  observationType = 'paid';
+}
+
+var datatimeCurrent = new Date();
+
+      var newFeature = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [parseFloat(randomPoint.lat), parseFloat(randomPoint.lng)]
+      },
+      "properties": {
+        'id': index,
+         'name' : 'WaliedCheetos',
+         'datetime' : datatimeCurrent.toISOString(),
+         'type' : observationType,
+         'officer' : 'WaliedCheetos',
+         'zone_number' : 'xyz',
+         'plate' : 'x-xyz',
+         'start' : '',
+         'end' : ''
+      }
+    }
+
+    geojson['features'].push(newFeature);
+}
+
+    // add markers to map
+    map.addObjects(markers); 
+    console.log(JSON.stringify(geojson));
+
+  } catch (error) {
+    console.error(`WaliedCheetos - Exception: ${error}`);
+  }
+}
+    </script>
+  </body>
+</html>
