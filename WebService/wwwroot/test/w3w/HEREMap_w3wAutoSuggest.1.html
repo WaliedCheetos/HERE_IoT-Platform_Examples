@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <title>HERE Maps with w3w AutoSuggest</title>
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script src="https://assets.what3words.com/sdk/v3.1/what3words.js?key=***"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+    <style>
+        #autosuggest {
+            position: absolute;
+            top: 50px;
+            left: 9px;
+            z-index: 9999;
+        }
+
+        #wrapper {
+            position: relative;
+            height: 100%;
+        }
+
+        #map {
+            height: 100%;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+
+    <div id="wrapper">
+        <div id="autosuggest">
+            <what3words-autosuggest id="suggestComponent" />
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <script type="text/javascript">
+
+        //#region configuration
+        const HEREInitials = {
+            Messages: {
+                NoImplemntation: 'WaliedCheetos says Hollla - Nothing implemented yet!',
+            },
+            Center: {
+                lat: 25.19893,
+                lng: 55.27991,
+                text: 'WaliedCheetos'
+            },
+            Zoom0: 11,
+            Zoom: 17,
+            Heading: 180,
+            Tilt: 65,
+            Credentials: {
+                AppID: '***',
+                AppCode: '***',
+                APIKey: '***'
+            },
+            Attribution: '&copy; HERE 2020'
+        };
+
+        const What3WordsInitials = {
+            Credentials: {
+                APIKey: '***'
+            },
+            RegEx: {
+                w3wFormat: /^\/{0,}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}$/i
+            }
+        };
+        //#endregion
+
+
+
+
+
+        //Step 1: initialize communication with the platform
+        // In your own code, replace apikey value with your own apikey
+
+        var platform = new H.service.Platform({
+            apikey: HEREInitials.Credentials.APIKey
+        });
+        var defaultLayers = platform.createDefaultLayers();
+
+        //Step 2: initialize a map - this map is centered over a location of your choice    
+
+        var map = new H.Map(document.getElementById('map'),
+            defaultLayers.vector.normal.map, {
+            center: { lat: HEREInitials.Center.lat, lng: HEREInitials.Center.lng },
+            zoom: HEREInitials.Zoom0,
+            pixelRatio: window.devicePixelRatio || 1
+        });
+
+        // add a resize listener to make sure that the map occupies the whole container
+        window.addEventListener('resize', () => map.getViewPort().resize());
+
+        //Step 3: make the map interactive
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+        var marker_HERE;
+
+        const input = document.getElementById("suggestComponent");
+        input.addEventListener("select", (value) => {
+            // Call the what3words convert to coordinates API to obtain the latitude and longitude of the three word address provided
+            what3words.api.convertToCoordinates(value.detail).then(function (response) {
+                if (response.coordinates) {
+
+                    var latLng = { lat: response.coordinates.lat, lng: response.coordinates.lng };
+
+                    // Create a marker for the location
+                    if (!marker_HERE) {
+                        marker_HERE = new H.map.Marker(latLng);
+                        map.addObject(marker_HERE);
+                    } else {
+                        marker_HERE.setGeometry(latLng);
+                    }
+
+
+
+                    // Center the map on that location, and zoom in on it to display the grid
+                    map.getViewModel().setLookAtData({
+                        position: latLng,
+                        zoom: HEREInitials.Zoom,
+                        heading: HEREInitials.Heading,
+                        tilt: HEREInitials.Tilt
+                    }, true);
+                }
+            });
+        });
+
+
+    </script>
+</body>
+</html>

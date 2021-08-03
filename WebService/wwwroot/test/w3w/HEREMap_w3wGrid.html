@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8" />
+  <title>HERE Maps with w3w Grid</title>
+
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+  <script src="https://assets.what3words.com/sdk/v3.1/what3words.js?key=***"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
+  <style>
+    #map {
+      height: 100%;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script type="text/javascript">
+
+    //#region configuration
+    const HEREInitials = {
+      Messages: {
+        NoImplemntation: 'WaliedCheetos says Hollla - Nothing implemented yet!',
+      },
+      Center: {
+        lat: 25.19893,
+        lng: 55.27991,
+        // lat: 55.27991,
+        // lng: 25.19893,
+        text: 'WaliedCheetos'
+      },
+      Zoom: 17,
+      w3wGridShowZoom: 18,
+      Heading: 180,
+      Tilt: 65,
+      Credentials: {
+        AppID: '***',
+        AppCode: '***',
+        APIKey: '***'
+      },
+      Attribution: '&copy; HERE 2020'
+    };
+
+    const What3WordsInitials = {
+      Credentials: {
+        APIKey: '***'
+      },
+      RegEx: {
+        w3wFormat: /^\/{0,}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}$/i
+      }
+    };
+    //#endregion
+
+
+
+
+
+    //Step 1: initialize communication with the platform
+    // In your own code, replace apikey value with your own apikey
+
+    var platform = new H.service.Platform({
+      apikey: HEREInitials.Credentials.APIKey
+    });
+    var defaultLayers = platform.createDefaultLayers();
+
+    //Step 2: initialize a map - this map is centered over a location of your choice    
+
+    var map = new H.Map(document.getElementById('map'),
+      defaultLayers.vector.normal.map, {
+        center: { lat: HEREInitials.Center.lat, lng: HEREInitials.Center.lng },
+        zoom: HEREInitials.Zoom,
+        pixelRatio: window.devicePixelRatio || 1
+      });
+
+    // add a resize listener to make sure that the map occupies the whole container
+    window.addEventListener('resize', () => map.getViewPort().resize());
+
+    //Step 3: make the map interactive
+    // MapEvents enables the event system
+    // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+    // Create the default UI components
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+    var oldZoom = map.getZoom();
+    var gridLayer;
+    map.addEventListener('mapviewchangeend', function () {
+
+      if (gridLayer !== undefined) {
+        map.removeLayer(gridLayer);
+      }
+
+      var newZoom = map.getZoom();
+      if (newZoom > oldZoom) {
+        // zoomed in
+      } else {
+        // zoomed out
+      }
+      oldZoom = newZoom;
+
+      const bool_LoadFeatures = newZoom > HEREInitials.w3wGridShowZoom;
+
+      const newBounds = map.getViewModel().getLookAtData().bounds;
+
+      //check if the zoom level is high enough, then you call request/load ///w3w grid and overlay that layer on top of the basemap
+      if (bool_LoadFeatures) {
+
+        // Call the what3words Grid API to obtain the grid squares within the current visble bounding box
+        what3words.api
+          .gridSectionGeoJson({
+            southwest: {
+              lat: newBounds.cb.P.ma, lng: newBounds.cb.P.ca
+            },
+            northeast: {
+              lat: newBounds.cb.P.la, lng: newBounds.cb.P.ia
+            }
+          }).then(function (data) {
+            // var gridData = new H.data.geojson.Reader(undefined, { disableLegacyMode: true });
+            var gridData = new H.data.geojson.Reader(null, {
+              disableLegacyMode: true
+            });
+
+            //start parsing the geojson data
+            gridData.parseData(data);
+            gridLayer = gridData.getLayer();
+
+            // Add layer which shows GeoJSON data on the map
+            map.addLayer(gridLayer);
+
+          }).catch(function (error) {
+            console.error(error);
+          });
+      }
+    });
+  </script>
+</body>
+
+</html>

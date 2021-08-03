@@ -1,0 +1,488 @@
+                  
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Route_With_Without_MapMatch</title>
+
+
+    <!--jQuery-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+
+        <!--jQuery-->
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+  <body >
+    <input type="button" id='routeWithoutMapMatch' onclick="routeWithoutMapMatch()" value='Route without MapMatch'>
+    <input type="button" id='routeWithMapMatch' onclick="routeWithMapMatch()" value='Route with MapMatch'>
+    <div id="mapContainer" style="width:93vw; height:93vh;"></div>
+    <script type="text/javascript" >
+
+
+const initials = {
+   attribution: 'WaliedCheetos - &copy; HERE 2021',
+   hereCredentials : {
+      id: '***',
+      code: '***',
+      apikey: '8PLJfm3l8IbHKnYd5ks-Oxv0eLMEh8Tgsa70SZFBfSs'
+   },
+   mapCenter : { 
+      lat: 24.67684, 
+      lng: 46.69142, 
+      zoom: 7,
+      text: 'Riyadh, KSA'
+   },
+   URLs :{
+       routeWithoutMapMatch : "https://fleet.ls.hereapi.com/2/calculateroute.json?rollup=none&routeattributes=none,notes&linkattributes=none,rt,fl,le,tr,ti&legattributes=none,baseTime,le,mn&cost_optimize=0&height=410cm&length=1650cm&width=430cm&limitedWeight=40000kg&weightPerAxle=10000kg&trailersCount=1&axleCount=5&detail=1&tollVehicleType=3&commercial=1&emissionType=6&vehicleWeight=8000kg&vehicleNumberAxles=2&tiresCount=10&heightAbove1stAxle=410cm&trailerType=2&trailerNumberAxles=3&trailerHeight=410cm&mode=balanced;truck;traffic:disabled;dirtRoad:-2&language=pl&waypoint0=geo!36.7794,-2.77607&waypoint1=geo!51.24987,22.62682&truckRestrictionPenalty=soft&maneuverattributes=none,li,ix,notes&instructionFormat=text&departure=2021-06-16T00%3A00%3A00%2B01%3A00&apiKey=8PLJfm3l8IbHKnYd5ks-Oxv0eLMEh8Tgsa70SZFBfSs",
+       routeWithMapMatch : "https://fleet.ls.hereapi.com/2/calculateroute.json?routeMatch=1&routeattributes=none,notes&linkattributes=none,rt,fl,le,tr,ti&legattributes=none,baseTime,le,mn&responseAttributes=-wn,-lg&height=410cm&length=1650cm&width=430cm&limitedWeight=40000kg&weightPerAxle=10000kg&trailersCount=1&axleCount=5&detail=1&tollVehicleType=3&commercial=1&emissionType=6&vehicleWeight=8000kg&vehicleNumberAxles=2&tiresCount=10&heightAbove1stAxle=410cm&trailerType=2&trailerNumberAxles=3&trailerHeight=410cm&mode=truck&language=pl&truckRestrictionPenalty=soft&maneuverattributes=none,li,ix,notes&instructionFormat=text&apiKey=8PLJfm3l8IbHKnYd5ks-Oxv0eLMEh8Tgsa70SZFBfSs"
+    //    routeWithMapMatch : "https://fleet.ls.hereapi.com/2/calculateroute.json?routeMatch=1&routeattributes=none,notes&linkattributes=none,rt,fl,le,tr,ti&legattributes=none,baseTime,le,mn&responseAttributes=-wn,-lg&mode=truck&height=4.1&length=16.5&width=4.3&limitedWeight=40.0&weightPerAxle=10.0&trailersCount=1&axleCount=5&mapMatchRadius=100&apiKey=8PLJfm3l8IbHKnYd5ks-Oxv0eLMEh8Tgsa70SZFBfSs"
+    //    routeWithMapMatch : "https://fleet.ls.hereapi.com/2/calculateroute.json?routeMatch=1&legAttributes=none&responseAttributes=-wn,-lg&mode=truck&height=4.1&length=16.5&width=4.3&limitedWeight=40.0&weightPerAxle=10.0&trailersCount=1&axleCount=5&mapMatchRadius=100&routeAttributes=-wp,-mo,-sm,-fl,sh&apiKey=8PLJfm3l8IbHKnYd5ks-Oxv0eLMEh8Tgsa70SZFBfSs"
+   }
+}
+
+/**
+ * Boilerplate map initialization code starts below:
+ */
+
+//Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: initials.hereCredentials.apikey
+});
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map
+var map = new H.Map(document.getElementById('mapContainer'),
+  defaultLayers.vector.normal.map,{
+  center: {lat: initials.mapCenter.lat, lng: initials.mapCenter.lng},
+  zoom: initials.mapCenter.zoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+var group = new H.map.Group();
+var currentBubble;
+		var currentOpenBubble;
+		var bErrorHappened = false;
+		var bLongClickUseForStartPoint = true; // for long click in map we toggle start/destination
+        var routeColor = ["rgba(18, 65, 145, 0.8)", "rgba(0, 145, 255, 0.7)", "rgba(127, 201, 255, 0.6)"];
+        var routeColor_01 = ["rgba(10, 0, 255, 0.6)", "rgba(0, 13, 255, 0.5)", "rgba(223, 11, 255, 0.4)"];
+var routeStroke = 8;
+
+var markers = [];
+var points = [
+    {lat:44.5124, lng:4.7778},
+    {lat:44.5314, lng:4.8013},
+    {lat:44.5569, lng:4.8114},
+    {lat:44.5824, lng:4.8043},
+    {lat:44.6067, lng:4.7937},
+    {lat:44.6324, lng:4.7925},
+    {lat:44.6584, lng:4.7961},
+    {lat:44.685, lng:4.7954}
+]
+
+    // create SVG Dom Icon
+    var svg = `<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="10px" height="10px">
+    <circle cx="5" cy="5" r="4" fill="rgb(250, 127, 0)" stroke-width="1" stroke="black" opacity="1"/>
+    </svg>`;
+
+
+
+//#region routing without map match
+
+function clearLastRouteCalculation() {
+			bErrorHappened = false;
+			//bLongClickUseForStartPoint = true;
+			if (currentOpenBubble) {
+				ui.removeBubble(currentOpenBubble);
+			}
+			group.removeAll();
+
+
+if (markers.length > 0) {
+map.removeObjects(markers);
+markers = [];
+}
+}
+
+function addGPXTraces(){
+    var domIcon = new H.map.DomIcon(svg);
+
+
+for (let index = 0; index < points.length; index++) {
+
+markers.push(new H.map.DomMarker(points[index], {
+    icon: domIcon
+  }));
+}
+
+// add markers to map
+map.addObjects(markers); 
+}
+
+function routeWithoutMapMatch(){
+    clearLastRouteCalculation();
+    let p1 = $.getJSON(initials.URLs.routeWithoutMapMatch);
+
+    $.when(p1).done(function (resp) {
+
+        if (resp.error != undefined) {
+				if (resp.error == "NoRouteFound") {
+					alert('Please consider to change your start or destination as the one you entered is not reachable with the given vehicle profile');
+					//feedbackTxt.innerHTML = 'The Router service is unable to compute the route: try to change your start / destination point';
+				}
+				else {
+					alert(resp.error);
+					//feedbackTxt.innerHTML = resp.error;
+				}
+				return;
+			}
+			if (resp.response == undefined && resp.subtype != undefined) {
+				if (resp.subtype == "NoRouteFound") {
+					alert('Please consider to change your start or destination as the one you entered is not reachable with the given vehicle profile');
+					//feedbackTxt.innerHTML = 'The Router service is unable to compute the route: try to change your start / destination point';
+				}
+				else {
+					alert(resp.subtype + " " + resp.details);
+					//feedbackTxt.innerHTML = resp.error;
+				}
+				return;
+			}
+			if (resp.error != undefined) {
+				alert(resp.error);
+                //feedbackTxt.innerHTML = resp.error;
+				return;
+			}
+			if (resp.responseCode != undefined) {
+				alert(resp.message);
+				//feedbackTxt.innerHTML = resp.message;
+				return;
+			}
+			if (resp.onError == true) {
+				for (var i = 0; i < resp.errors.length; i++) {
+					// feedbackTxt.innerHTML = "<font color='red'>" + resp.errors +"</font>";
+					// feedbackTxt.innerHTML += "<br />";
+				}
+				return;
+			}
+			if (bErrorHappened) {
+				return;
+			}
+
+			// if (feedbackTxt.innerHTML != strTceError) {
+            //     alert(strTceResponseReceived);
+			// 	// feedbackTxt.innerHTML = strTceResponseReceived;
+			// }
+
+			var routeLinkHashMap = new Object();
+
+			// create link objects
+			for (var r = 0; r < resp.response.route.length; r++) {
+				for (var m = 0; m < resp.response.route[r].leg[0].link.length; m++) {
+					// only add new link if it does not exist so far - so alternatives are not drawn multiple times
+					var linkId = (resp.response.route[r].leg[0].link[m].linkId.lastIndexOf("+", 0) === 0 ? resp.response.route[r].leg[0].link[m].linkId.substring(1) : resp.response.route[r].leg[0].link[m].linkId);
+					if(routeLinkHashMap[linkId] == null) {
+						var strip = new H.geo.LineString(),
+						shape = resp.response.route[r].leg[0].link[m].shape,
+						i,
+						l = shape.length;
+
+						for (i = 0; i < l; i += 2) {
+							strip.pushLatLngAlt(shape[i], shape[i + 1], 0);
+						}
+
+						var link = new H.map.Polyline(strip,
+							{
+								style: {
+									lineWidth: (routeStroke - (r + 1)), // alternatives get smaller line with
+									strokeColor: routeColor[r],
+									lineCap: 'butt'
+								}
+							});
+							link.setArrows({color: "#F00F", width: 2, length: 3, frequency: 4});
+							link.$linkId = resp.response.route[r].leg[0].link[m].linkId;
+
+							//The router can send back links ids with "-" or "+" prefix: only "-" prefix is kept and stored in this HashMap, the "+" is removed
+							routeLinkHashMap[linkId] = link;
+
+							// add event listener to link
+							link.addEventListener("pointerdown", function (e) {
+								if (currentOpenBubble)
+									ui.removeBubble(currentOpenBubble);
+								var html = '<div>' +
+									'<p style="font-family:Arial,sans-serif; font-size:12px;">LinkId: ' + e.target.$linkId + '</p>'
+								'</div>';
+
+								var pos = map.screenToGeo(e.currentPointer.viewportX, e.currentPointer.viewportY);
+
+								var currentOpenBubble = new H.ui.InfoBubble(pos, {content: html});
+								ui.addBubble(currentOpenBubble);
+							});
+
+							group.addObject(link);
+						}
+				}
+			}
+
+			map.addObject(group);
+            map.getViewModel().setLookAtData({
+								bounds: group.getBoundingBox()
+							});
+    });
+}
+
+function routeWithMapMatch(){
+
+    clearLastRouteCalculation();
+
+    var settings = {
+  "url": initials.URLs.routeWithMapMatch,
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "text/plain"
+  },
+  "data": "LATITUDE,LONGITUDE\n44.5124,4.7778\n44.5314,4.8013\n44.5569,4.8114\n44.5824,4.8043\n44.6067,4.7937\n44.6324,4.7925\n44.6584,4.7961\n44.685,4.7954",
+};
+
+$.ajax(settings).done(function (resp) {
+  //console.log(resp);
+
+
+addGPXTraces();
+
+
+
+  if (resp.error != undefined) {
+				if (resp.error == "NoRouteFound") {
+					alert('Please consider to change your start or destination as the one you entered is not reachable with the given vehicle profile');
+					//feedbackTxt.innerHTML = 'The Router service is unable to compute the route: try to change your start / destination point';
+				}
+				else {
+					alert(resp.error);
+					//feedbackTxt.innerHTML = resp.error;
+				}
+				return;
+			}
+			if (resp.response == undefined && resp.subtype != undefined) {
+				if (resp.subtype == "NoRouteFound") {
+					alert('Please consider to change your start or destination as the one you entered is not reachable with the given vehicle profile');
+					//feedbackTxt.innerHTML = 'The Router service is unable to compute the route: try to change your start / destination point';
+				}
+				else {
+					alert(resp.subtype + " " + resp.details);
+					//feedbackTxt.innerHTML = resp.error;
+				}
+				return;
+			}
+			if (resp.error != undefined) {
+				alert(resp.error);
+                //feedbackTxt.innerHTML = resp.error;
+				return;
+			}
+			if (resp.responseCode != undefined) {
+				alert(resp.message);
+				//feedbackTxt.innerHTML = resp.message;
+				return;
+			}
+			if (resp.onError == true) {
+				for (var i = 0; i < resp.errors.length; i++) {
+					// feedbackTxt.innerHTML = "<font color='red'>" + resp.errors +"</font>";
+					// feedbackTxt.innerHTML += "<br />";
+				}
+				return;
+			}
+			if (bErrorHappened) {
+				return;
+			}
+
+			// if (feedbackTxt.innerHTML != strTceError) {
+            //     alert(strTceResponseReceived);
+			// 	// feedbackTxt.innerHTML = strTceResponseReceived;
+			// }
+
+			var routeLinkHashMap = new Object();
+
+			// create link objects
+			for (var r = 0; r < resp.response.route.length; r++) {
+				for (var m = 0; m < resp.response.route[r].leg[0].link.length; m++) {
+					// only add new link if it does not exist so far - so alternatives are not drawn multiple times
+					var linkId = (resp.response.route[r].leg[0].link[m].linkId.lastIndexOf("+", 0) === 0 ? resp.response.route[r].leg[0].link[m].linkId.substring(1) : resp.response.route[r].leg[0].link[m].linkId);
+					if(routeLinkHashMap[linkId] == null) {
+						var strip = new H.geo.LineString(),
+						shape = resp.response.route[r].leg[0].link[m].shape,
+						i,
+						l = shape.length;
+
+						for (i = 0; i < l; i += 2) {
+							strip.pushLatLngAlt(shape[i], shape[i + 1], 0);
+						}
+
+						var link = new H.map.Polyline(strip,
+							{
+								style: {
+									lineWidth: (routeStroke - (r + 1)), // alternatives get smaller line with
+									strokeColor: routeColor_01[r],
+									lineCap: 'butt'
+								}
+							});
+							link.setArrows({color: "#F00F", width: 2, length: 3, frequency: 4});
+							link.$linkId = resp.response.route[r].leg[0].link[m].linkId;
+
+							//The router can send back links ids with "-" or "+" prefix: only "-" prefix is kept and stored in this HashMap, the "+" is removed
+							routeLinkHashMap[linkId] = link;
+
+							// add event listener to link
+							link.addEventListener("pointerdown", function (e) {
+								if (currentOpenBubble)
+									ui.removeBubble(currentOpenBubble);
+								var html = '<div>' +
+									'<p style="font-family:Arial,sans-serif; font-size:12px;">LinkId: ' + e.target.$linkId + '</p>'
+								'</div>';
+
+								var pos = map.screenToGeo(e.currentPointer.viewportX, e.currentPointer.viewportY);
+
+								var currentOpenBubble = new H.ui.InfoBubble(pos, {content: html});
+								ui.addBubble(currentOpenBubble);
+							});
+
+							group.addObject(link);
+						}
+				}
+			}
+
+			map.addObject(group);
+            map.getViewModel().setLookAtData({
+								bounds: group.getBoundingBox()
+							});
+});
+}
+
+/************************************
+		parse the routing response
+		************************************/
+		function parseRoutingResponse(resp) {
+			if (resp.error != undefined) {
+				if (resp.error == "NoRouteFound") {
+					alert('Please consider to change your start or destination as the one you entered is not reachable with the given vehicle profile');
+					//feedbackTxt.innerHTML = 'The Router service is unable to compute the route: try to change your start / destination point';
+				}
+				else {
+					alert(resp.error);
+					//feedbackTxt.innerHTML = resp.error;
+				}
+				return;
+			}
+			if (resp.response == undefined && resp.subtype != undefined) {
+				if (resp.subtype == "NoRouteFound") {
+					alert('Please consider to change your start or destination as the one you entered is not reachable with the given vehicle profile');
+					//feedbackTxt.innerHTML = 'The Router service is unable to compute the route: try to change your start / destination point';
+				}
+				else {
+					alert(resp.subtype + " " + resp.details);
+					//feedbackTxt.innerHTML = resp.error;
+				}
+				return;
+			}
+			if (resp.error != undefined) {
+				alert(resp.error);
+                //feedbackTxt.innerHTML = resp.error;
+				return;
+			}
+			if (resp.responseCode != undefined) {
+				alert(resp.message);
+				//feedbackTxt.innerHTML = resp.message;
+				return;
+			}
+			if (resp.onError == true) {
+				for (var i = 0; i < resp.errors.length; i++) {
+					// feedbackTxt.innerHTML = "<font color='red'>" + resp.errors +"</font>";
+					// feedbackTxt.innerHTML += "<br />";
+				}
+				return;
+			}
+			if (bErrorHappened) {
+				return;
+			}
+
+			if (feedbackTxt.innerHTML != strTceError) {
+                alert(strTceResponseReceived);
+				// feedbackTxt.innerHTML = strTceResponseReceived;
+			}
+
+			var routeLinkHashMap = new Object();
+
+			// create link objects
+			for (var r = 0; r < resp.response.route.length; r++) {
+				for (var m = 0; m < resp.response.route[r].leg[0].link.length; m++) {
+					// only add new link if it does not exist so far - so alternatives are not drawn multiple times
+					var linkId = (resp.response.route[r].leg[0].link[m].linkId.lastIndexOf("+", 0) === 0 ? resp.response.route[r].leg[0].link[m].linkId.substring(1) : resp.response.route[r].leg[0].link[m].linkId);
+					if(routeLinkHashMap[linkId] == null) {
+						var strip = new H.geo.LineString(),
+						shape = resp.response.route[r].leg[0].link[m].shape,
+						i,
+						l = shape.length;
+
+						for (i = 0; i < l; i += 2) {
+							strip.pushLatLngAlt(shape[i], shape[i + 1], 0);
+						}
+
+						var link = new H.map.Polyline(strip,
+							{
+								style: {
+									lineWidth: (routeStroke - (r + 1)), // alternatives get smaller line with
+									strokeColor: routeColor[r],
+									lineCap: 'butt'
+								}
+							});
+							link.setArrows({color: "#F00F", width: 2, length: 3, frequency: 4});
+							link.$linkId = resp.response.route[r].leg[0].link[m].linkId;
+
+							//The router can send back links ids with "-" or "+" prefix: only "-" prefix is kept and stored in this HashMap, the "+" is removed
+							routeLinkHashMap[linkId] = link;
+
+							// add event listener to link
+							link.addEventListener("pointerdown", function (e) {
+								if (currentOpenBubble)
+									ui.removeBubble(currentOpenBubble);
+								var html = '<div>' +
+									'<p style="font-family:Arial,sans-serif; font-size:12px;">LinkId: ' + e.target.$linkId + '</p>'
+								'</div>';
+
+								var pos = map.screenToGeo(e.currentPointer.viewportX, e.currentPointer.viewportY);
+
+								var currentOpenBubble = new H.ui.InfoBubble(pos, {content: html});
+								ui.addBubble(currentOpenBubble);
+							});
+
+							group.addObject(link);
+						}
+				}
+			}
+
+			map.addObject(group);
+		}
+
+//#endregion
+
+    </script>
+  </body>
+</html>

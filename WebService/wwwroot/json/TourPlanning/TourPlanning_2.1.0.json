@@ -1,0 +1,133 @@
+{
+    "id": "TourPlanning_2.1.0_Template",
+    "configuration": {
+      "optimizations": {
+        "traffic": "liveOrHistorical",
+        "waitingTime": {
+          "reduce": true,
+          "bufferTime": 15
+        }
+      }
+    },
+    "fleet": {
+      "types": [
+        {
+          "id": "7f3423c2-784a-4983-b472-e14107d5a54a",
+          "profile": "normal_car",
+          "costs": {
+            "fixed": 22,
+            "distance": 0.0001,
+            "time": 0.0048
+          },
+          "shifts": [
+            {
+              "start": {
+                "time": "2020-07-04T09:00:00Z",
+                "location": {
+                  "lat": 52.5256,
+                  "lng": 13.4542
+                }
+              },
+              "end": {
+                "time": "2020-07-04T18:00:00Z",
+                "location": {
+                  "lat": 52.5256,
+                  "lng": 13.4542
+                }
+              },
+              "breaks": [
+                {
+                  "duration": 1800,
+                  "times": [
+                    [
+                      "2020-07-04T11:00:00Z",
+                      "2020-07-04T13:00:00Z"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "capacity": [
+            10,
+            5
+          ],
+          "skills": [
+            "fridge"
+          ],
+          "limits": {
+            "maxDistance": 20000,
+            "shiftTime": 21600
+          },
+          "amount": 1
+        }
+      ],
+      "profiles": [
+        {
+          "type": "car",
+          "name": "normal_car"
+        }
+      ]
+    },
+    "plan": {
+      "jobs": [
+        {
+          "id": "7f3423c2-784a-4983-b472-e14107d5a54a",
+          "places": {
+            "pickups": [
+              {
+                "times": [
+                  [
+                    "2020-07-04T10:00:00Z",
+                    "2020-07-04T12:00:00Z"
+                  ]
+                ],
+                "location": {
+                  "lat": 52.53088,
+                  "lng": 13.38471
+                },
+                "duration": 180,
+                "demand": [
+                  10
+                ]
+              }
+            ],
+            "deliveries": [
+              {
+                "times": [
+                  [
+                    "2020-07-04T14:00:00Z",
+                    "2020-07-04T16:00:00Z"
+                  ]
+                ],
+                "location": {
+                  "lat": 52.54016,
+                  "lng": 13.40241
+                },
+                "duration": 300,
+                "demand": [
+                  10
+                ]
+              }
+            ]
+          },
+          "skills": [
+            "fridge"
+          ],
+          "priority": 2
+        }
+      ],
+      "relations": [
+        {
+          "type": "sequence",
+          "jobs": [
+            "departure",
+            "7f3423c2-784a-4983-b472-e14107d5a54a",
+            "break",
+            "7f3423c2-784a-4983-b472-e14107d5a54a"
+          ],
+          "vehicleId": "7f3423c2-784a-4983-b472-e14107d5a54a_1"
+        }
+      ]
+    }
+  }
