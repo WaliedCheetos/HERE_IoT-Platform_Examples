@@ -41,11 +41,13 @@
         var HERE_DefaultLayers = platform.createDefaultLayers();
 
         var tileProvider = new H.map.provider.ImageTileProvider({
-            providesOverlays: true,
+            providesOverlays: false,
             getURL: function (column, row, zoom) {
                 //return 'https://1.base.maps.api.here.com/maptile/2.1/maptile/newest/normal.day/' + zoom + '/' + column + '/' + row + '/256/png8?app_id=' + config.HEREIoT_AppID + '&app_code=' + config.HEREIoT_AppCode + '&pois';
                 //return 'https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/' + zoom + '/' + column + '/' + row + '/256/png8?apiKey=' + config.HEREIoT_APIKey;
-                return 'https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/' + zoom + '/' + column + '/' + row + '/512/png8?pois=true&apiKey=' + config.HEREIoT_APIKey;
+                // return 'https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/' + zoom + '/' + column + '/' + row + '/512/png8?pois=true&apiKey=' + config.HEREIoT_APIKey;
+                return `https://www.expo2020dubai.com/digital-map/${zoom}/${row}/${column}.png`;
+
             }
         });
 

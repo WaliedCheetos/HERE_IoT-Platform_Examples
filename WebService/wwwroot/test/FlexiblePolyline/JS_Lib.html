@@ -1,0 +1,150 @@
+<html>
+
+<head>
+   <title>WaliedCheetos - Test HERE flexible polyline</title>
+
+   <!-- Style -->
+       <!-- Social -->
+       <link rel="icon" type="image/png" sizes="16x16" href="../../resources/favicon.ico" />
+
+       <!--jQuery-->
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+   <!-- HERE JS API -->
+   <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+
+
+
+           <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+   <!-- HERE JS API -->
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
+
+<script type="text/javascript" src="../../js/FlexiblePolyline/flexPolyline.js"></script>
+
+</head>
+
+<body>
+    <div id="map" style="width:63%; height:63%;"></div>
+    <div id="flexPolyline_Controls">
+        <textarea id="encoded" rows="2" placeholder=""></textarea>
+        <input id="decode" type="button" value="Decode flexPolyline" onclick="_fx_DecodeFlexPolyline()"></input>
+    </div>
+
+ 
+
+   <script type="text/javascript">
+
+
+//#region config.
+const initials = {
+   attribution: 'WaliedCheetos - &copy; HERE 2021',
+   hereCredentials : {
+      id: '***',
+      code: '***',
+      apikey: '***'
+   },
+   mapCenter : { 
+      lat: 28.63096, 
+      lng: 77.21722,
+      zoom: 23,
+      text: 'WaliedCheetos !'
+   }
+}
+//#endregion
+
+
+
+//#region global vars
+var routes = new H.map.Group();
+//#endregion
+
+//#region HERE maps initialization
+
+// Initialize HERE Map
+const platform = new H.service.Platform({ apikey: initials.hereCredentials.apikey });
+const defaultLayers = platform.createDefaultLayers();
+const map = new H.Map(document.getElementById('map'),       
+defaultLayers.vector.normal.map, {
+    center: initials.mapCenter,
+    zoom: 12,
+    pixelRatio: window.devicePixelRatio || 1
+ });
+
+const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+const provider = map.getBaseLayer().getProvider();
+
+window.addEventListener('resize', () => map.getViewPort().resize());
+    
+// Create the default UI:
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+    map.addObject(routes);
+
+//#endregion
+
+//#region
+function _fx_DecodeFlexPolyline(){
+
+    routes.removeAll();
+
+// var exampleRequest = `https://router.hereapi.com/v8/routes?origin=52.53898,13.42937&destination=52.52833,13.386969&return=polyline,summary,actions,instructions&transportMode=car&apikey=${initials.hereCredentials.apikey}`;
+var request = $("#encoded").val();
+var lineString = new H.geo.LineString();
+
+    // $.getJSON(exampleRequest, function (data) {
+    $.getJSON(request, function (data) {
+        var decodedFlexPolyline = decode(data.routes[0].sections[0].polyline);
+    
+
+        decodedFlexPolyline.polyline.forEach(flexPoint => {
+
+            //this logic can be customized to accomodate any mapping engine to create a polyline from the points retrieved 
+            lineString.pushPoint({ lat: flexPoint[0], lng: flexPoint[1] });
+
+            // var marker = new H.map.Marker({ lat: flexPoint[0], lng: flexPoint[1] });
+			// map.addObject(marker);
+        });
+
+        ;
+
+        // Add the polyline to the map
+    routes.addObject(new H.map.Polyline(lineString, { style: { lineWidth: 4 }}));
+    // And zoom to its bounding rectangle
+    map.getViewModel().setLookAtData({
+      bounds: routes.getBoundingBox()
+    },  true);
+
+    });
+
+        // //alert('hi');
+        
+        //         // var decodedFlexPolyline = decode("BGo9llkDg_rzZkF0G8LoQ4NoQgP8QoLgKgyB0tB4XoVoLsJ0K4IwWoQsOsJ8LwHoLoGkS0KkN8GsJ0F8GgF4D4DsE0FwHoLUgK8BkIkDkIgFwHgFwCgFUgF7B4DjDsErEsE_EkD7GoLUgFoB0F8B8Q0FsE8BkmBkSgtBwWkS8GwH8B8GoBosCgKkhBsE0FU0FUgZjD8VgKoGkD4F8C");
+        //         var decodedFlexPolyline = decode("BGk1inkDm7l1ZjN9nBgUvlBkXztBsErdopBzpD8Q_sB0K7a0KzZ8B_E0FvM8BjDwCvC0FvC4InLvHnV_EjN_EnLvHrTjI_OnLnavCzF_Yr2B_TrsBzK_Y3IjSnGrOrJ3SjNvWnG_JvH7Ljc_iB_EnGjNzPzFvH7GvHrOnQzmCvyC7V_YjN_OnajhB_EnG3I4Xzes0C7Vk6B_doxCvvBw_DrO4mBrsB42D_dgwCrO0jBzF8LnG8LvMrTrTnfnLvR_EjIzKnQzFjI7GnLvM_TnQ_YjN7VnazoBrJ_OzFgKkSsd4DoGkN0UsOsYsJgPnG8LrEwH_E8GzF0FzFkDzFUzFvC_E_EzFvH7G7G");
+        // console.log(decodedFlexPolyline);
+
+        // try {
+        //     decodedFlexPolyline.polyline.forEach(flexPoint => {
+        //     var marker = new H.map.Marker({ lat: flexPoint[0], lng: flexPoint[1] });
+		// 	map.addObject(marker);
+        // });
+        // } catch (error) {
+        //     alert(error);
+        // }
+        
+    }
+//#endregion
+
+
+</script> 
+
+</body>
+
+</html>

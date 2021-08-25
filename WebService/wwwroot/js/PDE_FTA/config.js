@@ -8,8 +8,6 @@ const HEREInitials = {
         APIKey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
     },
     Center: {
-        //lat: 57.9882,
-        //lng: 27.49233,
         lat: 25.19893,
         lng: 55.27991,
         text: 'WaliedCheetos'

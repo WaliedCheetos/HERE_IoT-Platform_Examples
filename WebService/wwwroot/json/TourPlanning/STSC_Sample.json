@@ -1,0 +1,170 @@
+{
+    "id": "students_Home_2_School",
+    "configuration": {
+      "optimizations": {
+        "traffic": "liveOrHistorical",
+        "waitingTime": {
+          "reduce": true,
+          "bufferTime": 15
+        }
+      }
+    },
+    "fleet": {
+      "types": [
+        {
+          "id": "vehicle_1",
+          "profile": "normalcarProfile_1",
+          "costs": {
+            "fixed": 22,
+            "distance": 0.0001,
+            "time": 0.0048
+          },
+          "shifts": [
+            {
+              "start": {
+                "time": "2021-11-11T06:30:00Z",
+                "location": {
+                  "lat": 24.6892,
+                  "lng": 46.69947
+                }
+              },
+              "end": {
+                "time": "2021-11-11T09:00:00Z",
+                "location": {
+                  "lat": 24.6892,
+                  "lng": 46.69947
+                }
+              }
+            }
+          ],
+          "capacity": [
+            14
+          ],
+          "skills": [
+            "students"
+          ],
+          "limits": {
+            "maxDistance": 600000,
+            "shiftTime": 21600
+          },
+          "amount": 2
+        }, 
+        {
+         "id": "vehicle_2",
+         "profile": "truckProfile_1",
+         "costs": {
+           "fixed": 30,
+           "distance": 0.00015,
+           "time": 0.005
+         },
+         "shifts": [
+           {
+             "start": {
+               "time": "2021-11-11T06:30:00Z",
+               "location": {
+                 "lat": 24.6892,
+                 "lng": 46.69947
+               }
+             },
+             "end": {
+               "time": "2021-11-11T09:00:00Z",
+               "location": {
+                 "lat": 24.6892,
+                 "lng": 46.69947
+               }
+             }
+           }
+         ],
+         "capacity": [
+           50
+         ],
+         "skills": [
+           "students"
+         ],
+         "limits": {
+           "maxDistance": 600000,
+           "shiftTime": 21600
+         },
+         "amount": 1
+       }
+      ],
+      "profiles": [
+        {
+          "type": "car",
+          "name": "normalcarProfile_1"
+        },
+        {
+          "type": "truck",
+          "name": "truckProfile_1"
+        }
+      ]
+    },
+    "plan": {
+      "jobs": [
+        {
+           "id":"students_Home_2_School_1",
+           "places":{
+              "pickups":[
+                 {
+                    "times":[
+                       [
+                          "2021-11-11T07:00:00Z",
+                          "2021-11-11T07:30:00Z"
+                       ]
+                    ],
+                    "location":{
+                       "lat":24.65265570934297,
+                       "lng":46.71110571271056
+                    },
+                    "duration":120,
+                    "demand":[
+                       13
+                    ],
+                    "tag":"WaliedCheetos"
+                 },
+                 {
+                    "times":[
+                       [
+                          "2021-11-11T08:00:00Z",
+                          "2021-11-11T08:30:00Z"
+                       ]
+                    ],
+                    "location":{
+                        "lat":24.735741547392678,
+                        "lng":46.80757576173785
+                    },
+                    "duration":120,
+                    "demand":[
+                       13
+                    ],
+                    "tag":"WaliedCheetos"
+                 }
+              ],
+              "deliveries":[
+                 {
+                    "times":[
+                       [
+                          "2021-11-11T07:30:00Z",
+                          "2021-11-11T09:00:00Z"
+                       ]
+                    ],
+                    "location":{
+                       "lat":24.6892,
+                       "lng":46.69947
+                    },
+                    "duration":13,
+                    "demand":[
+                       26
+                    ],
+                    "tag":"WaliedCheetos"
+                 }
+              ]
+           },
+           "skills":[
+              "students"
+           ],
+           "priority":2
+        }
+     ]
+    }
+}
