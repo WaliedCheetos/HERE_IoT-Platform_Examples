@@ -1,0 +1,39 @@
+overlay_spec=[{"op":"create","shape":[[50.10937,8.68422],[50.10807,8.68525],[50.10737,8.68387]],"data":{"NAMES":"WaliedCheetos 02102021_01 Road"}}]&storage=readonly
+
+
+{"map_name" : "Overlay_WaliedCheetos_02102021",
+"overlay_spec": [
+    {
+       "op":"create",
+       "shape":[
+          [
+             50.10937,
+             8.68422
+          ],
+          [
+             50.10807,
+             8.68525
+          ],
+          [
+             50.10737,
+             8.68387
+          ]
+       ],
+       "data":{
+          "NAMES":"ENGBNTestRoad"
+       },
+       "restrictions":[
+          {
+             "CONDITION_TYPE":"23",
+             "VEHICLE_TYPES":"truck,car",
+             "WEIGHT_RESTRICTION":"3500"
+          },
+          {
+             "CONDITION_TYPE":"23",
+             "VEHICLE_TYPES":"truck,car",
+             "HEIGHT_RESTRICTION":"200"
+          }
+       ]
+    }
+ ]
+}
