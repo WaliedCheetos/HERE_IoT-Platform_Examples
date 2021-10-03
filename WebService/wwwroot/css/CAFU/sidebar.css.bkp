@@ -1,13 +1,14 @@
 
 /* Sidebar */
 #sidebar {
-   position: absolute;
-   margin: var(--margin);;
-   z-index: 5000;
-   width: 325px;
-   max-height: calc(100vh - 2 * var(--margin));
-   background: var(--background);
-   overflow-y: auto;
+    position: absolute;
+    margin: var(--margin);
+    z-index: 5000;
+    width: 325px;
+    max-height: calc(100vh - 2 * var(--margin));
+    background: var(--background);
+    overflow-y: auto;
+    opacity: 91%;
 }
 
 .group {
@@ -224,35 +225,62 @@
 }
 
 
-.chart_Default {
-   width:413px;
-   height: 233px;
-   }
-   
-   #sidebar_right {
-       position: absolute;
-       margin: var(--margin);
-       z-index: 5000;
-       width: 413px;
-       max-height: calc(100vh - 2 * var(--margin));
-       background: var(--background);
-       overflow-y: auto;
-       right: 5px;
-       opacity: 91%;
-   }
-   
-   #bottombar {
-       position: absolute;
-       margin: var(--margin);
-       z-index: 5000;
-       width: 93%;
-       height: 23%;
-       max-height: calc(100vh - 2 * var(--margin));
-       background: var(--background);
-       overflow-y: auto;
-       bottom: 5px;
-       opacity: 91%;
-   }
-   
-   .canvasjs-chart-credit{display:none}
+.chart_TrafficCongestionPerDay {
+width:400px;
+height: 250px;
+}
 
+#sidebar_right {
+    position: absolute;
+    margin: var(--margin);
+    z-index: 5000;
+    width: 666px;
+    max-height: calc(100vh - 2 * var(--margin));
+    background: var(--background);
+    overflow-y: auto;
+    right: 5px;
+    opacity: 91%;
+}
+
+#bottombar {
+    position: absolute;
+    margin: var(--margin);
+    z-index: 5000;
+    width: 93%;
+    height: 23%;
+    max-height: calc(100vh - 2 * var(--margin));
+    background: var(--background);
+    overflow-y: auto;
+    bottom: 5px;
+    opacity: 91%;
+}
+
+.canvasjs-chart-credit{display:none}
+
+
+/*table {
+    border-collapse: collapse;
+    border: 1px solid #7f7f7f;
+}
+
+td {
+    border: 1px solid #7f7f7f;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+}*/
+
+th, td, p, input, h3 {
+    font: 15px 'Segoe UI';
+}
+
+table, th, td {
+    border: solid 1px #ddd;
+    border-collapse: collapse;
+    padding: 2px 3px;
+    text-align: center;
+}
+
+th {
+    font-weight: bold;
+}

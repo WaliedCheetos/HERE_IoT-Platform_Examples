@@ -15,7 +15,9 @@
      <script type="text/javascript" src="../js/airports.js"></script>
 
   <body>
-    <div id="map" style="width: 600px; height: 600px;"></div>
+    <div id="map" style="width: 1100px; height: 600px;"></div>
+    <input type="button" value="Update!" onclick="updateClusterData();"></input>
+
     <script type="text/javascript">
         var config = {
             mapInitials:{
@@ -32,7 +34,9 @@
             }
         }
 
-
+function updateClusterData(){
+  alert('Hollla');
+}
 
 function startClustering(map, data) {
   // First we need to create an array of DataPoint objects,
@@ -47,9 +51,19 @@ function startClustering(map, data) {
       // Maximum radius of the neighbourhood
       eps: 32,
       // minimum weight of points required to form a cluster
-      minWeight: 2
+      minWeight: 2,
+//This strategy implements an efficient way to cluster large sets of data points.
+//      strategy: H.clustering.Provider.Strategy.FASTGRID
+
+//his strategy uses the same algorithm of clustering as the GRID, but clusters on the viewport basis and utilizes Web Workers for a better performance. 
+//It is best suited for data sets that are subject to frequent updates.
+strategy: H.clustering.Provider.Strategy.DYNAMICGRID
     }
   });
+
+  clusteredDataProvider.addEventListener('tap', handleClusterTap);
+
+  //clusteredDataProvider.addEventListener('update', logEvent);
 
   // Create a layer tha will consume objects from our clustering provider
   var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider);
@@ -57,8 +71,6 @@ function startClustering(map, data) {
   // To make objects from clustering provder visible,
   // we need to add our layer to the map
   map.addLayer(clusteringLayer);
-
-  clusteredDataProvider.addEventListener('tap', logEvent);
 }
 
 function addMarker(map, data){
@@ -78,9 +90,24 @@ map.getViewModel().addEventListener('sync', function() {
 }
 
 // Helper for logging events
+function handleClusterTap(evt) {
+    try {
+    // get the shape's bounding box and adjust the camera position
+    map.getViewModel().setLookAtData({
+      zoom: evt.target.getData().minZoom,
+      bounds: evt.target.getData().getBoundingBox()
+    }, true);
+
+    } catch (exception) {
+        console.error(exception);
+    }
+}
+
+// Helper for logging events
 function logEvent(evt) {
     try {
         alert (['event "', evt.type, '" @ '+ evt.target.getData()].join(''));
+
     } catch (exception) {
         console.error(exception);
     }
@@ -90,7 +117,9 @@ var platform = new H.service.Platform({
   apikey: config.mapInitials.APIKey,
 
 });
+
 var defaultLayers = platform.createDefaultLayers();
+
 var map = new H.Map(document.getElementById('map'),
   defaultLayers.vector.normal.map,{
   center: config.mapInitials.center,
@@ -107,8 +136,8 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 window.onload = function () {
 
 startClustering(map, airports);
-addMarker(map, config.mapCustoms.location);
-map.addEventListener('tap', logEvent);
+//addMarker(map, config.mapCustoms.location);
+//map.addEventListener('tap', logEvent);
 
 }
 

@@ -148,7 +148,13 @@ var clusteringProvider = new H.clustering.Provider(dataPoints, {
     max: 15,
     clusteringOptions: {
         minWeight: 1,
-        eps: 32
+        eps: 32,
+        //This strategy implements an efficient way to cluster large sets of data points.
+//      strategy: H.clustering.Provider.Strategy.FASTGRID
+
+//his strategy uses the same algorithm of clustering as the GRID, but clusters on the viewport basis and utilizes Web Workers for a better performance. 
+//It is best suited for data sets that are subject to frequent updates.
+strategy: H.clustering.Provider.Strategy.DYNAMICGRID
     },
     theme: {
         getClusterPresentation: function (markerCluster) {
@@ -272,6 +278,20 @@ var clusteringProvider = new H.clustering.Provider(dataPoints, {
 
 });
 
+// Add an event listener to the Provider - this listener is called when a maker
+// has been tapped:
+clusteringProvider.addEventListener('tap', function(event) {
+  // Log data bound to the marker that has been tapped:
+  console.log('Hollla');
+
+    // get the shape's bounding box and adjust the camera position
+    map.getViewModel().setLookAtData({
+      zoom: (event.target.getData().maxZoom),
+      bounds: event.target.getData().getBoundingBox()
+    }, true);
+
+  });
+
 
 
     // Create a layer tha will consume objects from our clustering provider
@@ -309,7 +329,7 @@ console.error('WaliedCheetos --> ' + 'Exception: ' + e);
             center: { lat: config.HEREIoT_initial_latitude, lng: config.HEREIoT_initial_longitude },
             zoom: config.HEREIoT_initial_zoom,
             pixelRatio: window.devicePixelRatio || 1,
-        engineType: H.map.render.RenderEngine.EngineType.P2D
+        //engineType: H.map.render.RenderEngine.EngineType.P2D
         });
 
         /*

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+    <title>Map at a specified location</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
+     <script type="text/javascript" src="../js/airports.js"></script>
+
+  <body>
+    <div id="map" style="width: 1100px; height: 600px;"></div>
+    <input type="button" value="Update!" onclick="updateClusterData();"></input>
+
+    <script type="text/javascript">
+        var config = {
+            mapInitials:{
+            APIKey:'***',
+            center:{lat:24.9599418, lng:55.1475067},
+            zoom: 2
+            },
+            mapCustoms:{
+                location:{lat:24.9599418, lng:55.1475067},
+                zoomLevel: 13,
+                tilt: 45,
+                heading: 0,
+                isAnimated: true
+            }
+        }
+
+
+        var clusteredDataProvider;
+
+        // array of initial positions of 40 markers
+var initialPositions = [
+      [49.606945, 8.368333],
+      [50.98194, 12.50638],
+      [51.83169, 12.19096],
+      [52.19585, 14.58753],
+      [51.30805, 13.55555],
+      [51.36305, 11.94083],
+      [51.55222, 12.05388],
+      [51.29360, 13.35611],
+      [53.30638, 12.75222],
+      [52.58055, 13.91666],
+      [52.20360, 13.15638],
+      [54.03825, 12.71051],
+      [50.91527, 11.71444],
+      [52.91888, 12.42527],
+      [52.07361, 11.62638],
+      [51.36333, 14.94999],
+      [53.83277, 13.66861],
+      [51.88944, 14.53194],
+      [51.29694, 14.12749],
+      [52.38000, 13.52250],
+      [51.13280, 13.76720],
+      [50.97980, 10.95810],
+      [50.02233, 8.57055],
+      [52.13460, 7.68482],
+      [53.63040, 9.98822],
+      [52.47259, 13.40390],
+      [50.86589, 7.14273],
+      [51.22701, 6.76677],
+      [48.35380, 11.7861],
+      [49.49869, 11.07805],
+      [51.42388, 12.23308],
+      [49.21459, 7.10950],
+      [48.68989, 9.22196],
+      [52.35970, 13.28769],
+      [52.46110, 9.68479],
+      [53.04750, 8.78665],
+      [49.69999, 8.64583],
+      [49.94869, 7.26388],
+      [49.47305, 8.51416],
+      [51.03499, 8.68083]
+    ];
+
+
+
+ /**
+     * update all markers' positions with animation using the ease function
+     */
+     function updateMarkerPositions() {
+
+      initialPositions.forEach(function(position) {
+        // get random position 0 - 450km from map's center in random direction
+        let randomPoint = map.getCenter().walk(Math.random() * 360, Math.random() * 450000);
+        
+
+        // update marker's position within ease function callback
+        ease(
+          marker.getGeometry(),
+          randomPoint,
+          4000,
+          function(coord) {
+            marker.setGeometry(coord);
+          }
+        )
+      })
+     }
+
+function updateClusterData(){
+  try {
+        for (let index = 0; index < initialPositions.length; index++) {
+          const element = initialPositions[index];
+          let randomPoint = map.getCenter().walk(Math.random() * 360, Math.random() * 450000);
+          initialPositions[index][0] = randomPoint.lat;
+          initialPositions[index][1] = randomPoint.lng;
+        }
+        
+        // First we need to create an array of DataPoint objects, for the ClusterProvider
+
+        dataPoints = initialPositions.map(function (item) {
+              return new H.clustering.DataPoint(item[0], item[1]);
+    //return new H.clustering.DataPoint(item.latitude, item.longitude);
+  });
+
+  clusteredDataProvider.setDataPoints(dataPoints);
+} catch (error) {
+  alert(error);
+}
+}
+
+/**
+ * Create markers
+ */
+ function createMarkers() {
+// create SVG Dom Icon
+  var svg = `<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="10px" height="10px">
+    <circle cx="5" cy="5" r="4" fill="rgb(250, 127, 0)" stroke-width="1" stroke="black" opacity="1"/>
+    </svg>`,
+    domIcon = new H.map.DomIcon(svg),
+    markers = [],
+    // array of initial positions of 40 markers
+    initialPositions = [
+      [49.606945, 8.368333],
+      [50.98194, 12.50638],
+      [51.83169, 12.19096],
+      [52.19585, 14.58753],
+      [51.30805, 13.55555],
+      [51.36305, 11.94083],
+      [51.55222, 12.05388],
+      [51.29360, 13.35611],
+      [53.30638, 12.75222],
+      [52.58055, 13.91666],
+      [52.20360, 13.15638],
+      [54.03825, 12.71051],
+      [50.91527, 11.71444],
+      [52.91888, 12.42527],
+      [52.07361, 11.62638],
+      [51.36333, 14.94999],
+      [53.83277, 13.66861],
+      [51.88944, 14.53194],
+      [51.29694, 14.12749],
+      [52.38000, 13.52250],
+      [51.13280, 13.76720],
+      [50.97980, 10.95810],
+      [50.02233, 8.57055],
+      [52.13460, 7.68482],
+      [53.63040, 9.98822],
+      [52.47259, 13.40390],
+      [50.86589, 7.14273],
+      [51.22701, 6.76677],
+      [48.35380, 11.7861],
+      [49.49869, 11.07805],
+      [51.42388, 12.23308],
+      [49.21459, 7.10950],
+      [48.68989, 9.22196],
+      [52.35970, 13.28769],
+      [52.46110, 9.68479],
+      [53.04750, 8.78665],
+      [49.69999, 8.64583],
+      [49.94869, 7.26388],
+      [49.47305, 8.51416],
+      [51.03499, 8.68083]
+    ];
+
+    // create markers
+    initialPositions.forEach(function(pos) {
+      markers.push(new H.map.DomMarker({lat: pos[0], lng: pos[1]}, {
+        icon: domIcon
+      }));
+    });
+    // add markers to map
+    map.addObjects(markers);
+
+    // randomly update all markers positions in intervals
+    setTimeout(updateMarkerPositions, 500);
+    setInterval(updateMarkerPositions, 5000);
+
+    /**
+     * update all markers' positions with animation using the ease function
+     */
+    function updateMarkerPositions() {
+      markers.forEach(function(marker) {
+        // get random position 0 - 450km from map's center in random direction
+        let randomPoint = map.getCenter().walk(Math.random() * 360, Math.random() * 450000);
+
+        // update marker's position within ease function callback
+        ease(
+          marker.getGeometry(),
+          randomPoint,
+          4000,
+          function(coord) {
+            marker.setGeometry(coord);
+          }
+        )
+      })
+    }
+}
+
+function startClustering(map, data) {
+  // First we need to create an array of DataPoint objects,
+  // for the ClusterProvider
+  var dataPoints = data.map(function (item) {
+    return new H.clustering.DataPoint(item[0], item[1]);
+    //return new H.clustering.DataPoint(item.latitude, item.longitude);
+  });
+
+  // Create a clustering provider with custom options for clusterizing the input
+  var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
+    clusteringOptions: {
+      // Maximum radius of the neighbourhood
+      eps: 32,
+      // minimum weight of points required to form a cluster
+      minWeight: 2,
+//This strategy implements an efficient way to cluster large sets of data points.
+//      strategy: H.clustering.Provider.Strategy.FASTGRID
+
+//his strategy uses the same algorithm of clustering as the GRID, but clusters on the viewport basis and utilizes Web Workers for a better performance. 
+//It is best suited for data sets that are subject to frequent updates.
+strategy: H.clustering.Provider.Strategy.DYNAMICGRID
+    }
+  });
+
+  clusteredDataProvider.addEventListener('tap', handleClusterTap);
+
+  //clusteredDataProvider.addEventListener('update', logEvent);
+
+  // Create a layer tha will consume objects from our clustering provider
+  var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider);
+
+  // To make objects from clustering provder visible,
+  // we need to add our layer to the map
+  map.addLayer(clusteringLayer);
+}
+
+function addMarker(map, data){
+
+var marker = new H.map.Marker(data);
+marker.setData('WaliedCheetos single marker!');
+map.addObject(marker);
+
+marker.addEventListener('tap', logEvent);
+
+map.getViewModel().addEventListener('sync', function() {
+  var center = map.getCenter();
+  // Set marker position here:
+  marker.setGeometry(center);
+});
+
+}
+
+function handleClusterTap(evt) {
+    try {
+//if the tap triggers no clusters but maybe a single point/marker
+      if (!evt.target.getData().isCluster()) {
+      
+        //implemnt you own logic maybe open a pop!
+
+            // event target is the marker itself, group is a parent event target
+    // for all objects that it contains
+    var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+      // read custom data
+      content: evt.target.getData().getPosition().toString()
+    });
+    // show info bubble
+    ui.addBubble(bubble);
+      }else //if the tap triggers a cluster
+      {
+        // get the shape's bounding box and adjust the camera position
+    map.getViewModel().setLookAtData({
+      zoom: evt.target.getData().minZoom,
+      bounds: evt.target.getData().getBoundingBox()
+    }, true);
+      }
+
+
+      /*
+      //if the tap triggers a cluster
+      if (evt.currentTarget.N.clusters.length > 0) {
+
+            // get the shape's bounding box and adjust the camera position
+    map.getViewModel().setLookAtData({
+      zoom: evt.target.getData().minZoom,
+      bounds: evt.target.getData().getBoundingBox()
+    }, true);
+      } else {
+        //if the tap triggers no clusters but maybe a single point/marker
+        //implemnt you own logic maybe open a pop!
+
+            // event target is the marker itself, group is a parent event target
+    // for all objects that it contains
+    var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+      // read custom data
+      content: evt.target.getData()
+    });
+    // show info bubble
+    ui.addBubble(bubble);
+      }
+      */
+
+    } catch (exception) {
+        console.error(exception);
+    }
+}
+
+function handleClusterDataUpdate(evt) {
+    try {
+    logEvent(evt);
+
+    } catch (exception) {
+        console.error(exception);
+    }
+}
+
+// Helper for logging events
+function logEvent(evt) {
+    try {
+        //console.debug(['event "', evt.type, '" @ '+ evt.target.getData()].join(''));
+
+    } catch (exception) {
+        console.error(exception);
+    }
+}
+
+var platform = new H.service.Platform({
+  apikey: config.mapInitials.APIKey,
+
+});
+
+var defaultLayers = platform.createDefaultLayers();
+
+var map = new H.Map(document.getElementById('map'),
+  defaultLayers.vector.normal.map,{
+    //defaultLayers.raster.terrain.map,{
+  center: config.mapInitials.center,
+  zoom: config.mapInitials.zoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
+
+window.addEventListener('resize', () => map.getViewPort().resize());
+var mapEvents = new H.mapevents.MapEvents(map);
+var behavior = new H.mapevents.Behavior(mapEvents);
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+
+//#region test dynamic clustering
+
+
+  // First we need to create an array of DataPoint objects,
+  // for the ClusterProvider
+  var dataPoints = initialPositions.map(function (item) {
+    return new H.clustering.DataPoint(item[0], item[1]);
+    //return new H.clustering.DataPoint(item.latitude, item.longitude);
+  });
+
+  // Create a clustering provider with custom options for clusterizing the input
+  var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
+    clusteringOptions: {
+      // Maximum radius of the neighbourhood
+      eps: 32,
+      // minimum weight of points required to form a cluster
+      minWeight: 2,
+//This strategy implements an efficient way to cluster large sets of data points.
+//      strategy: H.clustering.Provider.Strategy.FASTGRID
+
+//his strategy uses the same algorithm of clustering as the GRID, but clusters on the viewport basis and utilizes Web Workers for a better performance. 
+//It is best suited for data sets that are subject to frequent updates.
+strategy: H.clustering.Provider.Strategy.DYNAMICGRID
+    }
+  });
+
+  clusteredDataProvider.addEventListener('tap', handleClusterTap);
+  clusteredDataProvider.addEventListener('update', handleClusterDataUpdate);
+
+  // Create a layer tha will consume objects from our clustering provider
+  var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider);
+
+  // To make objects from clustering provder visible,
+  // we need to add our layer to the map
+  map.addLayer(clusteringLayer);
+
+//#endregion
+
+
+// Now use the map as required...
+window.onload = function () {
+
+//startClustering(map, initialPositions);
+//startClustering(map, airports);
+//addMarker(map, config.mapCustoms.location);
+//map.addEventListener('tap', logEvent);
+
+}
+
+
+    </script>
+  </body>
+</html>

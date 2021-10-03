@@ -18,19 +18,19 @@
 
 @font-face {
    font-family: FiraGO;
-   src: url(../../resources/RTA/FiraGO-Regular.woff);
+   src: url(../../resources/FiraGO-Regular.woff);
 }
 
 @font-face {
-   font-family: FiraGO;
-   src: url(../../resources/RTA/FiraGO-Bold.woff);
-   font-weight: bold;
+    font-family: FiraGO;
+    src: url(../../resources/FiraGO-Bold.woff);
+    font-weight: bold;
 }
 
 @font-face {
-   font-family: FiraGO;
-   src: url(../../resources/RTA/FiraGO-Medium.woff);
-   font-weight: 500;
+    font-family: FiraGO;
+    src: url(../../resources/FiraGO-Medium.woff);
+    font-weight: 500;
 }
 
 /* Main */
@@ -78,6 +78,10 @@ h2 {
    font-size: 14px;
    font-weight: 500;
    margin: 0px 0px 10px 0;
+}
+
+._img_header {
+width:133px;
 }
 
 /* Paragraph */
@@ -191,9 +195,3 @@ p {
    display: grid;
    grid-template-columns: 1fr 1fr;
 }
-
-/* .noneDisplay{
-   display: none;
-} */
-
-

@@ -124,7 +124,12 @@ try{
       eps: 32,
       // minimum weight of points required to form a cluster
       minWeight: 1,
-strategy: H.clustering.Provider.Strategy.FASTGRID
+//This strategy implements an efficient way to cluster large sets of data points.
+//      strategy: H.clustering.Provider.Strategy.FASTGRID
+
+//his strategy uses the same algorithm of clustering as the GRID, but clusters on the viewport basis and utilizes Web Workers for a better performance. 
+//It is best suited for data sets that are subject to frequent updates.
+        strategy: H.clustering.Provider.Strategy.DYNAMICGRID
     }
   });
 
