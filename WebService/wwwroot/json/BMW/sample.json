@@ -1,0 +1,230 @@
+{
+    WaliedCheetos:{
+    detections:[
+        {
+            id:"detect_01",
+            object:{
+                "type":"vehicle",
+                "subtype":"light vehicle",
+                id:"obj_01"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"bathroom"
+                },
+                coordinates:"x1, y1"
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_02",
+            object:{
+                "type":"vehicle",
+                "subtype":"heavy vehicle",
+                id:"obj_02"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:"x2, y2"
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_03",
+            object:{
+                "type":"person",
+                "subtype":"safety engineer",
+                id:"obj_03"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:"x3, y3"
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_04",
+            object:{
+                "type":"person",
+                "subtype":"maintenance engineer",
+                id:"obj_04"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:"x4, y4"
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_05",
+            object:{
+                "type":"person",
+                "subtype":"service engineer",
+                id:"obj_05"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:"x5, y5"
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_06",
+            object:{
+                "type":"person",
+                "subtype":"vehicle owner",
+                id:"obj_06"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:"x6, y6"
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        }
+    ],
+    vehciles_types:["light vehicle", "heavy vehicle"],
+    persons_types:["safety engineer", "service engineer", "vehicle owner"]
+}
+}
+
+
+
+
+// {
+//     "WaliedCheetos":{
+//     "detections":[
+//         {
+//             "id":"1",
+//             "object":{
+//                 "type":"vehicle",
+//                 "subtype":"light vehicle"
+//             },
+//             "location":{
+//                 "venue_info":{
+//                     "id":"venue_01",
+//                     "name":"WaliedCheetos_Venue_01",
+//                     "level":"01",
+//                     "space":"bathroom"
+//                 },
+//                 "coordinates":"x1, y1"
+//             }
+//         },
+//         {
+//             "id":"2",
+//             "object":{
+//                 "type":"vehicle",
+//                 "subtype":"heavy vehicle"
+//             },
+//             "location":{
+//                 "venue_info":{
+//                     "id":"venue_01",
+//                     "name":"WaliedCheetos_Venue_01",
+//                     "level":"01",
+//                     "space":"retail"
+//                 },
+//                 "coordinates":"x2, y2"
+//             }
+//         },
+//         {
+//             "id":"3",
+//             "object":{
+//                 "type":"person",
+//                 "subtype":"safety engineer"
+//             },
+//             "location":{
+//                 "venue_info":{
+//                     "id":"venue_01",
+//                     "name":"WaliedCheetos_Venue_01",
+//                     "level":"01",
+//                     "space":"retail"
+//                 },
+//                 "coordinates":"x3, y3"
+//             }
+//         },
+//         {
+//             "id":"4",
+//             "object":{
+//                 "type":"person",
+//                 "subtype":"maintenance engineer"
+//             },
+//             "location":{
+//                 "venue_info":{
+//                     "id":"venue_01",
+//                     "name":"WaliedCheetos_Venue_01",
+//                     "level":"01",
+//                     "space":"retail"
+//                 },
+//                 "coordinates":"x4, y4"
+//             }
+//         },
+//         {
+//             "id":"5",
+//             "object":{
+//                 "type":"person",
+//                 "subtype":"service engineer"
+//             },
+//             "location":{
+//                 "venue_info":{
+//                     "id":"venue_01",
+//                     "name":"WaliedCheetos_Venue_01",
+//                     "level":"01",
+//                     "space":"retail"
+//                 },
+//                 "coordinates":"x5, y5"
+//             }
+//         },
+//         {
+//             "id":"6",
+//             "object":{
+//                 "type":"person",
+//                 "subtype":"vehicle owner"
+//             },
+//             "location":{
+//                 "venue_info":{
+//                     "id":"venue_01",
+//                     "name":"WaliedCheetos_Venue_01",
+//                     "level":"01",
+//                     "space":"retail"
+//                 },
+//                 "coordinates":"x6, y6"
+//             }
+//         }
+//     ],
+//     "vehciles_types":["light vehicle", "heavy vehicle"],
+//     "persons_types":["safety engineer", "service engineer", "vehicle owner"]
+// }
+// }

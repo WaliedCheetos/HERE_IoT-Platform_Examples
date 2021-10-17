@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+    <title>Crash TP</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+           <!--jQuery-->
+           <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      
+
+
+           <!--jQuery-->
+           <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+           <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  </head>
+
+    <body>
+    <div id="map" style="width: 60vw; height: 60vh;"></div>
+    <div>
+        <textarea id="TPRequestPayload"></textarea>
+        <input type="button" value="Request" onclick="requestTP();">
+    </div>
+    <script type="text/javascript">
+
+var config = {
+   attribution: 'WaliedCheetos - &copy; HERE 2021',
+   hereCredentials : {
+      id: '***',
+      code: '***',
+      apikey: 'QICW7garcjxE7C7sSguJcNolMZXqYCJ9m5o6Qq3ygjg'
+      // apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+   },
+   map:{
+      center : { 
+         lat: 50, 
+         lng: 5, 
+         text: 'Berlin, Germany'
+      },
+      zoom: 17,
+      tilt: 33,
+      heading: 73,
+      incline: 33
+   }
+}
+
+
+//#region global vars
+var groupMarkers_Pickups = new H.map.Group();
+var groupMarkers_Deliveries = new H.map.Group();
+var groupMarkers_TP = new H.map.Group(); 
+
+var svg_Pickup = `<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="23px" height="23px">
+    <circle cx="5" cy="5" r="4" fill="rgb(255, 0, 0)" stroke-width="1" stroke="black" opacity="1"/>
+    </svg>`;
+
+    var svg_Delivery = `<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="10px" height="10px">
+    <circle cx="5" cy="5" r="4" fill="rgb(0, 0, 255)" stroke-width="1" stroke="black" opacity="1"/>
+    </svg>`;
+
+    var domIcon_Pickup = new H.map.DomIcon(svg_Pickup);
+    var domIcon_Delivery = new H.map.DomIcon(svg_Delivery);
+//#endregion
+
+//Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: config.hereCredentials.apikey
+});
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map - this map is centered over Europe
+var map = new H.Map(document.getElementById('map'),
+  defaultLayers.vector.normal.map,{
+  center: config.map.center,
+  //zoom: config.map.zoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+//#region business logic
+
+map.addObject(groupMarkers_TP);
+
+var requestTP = function(){
+    var location
+    try {
+
+       groupMarkers_Deliveries.removeAll();
+       groupMarkers_Pickups.removeAll();
+       groupMarkers_TP.removeAll();
+
+       var request = $('#TPRequestPayload').val();
+       request = JSON.parse(request);
+
+       request.plan.jobs.forEach(job => {
+           //job.places.forEach(place => {
+               try {
+                   job.places.pickups.forEach(pickup => {
+                    groupMarkers_TP.addObject(new H.map.DomMarker(pickup.location, {
+                        icon: domIcon_Pickup
+                    }));
+                });
+               } catch (error) {
+                   console.error(error);
+               }
+               try {
+                job.places.deliveries.forEach(delivery => {
+                    groupMarkers_TP.addObject(new H.map.DomMarker(delivery.location, {
+                        icon: domIcon_Delivery
+                    }));
+                });
+               } catch (error) {
+                console.error(error);
+               }
+           //});
+       });
+
+// And zoom to its bounding rectangle
+map.getViewModel().setLookAtData({
+  bounds: groupMarkers_TP.getBoundingBox()
+},  true);
+
+       /*
+       $.getJSON(request, function (data) {
+    var decodedFlexPolyline = decode(data.routes[0].sections[0].polyline);
+
+
+    decodedFlexPolyline.polyline.forEach(flexPoint => {
+
+        //this logic can be customized to accomodate any mapping engine to create a polyline from the points retrieved 
+        lineString.pushPoint({ lat: flexPoint[0], lng: flexPoint[1] });
+
+        // var marker = new H.map.Marker({ lat: flexPoint[0], lng: flexPoint[1] });
+        // map.addObject(marker);
+    });
+
+    ;
+
+    // Add the polyline to the map
+routes.addObject(new H.map.Polyline(lineString, { style: { lineWidth: 4 }}));
+// And zoom to its bounding rectangle
+map.getViewModel().setLookAtData({
+  bounds: routes.getBoundingBox()
+},  true);
+
+});
+*/
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+
+//#endregion
+
+
+    </script>
+  </body>
+</html>

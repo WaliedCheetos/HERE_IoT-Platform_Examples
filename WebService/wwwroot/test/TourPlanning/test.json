@@ -1,0 +1,1164 @@
+{
+    "id": "riyadh_problem",
+    "configuration": {
+        "optimizations": {
+            "traffic": "liveOrHistorical",
+            "waitingTime": {
+                "reduce": true,
+                "bufferTime": 15
+            }
+        }
+    },
+    "plan": {
+        "jobs": [
+            {
+                "id": "61e667ca-f5ec-45b3-be23-2d2a49f375c4",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.692078,
+                                "lng": 46.682436
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "2163aecf-78da-43c9-9335-96de8ebf5bcb",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.830491949329108,
+                                "lng": 46.725797354205845
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "9bb0d05c-d563-4fb1-a13b-718a1751f844",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.82449411788103,
+                                "lng": 46.7369062483445
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "fb489744-8593-4b5c-9e34-ae320cf9c6e9",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.78783046772735,
+                                "lng": 46.70374653405172
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "301b956e-5db0-4f28-96f1-c6920da5bb6f",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.79397376593287,
+                                "lng": 46.72401997326132
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "25e6178a-3cde-4d05-aa11-b6d8ad4a9e29",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.786055327216584,
+                                "lng": 46.714717988445045
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "93793cc1-eed6-4b30-aad4-b2e74113628f",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.77835764204667,
+                                "lng": 46.70741835150189
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "5aa33895-3096-4c31-8d71-f7d0094b48eb",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.815198599376775,
+                                "lng": 46.723483853329896
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "765724cf-393d-4b7f-8949-0e593178c00f",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.788840598805965,
+                                "lng": 46.70484481360203
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "4dc805d8-8225-43f8-b251-672fae5cdd47",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.82811148703283,
+                                "lng": 46.691383646925935
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "5efb8e8d-930c-46ff-b5f8-76cf89593c95",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.817903259301904,
+                                "lng": 46.67439340344256
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "b3c29e8f-943e-4744-af9b-b7a2e68b7aaf",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.78646903644654,
+                                "lng": 46.719748510058544
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "5eadc178-190b-46bd-b09c-741170a0e801",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.82840795177374,
+                                "lng": 46.72839949144781
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "612545b2-2b00-448b-86c7-b8adf628c85f",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.81674199666706,
+                                "lng": 46.694043513285166
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "945aa1e7-764d-4f43-aeb4-4d567fe68cf0",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.692078,
+                                "lng": 46.682436
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "271d5adc-fb2e-45e4-8075-aefdfe142719",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.831113533279492,
+                                "lng": 46.707998485098265
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "a18853e5-25b6-4dab-aacc-fc26343095dd",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.786880760342452,
+                                "lng": 46.675101451740126
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "0222ef84-53fa-40a0-84ca-296483888491",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.80324476637228,
+                                "lng": 46.673259072501054
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "ee319a92-027c-4460-a7dd-d33247843fe2",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.836995755778233,
+                                "lng": 46.69272901312289
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "8d534a10-c598-4780-9fa9-e1151974e394",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.820956735164312,
+                                "lng": 46.70772595749345
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "53fa07ee-d80e-488b-9465-3dacc873df8e",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.818052992975527,
+                                "lng": 46.70557427179346
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "b2a6f729-05df-4ecc-a1a8-c1a44687864d",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.83796267751673,
+                                "lng": 46.69287721586241
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "1c402112-9f42-41c3-b160-de922cb88bde",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.819375568303503,
+                                "lng": 46.70780633239068
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "db39a899-d8c1-42e0-bd97-a99b4c8b5a6e",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.80222140399565,
+                                "lng": 46.718603800385765
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "b0c5c830-61be-4fff-8a2c-753b7219a17d",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.80614458828158,
+                                "lng": 46.731216791941954
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "9c2b3aaa-c2d0-479e-b619-9731445e2d48",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.81011543019885,
+                                "lng": 46.739172226057164
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "32dd7eb2-e145-415a-8f79-da6abd2d8143",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.814209632147872,
+                                "lng": 46.71241351769247
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "693fb2f5-0219-4f0b-93f8-e54d6e14e603",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.82507218461208,
+                                "lng": 46.673311872247005
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "d33f4010-1ba3-4502-b835-411d43c2fe46",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.809856691327276,
+                                "lng": 46.68980241359473
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "53b76a5c-6195-49e4-b6f8-0d961f0ef1d9",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.82509238619018,
+                                "lng": 46.69530732073664
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "54cb875a-51c2-4010-9cdc-a5411a749087",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.81637695247817,
+                                "lng": 46.73181273618537
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "8886ff4a-60bd-4059-bf5a-f3cb2448c744",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.809306093150244,
+                                "lng": 46.71089214163866
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "394d48a0-fa2f-476c-8e74-6088a1500919",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.840163305138137,
+                                "lng": 46.68873864835433
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "d062d8c5-5f5c-49e0-a31d-41f408c636f0",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.808891979329555,
+                                "lng": 46.67193295066586
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "f6f6ed35-d686-447e-b2c0-c0657df12a98",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.80307007975417,
+                                "lng": 46.72176376421474
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "748203e3-6200-4327-8621-16f68fe56267",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.81644092831923,
+                                "lng": 46.703859476511276
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "04743077-0e99-40fb-9f40-0db9f269e8c6",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.820471842588613,
+                                "lng": 46.71503509687459
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "171a3aa7-25e7-49ff-94ec-f9d36a48a00e",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.806315639869325,
+                                "lng": 46.72545615758986
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "89483278-3800-4463-b7b6-d2d15a89b903",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.80092516661209,
+                                "lng": 46.71788057425969
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "6c2240ee-724d-4257-ae44-095c3b6a4ae9",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.806292797491512,
+                                "lng": 46.72651902376561
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "9cb40aef-e4e8-4151-b72e-7e6c398fe6f4",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.82628016594678,
+                                "lng": 46.70649169080191
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "ebba62b7-2bd3-44aa-bf39-075ea9f4a66f",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.82026847258854,
+                                "lng": 46.717686049772176
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "f990eb96-5c8c-468a-a648-9c0eed3deac6",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.817714170247715,
+                                "lng": 46.672274416625676
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "177f361f-ad57-450d-8d62-61a3078b3ee8",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.785828268322295,
+                                "lng": 46.72360130112353
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "52d808f1-6c05-4e86-a282-a16f50709434",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.83384047384036,
+                                "lng": 46.70671628811748
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "b9160402-a765-479f-8b27-564bbeae52ac",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.820869109270635,
+                                "lng": 46.688124181199925
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "8f6d3f74-ee16-42cf-a02e-cdc0ca1d2011",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.840393457521834,
+                                "lng": 46.72231637349925
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "4aedef5b-a88f-4097-b2fb-d2c0fd9f3a46",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.821606259387906,
+                                "lng": 46.66975328254492
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "23a23b23-52f0-428c-a3a1-d30d1f65d613",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.8279175866556,
+                                "lng": 46.711449495465786
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            },
+            {
+                "id": "c76d17e9-2516-481f-9b64-240e139ec495",
+                "places": {
+                    "pickups": [
+                        {
+                            "location": {
+                                "lat": 24.799559283050517,
+                                "lng": 46.698441951623046
+                            },
+                            "duration": 180,
+                            "demand": [
+                                1
+                            ],
+                            "tag": "pickup-1-has-2-sudents"
+                        }
+                    ]
+                },
+                "skills": [
+                    "studentsBus"
+                ],
+                "priority": 1
+            }
+        ]
+    },
+    "fleet": {
+        "types": [
+            {
+                "id": "24d409e0-e5f8-46e7-b59c-4997271af79d",
+                "profile": "stc_car",
+                "costs": {
+                    "fixed": 30,
+                    "distance": 1.5E-4,
+                    "time": 0.005
+                },
+                "shifts": [
+                    {
+                        "start": {
+                            "time": "2021-10-22T16:00:00Z",
+                            "location": {
+                                "lat": 24.692078,
+                                "lng": 46.682436
+                            }
+                        },
+                        "end": {
+                            "time": "2021-10-22T23:00:00Z",
+                            "location": {
+                                "lat": 24.81359454203796,
+                                "lng": 46.70306392014027
+                            }
+                        }
+                    }
+                ],
+                "capacity": [
+                    53
+                ],
+                "skills": [
+                    "studentsBus"
+                ],
+                "limits": {
+                    "maxDistance": 3000000,
+                    "shiftTime": 21600
+                },
+                "amount": 1
+            }
+        ],
+        "profiles": [
+            {
+                "type": "car",
+                "name": "stc_car"
+            }
+        ]
+    }
+}

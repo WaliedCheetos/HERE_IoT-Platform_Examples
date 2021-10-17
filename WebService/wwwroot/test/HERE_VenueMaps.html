@@ -23,7 +23,8 @@
  */
 function addVenueToMap(map) {
   // Get instance of venues service using valid apikey for venues
-  const venuesService = platform.getVenuesService({ apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E' });
+  // const venuesService = platform.getVenuesService({ apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E' });
+  const venuesService = platform.getVenuesService({ apikey: 'QICW7garcjxE7C7sSguJcNolMZXqYCJ9m5o6Qq3ygjg' });
 
   // Venues provider interacts with tile layer to visualize and control the venue map
   const venuesProvider = new H.venues.Provider();
