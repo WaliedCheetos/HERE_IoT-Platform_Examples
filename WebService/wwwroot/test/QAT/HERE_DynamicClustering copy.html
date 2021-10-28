@@ -1469,15 +1469,15 @@ var CUSTOM_THEME = {
                     // to show it correctly at certain zoom levels:
                     min: noisePoint.getMinZoom(),
                     
-                    icon: animatedPersonDomIcon
+                    // icon: animatedPersonDomIcon
                     
-                    // icon: new H.map.Icon(data.Marker, {
-                    //     size: {
-                    //         w: 153,
-                    //         h: 70
-                    //     },
-                    //     crossOrigin: 'anonymous'
-                    // })
+                    icon: new H.map.Icon(data.Marker, {
+                        size: {
+                            w: 153,
+                            h: 70
+                        },
+                        crossOrigin: 'anonymous'
+                    })
 
                 });
                 
