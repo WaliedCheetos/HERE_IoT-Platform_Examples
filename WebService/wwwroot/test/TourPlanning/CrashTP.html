@@ -19,10 +19,13 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+    
+
   </head>
 
     <body>
-    <div id="map" style="width: 60vw; height: 60vh;"></div>
+    <div id="map" style="width: 90vw; height: 90vh;"></div>
     <div>
         <textarea id="TPRequestPayload"></textarea>
         <input type="button" value="Request" onclick="requestTP();">
@@ -54,6 +57,7 @@ var config = {
 //#region global vars
 var groupMarkers_Pickups = new H.map.Group();
 var groupMarkers_Deliveries = new H.map.Group();
+var groupMarkers_Fleet = new H.map.Group();
 var groupMarkers_TP = new H.map.Group(); 
 
 var svg_Pickup = `<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="23px" height="23px">
@@ -64,8 +68,58 @@ var svg_Pickup = `<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width
     <circle cx="5" cy="5" r="4" fill="rgb(0, 0, 255)" stroke-width="1" stroke="black" opacity="1"/>
     </svg>`;
 
+    var svg_AnimatedIndicator_01 =  '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" ' + 
+    'y="0px" style="margin:-112px 0 0 -32px" width="136px"' + 
+    'height="150px" viewBox="0 0 136 150"><ellipse fill="#000" ' +
+    'cx="32" cy="128" rx="36" ry="4"><animate attributeName="cx" ' + 
+    'from="32" to="32" begin="0s" dur="1.5s" values="96;32;96" ' + 
+    'keySplines=".6 .1 .8 .1; .1 .8 .1 1" keyTimes="0;0.4;1"' + 
+    'calcMode="spline" repeatCount="indefinite"/>' +    
+    '<animate attributeName="rx" from="36" to="36" begin="0s"' +
+    'dur="1.5s" values="36;10;36" keySplines=".6 .0 .8 .0; .0 .8 .0 1"' + 
+    'keyTimes="0;0.4;1" calcMode="spline" repeatCount="indefinite"/>' +
+    '<animate attributeName="opacity" from=".2" to=".2"  begin="0s" ' +
+    ' dur="1.5s" values=".1;.7;.1" keySplines=" .6.0 .8 .0; .0 .8 .0 1" ' +
+    'keyTimes=" 0;0.4;1" calcMode="spline" ' +
+    'repeatCount="indefinite"/></ellipse><ellipse fill="#1b468d" ' +
+    'cx="26" cy="20" rx="16" ry="12"><animate attributeName="cy" ' +
+    'from="20" to="20" begin="0s" dur="1.5s" values="20;112;20" ' +
+    'keySplines=".6 .1 .8 .1; .1 .8 .1 1" keyTimes=" 0;0.4;1" ' +
+    'calcMode="spline" repeatCount="indefinite"/> ' +
+    '<animate attributeName="ry" from="16" to="16" begin="0s" ' + 
+    'dur="1.5s" values="16;12;16" keySplines=".6 .0 .8 .0; .0 .8 .0 1" ' +
+    'keyTimes="0;0.4;1" calcMode="spline" ' +
+    'repeatCount="indefinite"/></ellipse></svg>';
+
+    var svg_AnimatedIndicator_02 = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+    <g fill="none" stroke-width="3" transform="translate(11,11)">
+    <circle id="my-circle" cx="0" cy="0" r="9" stroke="darkorange" fill="seagreen" />
+    <animate href="#my-circle" attributeName="opacity"  values="1;-2" dur="1s" repeatCount="indefinite" /> </g> </svg>`;
+
+    var svg_LocationIndicator_01 = `<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="blue" class="bi bi-geo-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+</svg>`;
+
+var svg_LocationIndicator_02 = `<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="red" class="bi bi-geo-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+</svg>`;
+
+var svg_CartPlus = `<svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+</svg>`;
+
+var svg_CartDash = `<svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" fill="currentColor" class="bi bi-cart-dash-fill" viewBox="0 0 16 16">
+  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1z"/>
+</svg>`;
+
     var domIcon_Pickup = new H.map.DomIcon(svg_Pickup);
     var domIcon_Delivery = new H.map.DomIcon(svg_Delivery);
+    var domIcon_AnimatedIndicator_01 = new H.map.DomIcon(svg_AnimatedIndicator_01);
+    var domIcon_AnimatedIndicator_02 = new H.map.DomIcon(svg_AnimatedIndicator_02);
+    var domIcon_LocationIndicator_01 = new H.map.DomIcon(svg_LocationIndicator_01);
+    var domIcon_LocationIndicator_02 = new H.map.DomIcon(svg_LocationIndicator_02);
+    var domIcon_CartPlus = new H.map.DomIcon(svg_CartPlus);
+    var domIcon_CartDash = new H.map.DomIcon(svg_CartDash);
 //#endregion
 
 //Step 1: initialize communication with the platform
@@ -113,7 +167,10 @@ var requestTP = function(){
                try {
                    job.places.pickups.forEach(pickup => {
                     groupMarkers_TP.addObject(new H.map.DomMarker(pickup.location, {
-                        icon: domIcon_Pickup
+                        icon: domIcon_LocationIndicator_01
+                        // icon: domIcon_AnimatedIndicator_02
+                        // icon: domIcon_AnimatedIndicator_01
+                        // icon: domIcon_Pickup
                     }));
                 });
                } catch (error) {
@@ -122,7 +179,7 @@ var requestTP = function(){
                try {
                 job.places.deliveries.forEach(delivery => {
                     groupMarkers_TP.addObject(new H.map.DomMarker(delivery.location, {
-                        icon: domIcon_Delivery
+                        icon: domIcon_LocationIndicator_02
                     }));
                 });
                } catch (error) {
@@ -130,6 +187,28 @@ var requestTP = function(){
                }
            //});
        });
+
+       request.fleet.types.forEach(type => {
+        type.shifts.forEach(shift => {
+        try {
+          groupMarkers_TP.addObject(new H.map.DomMarker(shift.start.location, {
+                        icon: domIcon_CartPlus
+                    }));
+               } catch (error) {
+                   console.error(error);
+               }
+        try {
+          groupMarkers_TP.addObject(new H.map.DomMarker(shift.end.location, {
+                        icon: domIcon_CartDash
+                    }));
+               } catch (error) {
+                   console.error(error);
+               }
+       });
+      });
+
+
+
 
 // And zoom to its bounding rectangle
 map.getViewModel().setLookAtData({
