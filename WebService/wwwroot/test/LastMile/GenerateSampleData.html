@@ -1,0 +1,181 @@
+                  
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Generate Last Mile Sample Data</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+               <!--jQuery-->
+               <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+               <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+  <body >
+    <input type="button" id='generateRandomLastMileOrders' onclick="generateRandomLastMileOrders()" value='Generate Last Mile Random Orders'>
+    <div id="mapContainer" style="width:53vw; height:53vh;"></div>
+    <textarea id="randomLastMileOrdersResult"></textarea>
+
+    <script type="text/javascript" >
+
+
+const initials = {
+   attribution: 'WaliedCheetos - &copy; HERE 2021',
+   randomDatasetSize :13,
+   ordersTypes:{
+     delivery:'delivery',
+     pickup:'pickup',
+     pickup_and_delivery:''
+   },
+   hereCredentials : {
+      id: 'Lrw0yF4Z4nFpEe7jJxcd',
+      code: '9zhfUoi6kIHQqt85SunXuw',
+      apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+   },
+   mapCenter : { 
+      lat: 24.67684, 
+      lng: 46.69142, 
+      zoom: 7,
+      text: 'Riyadh, KSA'
+   },
+services:{
+  reverseGeocoding: "https://revgeocode.search.hereapi.com/v1/revgeocode?lang=en-US"
+}
+}
+
+var lastMileOrders = [];
+var mapGroup = new H.map.Group();
+
+/**
+ * Boilerplate map initialization code starts below:
+ */
+
+//Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: initials.hereCredentials.apikey
+});
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map
+var map = new H.Map(document.getElementById('mapContainer'),
+  defaultLayers.vector.normal.map,{
+  center: {lat: initials.mapCenter.lat, lng: initials.mapCenter.lng},
+  zoom: initials.mapCenter.zoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+map.addObject(mapGroup);
+
+// add 'tap' event listener, that opens info bubble, to the group
+mapGroup.addEventListener('tap', function (evt) {
+  // event target is the marker itself, group is a parent event target
+  // for all objects that it contains
+  var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+    // read custom data
+    content: evt.target.getData()
+  });
+  // show info bubble
+  ui.addBubble(bubble);
+}, false);
+
+
+
+function addMarker2MapGroup(group, coordinate, data) {
+  
+  var marker = new H.map.Marker(coordinate);
+
+  // add custom data to the marker
+  marker.setData(html);
+  mapGroup.addObject(marker);
+}
+
+//generates random id;
+let guid = () => {
+    let s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+function createLastMileOrder(reverseGeocodedOrder, orderType) {
+  reverseGeocodedOrder.items.forEach(item => {
+    var lastMileOrder = `${guid()},Walied,Cheetos,Agility,N/A,"${item.address.label}","${item.title}",${item.position.lat},${item.position.lng},${item.address.city},${item.address.postalCode},${item.address.countryCode},00971565111299,Walied.Cheetos@gmail.com,WaliedCheetos_Customer notes,WaliedCheetos_Job notes,12.13.21 07:00,12.13.21 18:00,3,${orderType},1,WaliedCheetos_Skills,`;
+    lastMileOrders.push(lastMileOrder);
+    document.getElementById('randomLastMileOrdersResult').value += lastMileOrder + "\n";
+    // $('#randomLastMileOrdersResult').append(lastMileOrder);
+
+var html = `<div><a>WaliedCheetos</a></div>
+<div>
+  ${item.address.label}
+  <br />
+${orderType}
+  </div>`;
+
+  var marker = new H.map.Marker({
+    lat: item.position.lat,
+    lng:item.position.lng
+  });
+
+  // add custom data to the marker
+  marker.setData(html);
+  mapGroup.addObject(marker);
+
+    // console.debug(lastMileOrderlastMileOrder);
+    // console.debug(item);
+  });
+}
+
+function generateRandomLastMileOrders() {
+  try {
+    lastMileOrders.length = 0;
+    mapGroup.removeAll();
+    $("#randomLastMileOrdersResult").val("");
+
+
+var lastMileOrdersHeader = 'ID,First name,Last name,Business name,c/o,Address line 1,Address line 2 (optional),Latitude,Longitude,City,Postcode,Country code,Phone,Email,Customer notes,Order notes,Start time,End time,Service time [m | m:ss],Job type,Demand,Skills,Depot name';
+   lastMileOrders.push(lastMileOrdersHeader);
+   document.getElementById('randomLastMileOrdersResult').value += lastMileOrdersHeader + "\n";
+  //  $('#randomLastMileOrdersResult').append(lastMileOrdersHeader);
+
+for (let index = 0; index < initials.randomDatasetSize; index++) {
+      
+      // get random position 0 - 17km from map's center in random direction
+      let randomPoint = map.getCenter().walk(Math.random() * 360, Math.random() * 17000);
+
+      //perform reverse geocoding RESTful call to make sure the random point is reachable (i.e. navigable)
+      $.ajax({
+        type: "GET",
+        url: `https://revgeocode.search.hereapi.com/v1/revgeocode?lang=en-US&at=${randomPoint.lat},${randomPoint.lng}&apiKey=${initials.hereCredentials.apikey}`,
+        success: function (response) {
+          createLastMileOrder(response, initials.ordersTypes.delivery);
+        }
+    });
+    }
+    
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+    </script>
+  </body>
+</html>
