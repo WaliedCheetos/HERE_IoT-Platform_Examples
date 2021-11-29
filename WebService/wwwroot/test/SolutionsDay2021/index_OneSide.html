@@ -1,0 +1,227 @@
+<html>
+
+<head>
+   <title>HERE Solutions Day, Dubai 2021</title>
+
+   <!-- Style -->
+   <link rel="stylesheet" type="text/css" href= "../../css/SolutionsDay2021/index.css" />
+   <link rel="stylesheet" type="text/css" href="../../css/SolutionsDay2021/sidebar.css" />
+   <link rel="stylesheet" type="text/css" href="../../css/SolutionsDay2021/search.css" />
+
+   <!-- JS API -->
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
+   
+               <!--jQuery-->
+               <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+               <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!--Highcharts-->
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+               <!-- <script src="https://code.highcharts.com/highcharts.src.js"></script> -->
+               <script src="https://code.highcharts.com/highcharts.js"></script>
+               <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+
+
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+   <!-- Social -->
+   <link rel="shortcut icon" href="../../resources/SolutionsDay2021/favicon.ico">
+
+</head>
+
+<body>
+
+   <div id="maps">
+      <div class="stack-top split left">
+         <div id="map_01" class="map centered" style="height: 100vh; width: 100vw;"></div>
+      </div>
+ 
+ 
+     <div class="stack-top split right">
+         <div id="map_02" class="map centered" style="height: 100vh; width: 100vw;"></div>
+     </div>
+   </div>
+
+
+   <div id="sidebar">
+   <div class="gradient-line"></div>
+   <div id="logos" >
+      <img  alt="" src="../../resources/SolutionsDay2021/HERELogo.png" style="width: 43%; height: 43%;"/>
+      
+   </div>
+   <div class="header" >
+      <h1>HERE Solutions Day, Dubai 2021</h1>
+      <h2>
+         AI/ML Automotive Predictive Maintenance Dashboard, Powered by HERE Platform!
+         <a target="_blank" href="https://www.here.com/platform/">Learn more</a>
+      </h2>
+   </div>
+
+   <div >
+      <div id="randomPartsChart_Container"></div>
+
+      <div class="gradient-line"></div>
+      <div>
+         <div id="partsLifespanChart_Container"></div>
+       </div>
+
+      <div class="gradient-line"></div>
+      <div id="predictiveMaintenance_Summary"></div>
+      
+      <div class="gradient-line"></div>
+      <div id="ondemandServices_Summary"></div>
+    
+      <div class="gradient-line"></div>
+      <textarea id="randomDataResult" style="display: none;"></textarea>
+
+   </div>
+</div>
+
+
+
+   <div id="sidebar" style="display: none; ">
+      <div class="gradient-line"></div>
+      <div class="header" >
+         <h1>HERE Isoline Routing</h1>
+         <p>
+            Determine a city's reachability index using HERE's location services.
+            <a target="_blank" href="https://developer.here.com/">Learn more</a>
+         </p>
+         <p>
+            To explore different locations, search for a city below or drag the map marker around.
+         </p>
+         <div class="search-container" >
+            <h2 class="city-label">Select a city</h2>
+            <div class="outer-city-field-container">
+               <img src="../../resources/SolutionsDay2021/outline-search-24px.svg">
+               <div class="inner-city-field-container">
+                  <div contenteditable="true" class="city-field"></div>
+                  <div class="city-field-suggestion"></div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+      <div class="tabs">
+         <div class="tab-container">
+            <div class="tab tab-active" id="tab-1">
+               Isoline Options
+            </div>
+            <div class="tab" id="tab-2">
+               Display Options
+            </div>
+         </div>
+         <div class="tab-bar"></div>
+      </div>
+
+
+      <div class="content">
+         <div class="content-group" id="content-group-1">
+            <div class="group">
+               <div class="h2-row">
+                  <h2>Range</h2>
+                  <div id="slider-val" class="h2-val"></div>
+               </div>
+               <input class="isoline-controls slider" id="range" type="range" min="0" max="4000" value="1200" />
+            </div>
+            <div class="group columns">
+               <div class="col">
+                  <h2>Mode</h2>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="car" name="mode" checked>
+                     <span class="checkmark"></span>
+                     Car
+                  </label>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="pedestrian" name="mode">
+                     <span class="checkmark"></span>
+                     Pedestrian
+                  </label>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="truck" name="mode">
+                     <span class="checkmark"></span>
+                     Truck
+                  </label>
+               </div>
+               <div class="col">
+                  <h2>Range type</h2>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="time" name="range-type" checked>
+                     <span class="checkmark"></span>
+                     Time
+                  </label>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="distance" name="range-type">
+                     <span class="checkmark"></span>
+                     Distance
+                  </label>
+               </div>
+            </div>
+
+            <div class="group">
+               <h2>Date</h2>
+               <input class="isoline-controls text-input" id="date-value" type="date" name="date" >
+            </div>
+
+            <div class="group">
+               <div class="h2-row">
+                  <h2>Time</h2>
+                  <div id="hour-slider-val" class="h2-val"></div>
+               </div>
+               <div class="graph-container">
+                  <div class="no-graph-text">Distribution is only available in range type time and mode car.</div>
+                  <div class="graph"></div>
+               </div>
+               <input class="isoline-controls slider" id="hour-slider" type="range" min="0" max="23" value="12" />
+            </div>
+         </div>
+
+         <div class="content-group" id="content-group-2">
+            <div class="group">
+               <h2>Map Theme</h2>
+               <div class="theme-tiles">
+                  <div id="day" class="theme-tile theme-tile-active">
+                     <img src="../../resources/SolutionsDay2021/day-theme.png">
+                  </div>
+                  <div id="night" class="theme-tile">
+                     <img src="../../resources/SolutionsDay2021/night-theme.png">
+                  </div>
+               </div>
+            </div>
+
+            <div class="group">
+               <h2>Map View</h2>
+               <label class="radio-container">
+                  <input class="view-controls" type="radio" id="static" name="map-view" checked>
+                  <span class="checkmark"></span>
+                  Static top-down
+               </label>
+               <label class="radio-container">
+                  <input class="view-controls" type="radio" id="rotating" name="map-view">
+                  <span class="checkmark"></span>
+                  Rotating angle
+               </label>
+            </div>
+         </div>
+      </div>
+   
+   
+   
+   
+   </div>
+
+   <script type="module" src="../../js/SolutionsDay2021/app.js"></script>
+</body>
+
+</html>

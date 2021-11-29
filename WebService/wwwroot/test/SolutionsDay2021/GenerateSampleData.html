@@ -1,0 +1,324 @@
+                  
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Generate Sample Data</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+               <!--jQuery-->
+               <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+               <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
+
+  <body >
+      
+    <input type="button" id='generateRandomData' onclick="generateRandomData_sync()" value='Generate Random Data  (sync)'>
+    <br /> <br /> 
+    <input type="button" id='generateRandomData' onclick="generateRandomData_async()" value='Generate Random Data  (async)'>
+    <input type="button" id='heatmapRandomData' onclick="heatmapRandomData()" value='Heatmap Random Data'>
+    <br /> <br />
+    <div id="mapContainer" style="width:100vw; height:53vh;"></div>
+    <br /> <br />
+    <textarea id="randomDataResult" style="width:93vw; height:13vh;"></textarea>
+
+    <script type="text/javascript" >
+
+
+const initials = {
+   attribution: 'WaliedCheetos - &copy; HERE 2021',
+   randomDataSetSpecs:{
+       size: 13,
+       isoline: 17000
+   },
+   ordersTypes:{
+     delivery:'delivery',
+     pickup:'pickup',
+     pickup_and_delivery:''
+   },
+   hereCredentials : {
+      id: 'Lrw0yF4Z4nFpEe7jJxcd',
+      code: '9zhfUoi6kIHQqt85SunXuw',
+      apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+   },
+   mapCenter : { 
+      lat: 24.67684, 
+      lng: 46.69142, 
+      zoom: 7,
+      text: 'Riyadh, KSA'
+   },
+services:{
+  reverseGeocoding: "https://revgeocode.search.hereapi.com/v1/revgeocode?lang=en-US"
+}
+}
+
+var randomData = [];
+var randomPoints = [];
+var mapGroup = new H.map.Group();
+
+var geojson = {};
+ geojson['type'] = 'FeatureCollection';
+ geojson['features'] = [];
+
+/**
+ * Boilerplate map initialization code starts below:
+ */
+
+//Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: initials.hereCredentials.apikey
+});
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map
+var map = new H.Map(document.getElementById('mapContainer'),
+  defaultLayers.vector.normal.map,{
+  center: {lat: initials.mapCenter.lat, lng: initials.mapCenter.lng},
+  zoom: initials.mapCenter.zoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+//#region add heat map tiles
+    // Create a provider for a semi-transparent heat map:
+    
+    var heatmapProvider = new H.data.heatmap.Provider({
+      type: 'value',
+      colors: new H.data.heatmap.Colors({
+        '0': 'red',
+        '0.5': 'blue',
+        '1': 'yellow'
+   }, true),
+   opacity: 0.7,
+   // Paint assumed values in regions where no data is available
+   assumeValues: false,
+   //A numeric value defining the resolution reduction when producing tiles.
+   //If the coarseness is set to 0, tiles are produced in the original resolution. 
+   //A coarseness of 1 allows the renderer to render tiles at half the size and then scale the output. 
+   //A coarseness of 2 allows the renderer to create tiles at a size of a quarter of the original tile size. 
+   //Increasing the number dramatically increases performance but also reduces visual quality, especially when using "posterization" (non-interpolated colors). 
+   //Values are restricted to a integer in the range [0 ... 3].
+   coarseness: 2
+ });
+
+ var heatmapTile = new H.map.layer.TileLayer(heatmapProvider);
+ map.addLayer(heatmapTile);
+ //#endregion
+
+
+map.addObject(mapGroup);
+
+// add 'tap' event listener, that opens info bubble, to the group
+mapGroup.addEventListener('tap', function (evt) {
+  // event target is the marker itself, group is a parent event target
+  // for all objects that it contains
+  var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+    // read custom data
+    content: evt.target.getData()
+  });
+  // show info bubble
+  ui.addBubble(bubble);
+}, false);
+
+function addMarker2MapGroup(group, coordinate, data) {
+  
+  var marker = new H.map.Marker(coordinate);
+
+  // add custom data to the marker
+  marker.setData(html);
+  mapGroup.addObject(marker);
+}
+
+//generates random id;
+let guid = () => {
+    let s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+function createRandomData(reverseGeocodedItem, metaData) {
+    reverseGeocodedItem.items.forEach(item => {
+
+        var heatValue = Math.random() * (4-1) + 1;
+        randomPoints.push(JSON.parse(`{"lat":${item.position.lat}, "lng":${item.position.lng}, "value":${heatValue}}`));
+
+
+        var datatimeCurrent = new Date();
+
+        var randomDataItem = {
+       "type": "Feature",
+       "geometry": {
+         "type": "Point",
+         "coordinates": `${item.position.lat},${item.position.lng}`
+       },
+       "properties": {
+         'id': `${guid()}`,
+          'name' : 'WaliedCheetos',
+          'datetime' : datatimeCurrent.toISOString(),
+          'type' : 'observationType',
+          'officer' : 'WaliedCheetos',
+          'zone_number' : 'xyz',
+          'plate' : 'x-xyz',
+          'start' : '',
+          'end' : '',
+          
+          "Address": `${item.address.label}`,
+      "BatteryVoltage": 0,
+      "CANaxle3weight": 0,
+      "CarId": 30413,
+      "CurrentProfile": 0,
+      "Din4_hours": 0,
+      "Direction": "17",
+      "ECO_ext_hrsh_braking": 0,
+      "ECO_harsh_acceleration": 0,
+      "ECO_idling_time": 0,
+      "GPSspeed": 0,
+      "GpsTime": "2021-10-14 05:45:23 PM",
+      "GSMjamming": 0,
+      "GSMSignalStrength": 0,
+      "iButtonID": "",
+      "Id": 30413,
+      "IgnitionDIN4": 0,
+      "isMDVR": 0,
+      "IsStop": "1",
+      "latitude": `${item.position.lat}`,
+      "location": {
+        "latitude": 24.963948,
+        "longitude": 55.148805,
+        "elevation": 0
+      },
+      "longitude": `${item.position.lng}`,
+      "Marker": "",
+      "Movement_sensor": 0,
+      "ObjectName": "WaliedCheetos_30413",
+      "PowerSupplyVoltage": 0,
+      "SDLogRecordMarker": 0,
+      "Speed": 0,
+      "Status": "0",
+      "VirtualOdometer": 7,
+      "DriverName": "N/A",
+      "PhoneNumber": "N/A",
+      "VehicleMake": "Buggy",
+      "VehicleModel": "Electric Buggy",
+      "VehicleCategory": "Buggy",
+      "IsValid": 0,
+      "InternalNo": "",
+      "_isSelected": false
+       }
+     }
+
+     geojson['features'].push(randomDataItem);
+     randomData.push(randomDataItem);
+     document.getElementById('randomDataResult').value += JSON.stringify(randomDataItem) +"\n"+",";
+
+var html = `<div><a>WaliedCheetos</a></div>
+<div>
+  ${item.address.label}
+  <br />
+${metaData}
+  </div>`;
+
+  var marker = new H.map.Marker({
+    lat: item.position.lat,
+    lng:item.position.lng
+  });
+
+  // add custom data to the marker
+  marker.setData(html);
+  mapGroup.addObject(marker);
+  });
+}
+
+function generateRandomData_sync() {
+  try {
+    randomData.length = 0;
+    randomPoints.length = 0;
+    heatmapProvider.clear();
+    mapGroup.removeAll();
+    $("#randomDataResult").val("");
+    geojson['features'] = [];
+
+for (let index = 0; index < initials.randomDataSetSpecs.size; index++) {
+      
+      // get random position 0 - x km from map's center in random direction
+      let randomPoint = map.getCenter().walk(Math.random() * 360, Math.random() * initials.randomDataSetSpecs.isoline);
+
+      //perform reverse geocoding RESTful call to make sure the random point is reachable (i.e. navigable)
+      $.ajax({
+        type: "GET",
+        url: `https://revgeocode.search.hereapi.com/v1/revgeocode?lang=en-US&at=${randomPoint.lat},${randomPoint.lng}&limit=1&apiKey=${initials.hereCredentials.apikey}`,
+        async: false,
+        success: function (response) {
+          createRandomData(response, '');
+        }
+    });
+    }
+    
+    heatmapRandomData();
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function generateRandomData_async() {
+  try {
+    randomData.length = 0;
+    randomPoints.length = 0;
+    heatmapProvider.clear();
+    mapGroup.removeAll();
+    $("#randomDataResult").val("");
+    geojson['features'] = [];
+
+for (let index = 0; index < initials.randomDataSetSpecs.size; index++) {
+      
+      // get random position 0 - x km from map's center in random direction
+      let randomPoint = map.getCenter().walk(Math.random() * 360, Math.random() * initials.randomDataSetSpecs.isoline);
+
+      //perform reverse geocoding RESTful call to make sure the random point is reachable (i.e. navigable)
+      $.ajax({
+        type: "GET",
+        url: `https://revgeocode.search.hereapi.com/v1/revgeocode?lang=en-US&at=${randomPoint.lat},${randomPoint.lng}&limit=1&apiKey=${initials.hereCredentials.apikey}`,
+        async: true,
+        success: function (response) {
+          createRandomData(response, '');
+        }
+    });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function heatmapRandomData() {
+    try {
+        heatmapProvider.addData(randomPoints);
+    } catch (error) {
+        console.error(`WaliedCheetos - EXCEPTION : ${error}`);
+    }
+}
+    
+    
+    </script>
+  </body>
+</html>

@@ -129,7 +129,9 @@
                     alert('Clicked at ' + Math.abs(coord.lat.toFixed(4)) +
                         ((coord.lat > 0) ? 'N' : 'S') +
                         ' ' + Math.abs(coord.lng.toFixed(4)) +
-                        ((coord.lng > 0) ? 'E' : 'W'));
+                        ((coord.lng > 0) ? 'E' : 'W') + 
+                        ' - Current zoom level: ' + map.getZoom()
+                        );
 
                     //logEvent('Clicked at ' + Math.abs(coord.lat.toFixed(4)) +
                     //    ((coord.lat > 0) ? 'N' : 'S') +

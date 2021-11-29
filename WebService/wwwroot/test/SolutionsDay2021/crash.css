@@ -1,0 +1,84 @@
+html, body {
+	 min-height: 100%;
+	 height: 100%;
+}
+ body {
+	 margin: 0;
+	 background: #202226;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+}
+ svg:nth-child(1) .pulse-disk {
+	 fill: #7864ff;
+}
+ svg:nth-child(1) .pulse-circle, svg:nth-child(1) .pulse-circle-2 {
+	 stroke: #7864ff;
+}
+ svg:nth-child(2) .pulse-disk {
+	 fill: #ff3c64;
+}
+ svg:nth-child(2) .pulse-circle, svg:nth-child(2) .pulse-circle-2 {
+	 stroke: #ff3c64;
+}
+ svg:nth-child(3) .pulse-disk {
+	 fill: #00c878;
+}
+ svg:nth-child(3) .pulse-circle, svg:nth-child(3) .pulse-circle-2 {
+	 stroke: #00c878;
+}
+ .pulse-circle, .pulse-circle-2 {
+	 transform-origin: center;
+	 stroke-width: 2;
+	 fill: none;
+	 transform: translate3d(0, 0, 0);
+}
+ .pulse-disk {
+	 r: 6;
+}
+ .pulse-circle {
+	 r: 4;
+	 animation: pulse 3s cubic-bezier(0.39, 0.54, 0.41, 1.5) infinite;
+}
+ .pulse-circle-2 {
+	 r: 16;
+	 animation: pulse-2 3s cubic-bezier(0.39, 0.54, 0.41, 1.5) infinite;
+}
+ @keyframes pulse {
+	 0% {
+		 r: 4;
+	}
+	 50% {
+		 r: 16;
+		 opacity: 1;
+	}
+	 99% {
+		 opacity: 0;
+	}
+	 100% {
+		 opacity: 0;
+		 r: 16;
+	}
+}
+ @keyframes pulse-2 {
+	 0% {
+		 opacity: 1;
+	}
+	 40% {
+		 opacity: 0;
+	}
+	 49.99% {
+		 r: 16;
+		 opacity: 0;
+	}
+	 50% {
+		 r: 4;
+		 opacity: 1;
+	}
+	 100% {
+		 r: 16;
+		 opacity: 1;
+	}
+}
+ 
+ 
