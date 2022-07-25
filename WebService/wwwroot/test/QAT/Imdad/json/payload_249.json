@@ -1,0 +1,7668 @@
+{
+
+
+        "fleet":{
+    "types": [
+        {
+                    "id": "UT-00-64",
+                    "profile": "Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        25
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-73",
+                    "profile": "Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        25
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-158",
+                    "profile": "Mini_Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        7
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-169",
+                    "profile": "Mini_Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        7
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-170",
+                    "profile": "Mini_Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        7
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-259",
+                    "profile": "Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        16
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-260",
+                    "profile": "Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        16
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-261",
+                    "profile": "Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        16
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-262",
+                    "profile": "Compactor",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        25
+                    ],
+                    "skills": [
+                    "COMPACTOR"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-110",
+                    "profile": "Double_Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-152",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-153",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-154",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-155",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-164",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-165",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-206",
+                    "profile": "Double_Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-207",
+                    "profile": "Double_Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-208",
+                    "profile": "Double_Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-209",
+                    "profile": "Double_Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-230",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-231",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-278",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-277",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-276",
+                    "profile": "Skip_Truck",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        6
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-135",
+                    "profile": "Truck_Roll_On_Roll_Off",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        13
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-140",
+                    "profile": "Truck_Roll_On_Roll_Off",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        13
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "UT-00-157",
+                    "profile": "Truck_Roll_On_Roll_Off",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        13
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-241",
+                    "profile": "Truck_Roll_On_Roll_Off",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        13
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-255",
+                    "profile": "Truck_Roll_On_Roll_Off",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        13
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    },{
+                    "id": "IMD-UT-280",
+                    "profile": "Truck_Roll_On_Roll_Off",
+                    "costs": {
+                    "fixed": 22,
+                    "distance": 0.0001,
+                    "time": 0.0048
+                    },
+                    "shifts": [
+                    {
+                    "start": {
+                    "time": "2020-07-04T07:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "end": {
+                    "time": "2020-07-04T19:00:00Z",
+                    "location": {
+                    "lat": 24.936,
+                    "lng": 55.0903
+                    }
+                    },
+                    "breaks": [
+                    {
+                    "duration": 1800,
+                    "times": [
+                    [
+                    "2020-07-04T13:00:00Z",
+                    "2020-07-04T14:00:00Z"
+                    ]
+                    ]
+                    }
+                    ]
+                    }
+                    ],
+                    "capacity": [
+                        13
+                    ],
+                    "skills": [
+                    "SKIP"
+                    ],
+                    "limits": {
+                    "maxDistance": 20000,
+                    "shiftTime": 21600
+                    },
+                    "amount": 1
+                    }
+    ],
+    "profiles": [
+    {
+    "type": "truck",
+    "name": "Compactor"
+    },
+    {
+    "type": "truck",
+    "name": "Mini_Compactor"
+    },
+    {
+    "type": "truck",
+    "name": "Double_Skip_Truck"
+    },
+    {
+    "type": "truck",
+    "name": "Skip_Truck"
+    },
+    {
+    "type": "truck",
+    "name": "Truck_Roll_On_Roll_Off"
+    }
+    ],
+    "traffic": "liveOrHistorical"
+    }
+    
+    ,
+ 
+
+        "plan": {
+        "jobs": [
+            {
+"id": "1",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.957,
+"lng": 55.0695
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002123"
+},{
+"id": "2",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9711,
+"lng": 55.0697
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000024"
+},{
+"id": "3",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.973,
+"lng": 55.0417
+},
+"duration": 300
+}
+],
+"demand": [
+4
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001323"
+},{
+"id": "4",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9602,
+"lng": 55.074
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001786"
+},{
+"id": "5",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.968,
+"lng": 55.0673
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000674"
+},{
+"id": "7",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9565,
+"lng": 55.0685
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000190"
+},{
+"id": "8",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9599,
+"lng": 55.079
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002122"
+},{
+"id": "9",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.955,
+"lng": 55.0711
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001544"
+},{
+"id": "10",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9587,
+"lng": 55.0719
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000367"
+},{
+"id": "11",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9846,
+"lng": 55.0498
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004712"
+},{
+"id": "12",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9752,
+"lng": 55.0492
+},
+"duration": 300
+}
+],
+"demand": [
+4
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000942"
+},{
+"id": "13",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9867,
+"lng": 55.047
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001264"
+},{
+"id": "14",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9867,
+"lng": 55.0455
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000788"
+},{
+"id": "15",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9561,
+"lng": 55.0697
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000342"
+},{
+"id": "16",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9699,
+"lng": 55.0678
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001677"
+},{
+"id": "17",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9578,
+"lng": 55.0707
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000675"
+},{
+"id": "18",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9734,
+"lng": 55.069
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000093"
+},{
+"id": "19",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9772,
+"lng": 55.0423
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001600"
+},{
+"id": "20",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9658,
+"lng": 55.0495
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001556"
+},{
+"id": "21",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9783,
+"lng": 55.0771
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001240"
+},{
+"id": "22",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9367,
+"lng": 55.0536
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002036"
+},{
+"id": "23",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9326,
+"lng": 55.0502
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001947"
+},{
+"id": "24",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9841,
+"lng": 55.0886
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000985"
+},{
+"id": "25",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9741,
+"lng": 55.0764
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001627"
+},{
+"id": "26",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9355,
+"lng": 55.0567
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002187"
+},{
+"id": "27",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9355,
+"lng": 55.0567
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002188"
+},{
+"id": "28",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9355,
+"lng": 55.0567
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001610"
+},{
+"id": "29",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9328,
+"lng": 55.0621
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001980"
+},{
+"id": "30",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0062,
+"lng": 55.0919
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000988"
+},{
+"id": "31",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0022,
+"lng": 55.0884
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001246"
+},{
+"id": "32",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9911,
+"lng": 55.0895
+},
+"duration": 300
+}
+],
+"demand": [
+4
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001555"
+},{
+"id": "33",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.996,
+"lng": 55.0926
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000973"
+},{
+"id": "34",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0005,
+"lng": 55.0585
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006618"
+},{
+"id": "36",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0063,
+"lng": 55.0833
+},
+"duration": 300
+}
+],
+"demand": [
+4
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000570"
+},{
+"id": "37",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9977,
+"lng": 55.053
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001683"
+},{
+"id": "38",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9794,
+"lng": 55.0819
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000943"
+},{
+"id": "40",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1129,
+"lng": 55.1428
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006219"
+},{
+"id": "45",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0991,
+"lng": 55.1221
+},
+"duration": 300
+}
+],
+"demand": [
+8
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006665"
+},{
+"id": "46",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1129,
+"lng": 55.1428
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003504"
+},{
+"id": "47",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0173,
+"lng": 55.1426
+},
+"duration": 300
+}
+],
+"demand": [
+5
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003615"
+},{
+"id": "48",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1078,
+"lng": 55.1481
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006117"
+},{
+"id": "49",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1129,
+"lng": 55.1428
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006399"
+},{
+"id": "50",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1262,
+"lng": 55.1537
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006909"
+},{
+"id": "51",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1129,
+"lng": 55.1428
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003503"
+},{
+"id": "53",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1129,
+"lng": 55.1428
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006219"
+},{
+"id": "58",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0991,
+"lng": 55.1221
+},
+"duration": 300
+}
+],
+"demand": [
+8
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006665"
+},{
+"id": "59",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1129,
+"lng": 55.1428
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003504"
+},{
+"id": "60",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0173,
+"lng": 55.1426
+},
+"duration": 300
+}
+],
+"demand": [
+5
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003615"
+},{
+"id": "61",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1078,
+"lng": 55.1481
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006117"
+},{
+"id": "62",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1129,
+"lng": 55.1428
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006399"
+},{
+"id": "63",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1262,
+"lng": 55.1537
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006909"
+},{
+"id": "64",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1129,
+"lng": 55.1428
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003503"
+},{
+"id": "65",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0887,
+"lng": 55.3727
+},
+"duration": 300
+}
+],
+"demand": [
+1009
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006157"
+},{
+"id": "66",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0887,
+"lng": 55.3727
+},
+"duration": 300
+}
+],
+"demand": [
+151
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006158"
+},{
+"id": "68",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0271,
+"lng": 55.2677
+},
+"duration": 300
+}
+],
+"demand": [
+867
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006137"
+},{
+"id": "69",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0271,
+"lng": 55.2677
+},
+"duration": 300
+}
+],
+"demand": [
+261
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006392"
+},{
+"id": "70",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0304,
+"lng": 55.2863
+},
+"duration": 300
+}
+],
+"demand": [
+266
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006134"
+},{
+"id": "71",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0271,
+"lng": 55.2677
+},
+"duration": 300
+}
+],
+"demand": [
+74
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006138"
+},{
+"id": "73",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0064,
+"lng": 55.092
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000988"
+},{
+"id": "74",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9552,
+"lng": 55.1114
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002208"
+},{
+"id": "75",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9817,
+"lng": 55.0995
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001297"
+},{
+"id": "76",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9992,
+"lng": 55.089
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000175"
+},{
+"id": "77",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9634,
+"lng": 55.0493
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004510"
+},{
+"id": "84",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9822,
+"lng": 55.0992
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001716"
+},{
+"id": "97",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9933,
+"lng": 55.0689
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000576"
+},{
+"id": "98",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9754,
+"lng": 55.0666
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001858"
+},{
+"id": "99",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9724,
+"lng": 55.1045
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002108"
+},{
+"id": "100",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9826,
+"lng": 55.09
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001640"
+},{
+"id": "101",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9878,
+"lng": 55.0462
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001077"
+},{
+"id": "102",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9925,
+"lng": 55.0721
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004621"
+},{
+"id": "103",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9534,
+"lng": 55.0589
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000088"
+},{
+"id": "105",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9519,
+"lng": 55.0644
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000278"
+},{
+"id": "106",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9565,
+"lng": 55.0627
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001885"
+},{
+"id": "107",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0126,
+"lng": 55.0586
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000166"
+},{
+"id": "108",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9326,
+"lng": 55.0502
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001947"
+},{
+"id": "109",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9563,
+"lng": 55.0863
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000980"
+},{
+"id": "110",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9803,
+"lng": 55.0976
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001960"
+},{
+"id": "111",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9618,
+"lng": 55.0958
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002208"
+},{
+"id": "112",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9552,
+"lng": 55.1114
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002208"
+},{
+"id": "113",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.976,
+"lng": 55.0643
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000440"
+},{
+"id": "114",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9729,
+"lng": 55.133
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001214"
+},{
+"id": "115",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9653,
+"lng": 55.0942
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000713"
+},{
+"id": "116",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9563,
+"lng": 55.0862
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000980"
+},{
+"id": "117",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9564,
+"lng": 55.0862
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000980"
+},{
+"id": "118",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9639,
+"lng": 55.0936
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000934"
+},{
+"id": "119",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9749,
+"lng": 55.0923
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000961"
+},{
+"id": "120",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.967,
+"lng": 55.0887
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001153"
+},{
+"id": "121",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9724,
+"lng": 55.091
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001080"
+},{
+"id": "123",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9719,
+"lng": 55.1002
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001193"
+},{
+"id": "124",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9737,
+"lng": 55.0967
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001068"
+},{
+"id": "125",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9729,
+"lng": 55.098
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002253"
+},{
+"id": "126",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9795,
+"lng": 55.0999
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002149"
+},{
+"id": "127",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9609,
+"lng": 55.0877
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001125"
+},{
+"id": "128",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9451,
+"lng": 55.0725
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001501"
+},{
+"id": "129",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9505,
+"lng": 55.0823
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001112"
+},{
+"id": "130",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9571,
+"lng": 55.0867
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000863"
+},{
+"id": "131",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9555,
+"lng": 55.0893
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000730"
+},{
+"id": "132",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9262,
+"lng": 55.0999
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002097"
+},{
+"id": "133",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9738,
+"lng": 55.1014
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001557"
+},{
+"id": "134",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9738,
+"lng": 55.1014
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001557"
+},{
+"id": "135",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9745,
+"lng": 55.1013
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000831"
+},{
+"id": "136",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9735,
+"lng": 55.0968
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000823"
+},{
+"id": "137",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9572,
+"lng": 55.1173
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000719"
+},{
+"id": "138",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9692,
+"lng": 55.099
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000766"
+},{
+"id": "139",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9673,
+"lng": 55.1053
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000075"
+},{
+"id": "140",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9629,
+"lng": 55.1019
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000862"
+},{
+"id": "141",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9544,
+"lng": 55.1122
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000965"
+},{
+"id": "142",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9592,
+"lng": 55.1174
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000921"
+},{
+"id": "143",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9599,
+"lng": 55.1166
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001487"
+},{
+"id": "145",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9528,
+"lng": 55.0802
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001712"
+},{
+"id": "146",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9466,
+"lng": 55.0708
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001518"
+},{
+"id": "147",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9721,
+"lng": 55.0956
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001517"
+},{
+"id": "148",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9716,
+"lng": 55.1346
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000796"
+},{
+"id": "149",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9462,
+"lng": 55.072
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001518"
+},{
+"id": "150",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9448,
+"lng": 55.0777
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001167"
+},{
+"id": "151",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9721,
+"lng": 55.1006
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000890"
+},{
+"id": "152",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9789,
+"lng": 55.0979
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001153"
+},{
+"id": "153",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.963,
+"lng": 55.127
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000875"
+},{
+"id": "154",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9572,
+"lng": 55.0915
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000708"
+},{
+"id": "155",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9572,
+"lng": 55.0915
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000708"
+},{
+"id": "156",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9707,
+"lng": 55.1307
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000882"
+},{
+"id": "157",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9721,
+"lng": 55.1316
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002057"
+},{
+"id": "158",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9664,
+"lng": 55.1299
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002044"
+},{
+"id": "159",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9615,
+"lng": 55.095
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001137"
+},{
+"id": "160",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9742,
+"lng": 55.1351
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-001214"
+},{
+"id": "161",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0662,
+"lng": 55.21
+},
+"duration": 300
+}
+],
+"demand": [
+8
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003512"
+},{
+"id": "162",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0514,
+"lng": 55.1999
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002984"
+},{
+"id": "163",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0429,
+"lng": 55.1593
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-005869"
+},{
+"id": "164",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.069,
+"lng": 55.207
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004255"
+},{
+"id": "165",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0476,
+"lng": 55.1958
+},
+"duration": 300
+}
+],
+"demand": [
+6
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006383"
+},{
+"id": "172",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0689,
+"lng": 55.2068
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004218"
+},{
+"id": "173",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0505,
+"lng": 55.2131
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003520"
+},{
+"id": "174",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0598,
+"lng": 55.2026
+},
+"duration": 300
+}
+],
+"demand": [
+8
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006116"
+},{
+"id": "175",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0598,
+"lng": 55.2026
+},
+"duration": 300
+}
+],
+"demand": [
+8
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006115"
+},{
+"id": "176",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.067,
+"lng": 55.2049
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004266"
+},{
+"id": "177",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0489,
+"lng": 55.2128
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004264"
+},{
+"id": "178",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0489,
+"lng": 55.2128
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004263"
+},{
+"id": "179",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0489,
+"lng": 55.2129
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004262"
+},{
+"id": "180",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.067,
+"lng": 55.2049
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004261"
+},{
+"id": "181",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0572,
+"lng": 55.2182
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004260"
+},{
+"id": "182",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0619,
+"lng": 55.2155
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004265"
+},{
+"id": "184",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0514,
+"lng": 55.2125
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007030"
+},{
+"id": "185",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.0672,
+"lng": 55.1641
+},
+"duration": 300
+}
+],
+"demand": [
+18
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003329"
+},{
+"id": "186",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2695,
+"lng": 55.3183
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007002"
+},{
+"id": "187",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2654,
+"lng": 55.318
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006314"
+},{
+"id": "188",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2633,
+"lng": 55.3301
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006315"
+},{
+"id": "189",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2626,
+"lng": 55.3212
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006701"
+},{
+"id": "190",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2607,
+"lng": 55.3267
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003907"
+},{
+"id": "191",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2613,
+"lng": 55.3215
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003974"
+},{
+"id": "192",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2684,
+"lng": 55.3281
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003976"
+},{
+"id": "193",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2599,
+"lng": 55.3274
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003914"
+},{
+"id": "195",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2654,
+"lng": 55.318
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006924"
+},{
+"id": "197",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2608,
+"lng": 55.327
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007159"
+},{
+"id": "198",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2678,
+"lng": 55.3041
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007200"
+},{
+"id": "200",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.269,
+"lng": 55.3271
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003164"
+},{
+"id": "202",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2703,
+"lng": 55.3042
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006965"
+},{
+"id": "203",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.282,
+"lng": 55.3506
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003901"
+},{
+"id": "204",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2695,
+"lng": 55.3183
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003912"
+},{
+"id": "205",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2624,
+"lng": 55.3249
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003937"
+},{
+"id": "206",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2703,
+"lng": 55.3042
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007389"
+},{
+"id": "207",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9368,
+"lng": 55.09
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007375"
+},{
+"id": "208",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2633,
+"lng": 55.3294
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004283"
+},{
+"id": "209",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2679,
+"lng": 55.3154
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006292"
+},{
+"id": "210",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2738,
+"lng": 55.328
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006289"
+},{
+"id": "211",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2802,
+"lng": 55.3193
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-005183"
+},{
+"id": "212",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2712,
+"lng": 55.3177
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-005141"
+},{
+"id": "213",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.282,
+"lng": 55.3506
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006318"
+},{
+"id": "214",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2701,
+"lng": 55.309
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003128"
+},{
+"id": "215",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2632,
+"lng": 55.3193
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006923"
+},{
+"id": "216",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2667,
+"lng": 55.3221
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003739"
+},{
+"id": "217",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2709,
+"lng": 55.319
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006931"
+},{
+"id": "218",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2599,
+"lng": 55.3246
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007244"
+},{
+"id": "219",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.2717,
+"lng": 55.3334
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006290"
+},{
+"id": "220",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.263,
+"lng": 55.3226
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006313"
+},{
+"id": "221",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.8597,
+"lng": 55.0482
+},
+"duration": 300
+}
+],
+"demand": [
+6
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003802"
+},{
+"id": "222",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.8561,
+"lng": 55.0491
+},
+"duration": 300
+}
+],
+"demand": [
+5
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003684"
+},{
+"id": "223",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.8918,
+"lng": 55.0738
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007004"
+},{
+"id": "224",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.8221,
+"lng": 55.1061
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007096"
+},{
+"id": "225",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.8935,
+"lng": 55.0689
+},
+"duration": 300
+}
+],
+"demand": [
+6
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-002427"
+},{
+"id": "231",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 24.9169,
+"lng": 55.0069
+},
+"duration": 300
+}
+],
+"demand": [
+4
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006041"
+},{
+"id": "232",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1898,
+"lng": 55.2318
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003480"
+},{
+"id": "233",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1352,
+"lng": 55.1894
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006435"
+},{
+"id": "234",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1151,
+"lng": 55.2038
+},
+"duration": 300
+}
+],
+"demand": [
+4
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003807"
+},{
+"id": "235",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1474,
+"lng": 55.1964
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-005175"
+},{
+"id": "236",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1611,
+"lng": 55.3245
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-000970"
+},{
+"id": "237",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1358,
+"lng": 55.1915
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006433"
+},{
+"id": "238",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1111,
+"lng": 55.205
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003321"
+},{
+"id": "239",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1343,
+"lng": 55.1892
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007075"
+},{
+"id": "240",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1076,
+"lng": 55.1823
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-007445"
+},{
+"id": "241",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1637,
+"lng": 55.2113
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003987"
+},{
+"id": "242",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1089,
+"lng": 55.2039
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004343"
+},{
+"id": "243",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1096,
+"lng": 55.2033
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004334"
+},{
+"id": "244",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1097,
+"lng": 55.2034
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004310"
+},{
+"id": "245",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1132,
+"lng": 55.2044
+},
+"duration": 300
+}
+],
+"demand": [
+3
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-004270"
+},{
+"id": "246",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1734,
+"lng": 55.2179
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-005335"
+},{
+"id": "247",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1464,
+"lng": 55.1964
+},
+"duration": 300
+}
+],
+"demand": [
+2
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-006958"
+},{
+"id": "248",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.1099,
+"lng": 55.1887
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003425"
+},{
+"id": "249",
+"tasks": {
+    "deliveries": [
+{
+"places": [
+{
+"times": [
+[
+"2020-07-04T07:00:00Z",
+"2020-07-04T19:00:00Z"
+]
+],
+"location": {
+"lat": 25.106,
+"lng": 55.1843
+},
+"duration": 300
+}
+],
+"demand": [
+1
+]
+}
+]
+},
+"skills": [
+"COMPACTOR"
+],
+"priority": 1,
+"customerId": "CTS-003426"
+}
+        ]
+     
+    }
+}

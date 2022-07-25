@@ -1,0 +1,339 @@
+<html>
+
+<head>
+   <title>WCheetos - Aramex geocoding results</title>
+
+   <!-- Style -->
+   <link rel="stylesheet" type="text/css" href="css/index.css" />
+   <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
+   <link rel="stylesheet" type="text/css" href="css/search.css" />
+   <!-- <link rel="stylesheet" type="text/css" href="../../template/css/index.css" />
+   <link rel="stylesheet" type="text/css" href="../../template/css/sidebar.css" />
+   <link rel="stylesheet" type="text/css" href="../../template/css/search.css" /> -->
+
+   <!-- <script src="https://code.jquery.com/ui/3.6.0/jquery-ui.js"></script> -->
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+   <!-- helper libs -->
+   <!-- Turf for area calculations -->
+   <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+   <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+   
+   
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+   <!-- Social -->
+   <link rel="shortcut icon" href="resources/favicon.ico">
+
+   <!-- Date -->
+   <script src="https://unpkg.com/better-dom@4.0.0/dist/better-dom.min.js"></script>
+   <script src="https://unpkg.com/better-dateinput-polyfill@3.2.7/dist/better-dateinput-polyfill.min.js"></script>
+
+   <!-- JS API -->
+   <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+</head>
+
+<body>
+
+   <div id="map"></div>
+   
+   <div id="sidebar-left">
+      <div class="gradient-line"></div>
+      <div class="header">
+         <img src="./resources/aramex_logo.png" style="width:53%;height:53%">
+         <img src="./resources/HERE_logo.png" style="width:33%;height:33%;padding-left: 23px;">
+         
+         <div class="gradient-line"></div>
+      </br>
+
+         <h1>Aramex geocoding tests</h1>
+         <p>
+            Benchmark Aramex addresses using HERE's location services.
+            <a target="_blank" href="https://developer.here.com/">Learn more</a>
+         </p>
+         <p>
+            To explore your options browse for a standard Aramex addresses workbook.
+         </p>
+
+         <div class="gradient-line"></div>
+      </br>
+
+         <div class="search-container" style="display: none;">
+            <h2 class="city-label">Select a city</h2>
+             <div class="outer-city-field-container">
+               <img src="resources/outline-search-24px.svg">
+               <div class="inner-city-field-container">
+                  <div contenteditable="true" class="city-field"></div>
+                   <div class="city-field-suggestion"></div>
+               </div>
+               </div>
+         </div>
+
+
+         <div class="search-container">
+            <h2 class="city-label">Select a ///w3w, address, city, place, POI, ... etc.</h2>                   
+            <div class="outer-city-field-container">
+               <img src="resources/outline-search-24px.svg">
+               <div class="inner-city-field-container">
+                  <div contenteditable="true" class="city-field"  id="searchAll_prewords"></div>
+                  <div class="city-field-suggestion"></div>
+               </div>
+               </div>
+               <h3 class="city-label" id="searchAll_result">...</h3>
+         </div>
+
+         <div class="gradient-line"></div>
+      </br>
+
+      </div>
+      <div class="tabs">
+         <div class="tab-container">
+            <div class="tab tab-active" id="tab-1">
+               Geocoding options
+            </div>
+            <!-- <div class="tab tab-active" id="tab-1">
+               Isoline Options
+            </div> -->
+            <div class="tab" id="tab-2">
+               Display Options
+            </div>
+         </div>
+         <div class="tab-bar"></div>
+      </div>
+
+
+      <div class="content">
+         <div class="content-group" id="content-group-1">
+            <div class="group">
+               <div class="h2-row">
+                  <h2>Browse for addresses</h2>
+               </div>
+               <div class="h2-row">
+                  <input type="file" id="fileInput" value="Click here to choose an *.xlsx file">
+               </div>
+               <br />
+               <div class="h2-row">
+                  <div id="statusIndicator">Status : ...!</div>
+               </div>
+            </div>
+            <div class="group columns" style="display:none">
+               <div class="col">
+                  <h2>Mode</h2>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="geocodingMode" name="mode" checked>
+                     <span class="checkmark"></span>
+                     Geocoding search
+                  </label>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="placesMode" name="mode">
+                     <span class="checkmark"></span>
+                     Places search
+                  </label>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="hybridMode" name="mode">
+                     <span class="checkmark"></span>
+                     Hybrid
+                  </label>
+               </div>
+            </div>
+
+            <div class="group" style="display:none">
+               <h2>Results 01</h2>
+               <!-- <div id="resultsTable"  style="height: 13vh;flex:1;background-color: lightblue; overflow: auto; scroll-behavior: smooth;" >
+                  <table id="geocodingResultsTable" border="2" cellspacing="1" cellpadding="8" class="table">
+                      <tr>
+                          <th class="tb-200">Address text</th>
+                          <th class="tb-200">Geocoded address title</th>
+                          <th class="tb-100">Result type</th>
+                          <th class="tb-100">Proximity</th>
+                          <th class="tb-100">Query score</th>
+                          
+                          <th class="tb-200">Places address title</th>
+                          <th class="tb-100">Proximity</th>
+                      </tr>
+                  </table>
+              </div> -->
+            </div>
+
+            <div class="group" style="display:none">
+               <div class="h2-row">
+                  <h2>Time</h2>
+                  <div id="hour-slider-val" class="h2-val"></div>
+               </div>
+               <div class="graph-container">
+                  <div class="no-graph-text">Distribution is only available in range type time and mode car.</div>
+                  <div class="graph"></div>
+               </div>
+               <input class="isoline-controls slider" id="hour-slider" type="range" min="0" max="23" value="12" />
+            </div>
+         </div>
+
+         <div class="content-group" id="content-group-1" style="display:none">
+            <div class="group">
+               <div class="h2-row">
+                  <h2>Range</h2>
+                  <div id="slider-val" class="h2-val"></div>
+               </div>
+               <input class="isoline-controls slider" id="range" type="range" min="0" max="4000" value="1200" />
+            </div>
+            <div class="group columns">
+               <div class="col">
+                  <h2>Mode</h2>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="car" name="mode" checked>
+                     <span class="checkmark"></span>
+                     Car
+                  </label>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="pedestrian" name="mode">
+                     <span class="checkmark"></span>
+                     Pedestrian
+                  </label>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="truck" name="mode">
+                     <span class="checkmark"></span>
+                     Truck
+                  </label>
+               </div>
+               <div class="col">
+                  <h2>Range type</h2>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="time" name="range-type" checked>
+                     <span class="checkmark"></span>
+                     Time
+                  </label>
+                  <label class="radio-container">
+                     <input class="isoline-controls" type="radio" id="distance" name="range-type">
+                     <span class="checkmark"></span>
+                     Distance
+                  </label>
+               </div>
+            </div>
+
+            <div class="group">
+               <h2>Date</h2>
+               <input class="isoline-controls text-input" id="date-value" type="date" name="date" >
+            </div>
+
+            <div class="group">
+               <div class="h2-row">
+                  <h2>Time</h2>
+                  <div id="hour-slider-val" class="h2-val"></div>
+               </div>
+               <div class="graph-container">
+                  <div class="no-graph-text">Distribution is only available in range type time and mode car.</div>
+                  <div class="graph"></div>
+               </div>
+               <input class="isoline-controls slider" id="hour-slider" type="range" min="0" max="23" value="12" />
+            </div>
+         </div>
+
+         <div class="content-group" id="content-group-2">
+            <div class="group">
+               <h2>Map Theme</h2>
+               <div class="theme-tiles">
+                  <div id="day" class="theme-tile theme-tile-active">
+                     <img src="./resources/day-theme.png">
+                  </div>
+                  <div id="night" class="theme-tile">
+                     <img src="./resources/night-theme.png">
+                  </div>
+               </div>
+            </div>
+
+            <div class="group">
+               <h2>Map View</h2>
+               <label class="radio-container">
+                  <input class="view-controls" type="radio" id="static" name="map-view" checked>
+                  <span class="checkmark"></span>
+                  Static top-down
+               </label>
+               <label class="radio-container">
+                  <input class="view-controls" type="radio" id="rotating" name="map-view">
+                  <span class="checkmark"></span>
+                  Rotating angle
+               </label>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <div id="sidebar-right" style="display:none;">
+      <div class="gradient-line"></div>
+
+      <!-- <div class="content"> -->
+         <!-- <div class="content-group" id="content-group-1"> -->
+            <div class="group">
+
+               <!-- <div class="graph-container"> -->
+               
+                  <div class="h2-row">
+                     <!-- <h2>Hello</h2> -->
+                     <div >
+                        <canvas id="chart03" ></canvas>
+                     </div>
+                  </div>
+                  
+               </br>
+               </br>
+
+                  <div class="gradient-line" style="display: block;"></div>
+
+                  <div class="h2-row" style="display: block;">
+                     <!-- <h2>Bello</h2> -->
+                     <div>
+                        <canvas id="chart02" ></canvas>
+                     </div>
+                  </div>
+
+               </br>
+               </br>
+
+               <div class="gradient-line"></div>
+
+               <div class="h2-row">
+                  <!-- <h2>Geocode vs One-box (Proximity)</h2> -->
+                  <div>
+                     <canvas id="chart01" ></canvas>
+                  </div>
+               </div>
+
+               <!-- </div> -->
+            </div>
+         <!-- </div> -->
+      <!-- </div> -->
+
+   </div>
+
+   <div id="resultsTable"  style="position:absolute; bottom: 0%; width: 100vw; height: 30vh; flex:1;background-color: lightblue; overflow: auto; scroll-behavior: smooth; display:none ;" >
+      <table id="geocodingResultsTable" border="2" cellspacing="1" cellpadding="8" class="table" style="font-size: small;width: 100vw;">
+          <tr>
+              <th class="tb-200">Address text</th>
+
+              <th class="tb-200">Geocoded address title</th>
+              <th class="tb-100">Result type</th>
+              <th class="tb-100">Proximity</th>
+              <th class="tb-100">Query score</th>
+              
+              <th class="tb-200">Places address title</th>
+              <th class="tb-100">Proximity</th>
+          </tr>
+      </table>
+  </div>
+
+
+
+   <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

@@ -29,6 +29,7 @@
     <div>
         <textarea id="TPRequestPayload"></textarea>
         <input type="button" value="Request" onclick="requestTP();">
+        <input type="button" value="Request_v3" onclick="requestTP_v3();">
     </div>
     <script type="text/javascript">
 
@@ -165,6 +166,7 @@ var requestTP = function(){
        request.plan.jobs.forEach(job => {
            //job.places.forEach(place => {
                try {
+
                    job.places.pickups.forEach(pickup => {
                     groupMarkers_TP.addObject(new H.map.DomMarker(pickup.location, {
                         icon: domIcon_LocationIndicator_01
@@ -245,6 +247,110 @@ map.getViewModel().setLookAtData({
     }
 }
 
+
+
+var requestTP_v3 = () =>{
+var location
+    try {
+
+       groupMarkers_Deliveries.removeAll();
+       groupMarkers_Pickups.removeAll();
+       groupMarkers_TP.removeAll();
+
+       var request = $('#TPRequestPayload').val();
+       request = JSON.parse(request);
+
+       request.plan.jobs.forEach(job => {
+               try {
+
+                if (job.tasks.hasOwnProperty('pickups')) {
+                  job.tasks.pickups.forEach(pickup => {
+                    if (pickup.hasOwnProperty('places')) {
+                      pickup.places.forEach(place => {
+                        groupMarkers_TP.addObject(new H.map.DomMarker(place.location, {
+                        icon: domIcon_LocationIndicator_01
+                    }));
+                  });
+                }
+              });
+            }
+
+
+
+            if (job.tasks.hasOwnProperty('deliveries')) {
+                  job.tasks.deliveries.forEach(delivery => {
+                    if (delivery.hasOwnProperty('places')) {
+                      delivery.places.forEach(place => {
+                        groupMarkers_TP.addObject(new H.map.DomMarker(place.location, {
+                        icon: domIcon_LocationIndicator_02
+                    }));
+                  });
+                }
+              });
+            }
+
+          } catch (error) {
+            console.error(`WaliedCheetos - EXCEPTION : ${error.message}`);
+          }
+       });
+
+       request.fleet.types.forEach(type => {
+        type.shifts.forEach(shift => {
+        try {
+          groupMarkers_TP.addObject(new H.map.DomMarker(shift.start.location, {
+                        icon: domIcon_CartPlus
+                    }));
+               } catch (error) {
+                   console.error(error);
+               }
+        try {
+          groupMarkers_TP.addObject(new H.map.DomMarker(shift.end.location, {
+                        icon: domIcon_CartDash
+                    }));
+               } catch (error) {
+                   console.error(error);
+               }
+       });
+      });
+
+
+
+
+// And zoom to its bounding rectangle
+map.getViewModel().setLookAtData({
+  bounds: groupMarkers_TP.getBoundingBox()
+},  true);
+
+       /*
+       $.getJSON(request, function (data) {
+    var decodedFlexPolyline = decode(data.routes[0].sections[0].polyline);
+
+
+    decodedFlexPolyline.polyline.forEach(flexPoint => {
+
+        //this logic can be customized to accomodate any mapping engine to create a polyline from the points retrieved 
+        lineString.pushPoint({ lat: flexPoint[0], lng: flexPoint[1] });
+
+        // var marker = new H.map.Marker({ lat: flexPoint[0], lng: flexPoint[1] });
+        // map.addObject(marker);
+    });
+
+    ;
+
+    // Add the polyline to the map
+routes.addObject(new H.map.Polyline(lineString, { style: { lineWidth: 4 }}));
+// And zoom to its bounding rectangle
+map.getViewModel().setLookAtData({
+  bounds: routes.getBoundingBox()
+},  true);
+
+});
+*/
+    
+  } catch (error) {
+    console.error(`WaliedCheetos - EXCEPTION : ${error.message}`);
+  }
+}
 
 
 

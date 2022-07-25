@@ -40,7 +40,8 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-venues.js"></script>
+    <!-- <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-venues.js"></script> -->
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1.30.15/mapsjs-venues.js"></script>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -56,6 +57,10 @@
     <!-- <h2>Responsive Two Column Layout</h2>
     <p>Resize the browser window to see the responsive effect (the columns will stack on top of each other instead of floating next to each other, when the screen is less than 600px wide).</p>
      -->
+
+     <div>
+       <input type="button" id="fireFighterSimulate" onclick="fireFighter_simulate()" value="fire fighter simulate">
+     </div>
     <div class="row">
       <div class="column">
         <h2>Map</h2>
@@ -1046,7 +1051,8 @@ function addVenueToMap(map) {
   // const venuesProvider = new H.venues.Provider();
 
   // Venues service provides a loadVenue method
-  venuesService.loadVenue(7348).then((venue) => {
+  venuesService.loadVenue(27608).then((venue) => {
+  // venuesService.loadVenue(7348).then((venue) => {
   //venuesService.loadVenue(10635).then((venue) => {
     // add venue data to venues provider
     venuesProvider.addVenue(venue);
@@ -1056,7 +1062,7 @@ function addVenueToMap(map) {
     map.addLayer(new H.map.layer.TileLayer(venuesProvider));
 
     // optionally select drawing/level
-    venue.setActiveDrawing(7880);
+    // venue.setActiveDrawing(7880);
 
     // create level control
     const levelControl = new H.venues.ui.LevelControl(venue);
@@ -1075,7 +1081,7 @@ function addVenueToMap(map) {
       bounds: venue.getBoundingBox()
     }, true);
 
-    addDetections();
+    //addDetections();
 
     //createMarkers();
 
@@ -1290,20 +1296,288 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 
   // Venues provider interacts with tile layer to visualize and control the venue map
   const venuesProvider = new H.venues.Provider();
-  const venuesService = platform.getVenuesService({ apikey: 'QICW7garcjxE7C7sSguJcNolMZXqYCJ9m5o6Qq3ygjg' });
+  const venuesService = platform.getVenuesService({ apikey: 'UFykqZqE8BtxnVnLxaA_tf71CB_yEW94BujWeUHxIR4' });
+  // const venuesService = platform.getVenuesService({ apikey: 'QICW7garcjxE7C7sSguJcNolMZXqYCJ9m5o6Qq3ygjg' });
   
   var _marker;
 
 // Step 4: register map ontap event
-//setUpMapClickListener(map);
+setUpMapClickListener(map);
 
 // Step 5: load venue data
 addVenueToMap(map);
-addChart();
+//addChart();
 
 //createMarkers();
 //addDetections();
 //setInterval(updateMarkerPositions(markers_FirstFloor), 5000);
+
+
+//#region WaliedCheetos - Fire fighters
+
+var fireFighter01 = [
+  [25.2046, 55.3755],
+[25.2046, 55.3755],
+[25.2045, 55.3755],
+[25.2045, 55.3756],
+[25.2045, 55.3756],
+[25.2045, 55.3756],
+[25.2044, 55.3756],
+[25.2044, 55.3756],
+[25.2044, 55.3756],
+[25.2044, 55.3755],
+[25.2044, 55.3755],
+[25.2044, 55.3755],
+[25.2043, 55.3755],
+[25.2043, 55.3755],
+[25.2043, 55.3755],
+[25.2043, 55.3755],
+[25.2043, 55.3755],
+[25.2042, 55.3754],
+[25.2042, 55.3754],
+[25.2042, 55.3755],
+[25.2042, 55.3755],
+[25.2043, 55.3755],
+[25.2043, 55.3754],
+[25.2044, 55.3755],
+[25.2044, 55.3754],
+[25.2044, 55.3754],
+[25.2045, 55.3754],
+[25.2045, 55.3755],
+[25.2045, 55.3756],
+[25.2045, 55.3756],
+[25.2046, 55.3755]
+      ];
+
+      var marker_fireFighter01 ;
+      
+
+      function fireFighter_simulate(){
+        try {
+ 
+
+ // create SVG Dom Icon
+ var svg = `<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="10px" height="10px">
+    <circle cx="5" cy="5" r="4" fill="rgb(250, 127, 0)" stroke-width="1" stroke="black" opacity="1"/>
+    </svg>`,
+    
+    svgAnimatedPerson = '<svg id="mePin" xmlns="http://www.w3.org/2000/svg" width="43.3" height="42.4" viewBox="0 0 43.3 42.4"><path class="ring_outer" fill="#878787" d="M28.6 23c6.1 1.4 10.4 4.4 10.4 8 0 4.7-7.7 8.6-17.3 8.6-9.6 0-17.4-3.9-17.4-8.6 0-3.5 4.2-6.5 10.3-7.9.7-.1-.4-1.5-1.3-1.3C5.5 23.4 0 27.2 0 31.7c0 6 9.7 10.7 21.7 10.7s21.6-4.8 21.6-10.7c0-4.6-5.7-8.4-13.7-10-.8-.2-1.8 1.2-1 1.4z"/><path class="ring_inner" fill="#5F5F5F" d="M27 25.8c2 .7 3.3 1.8 3.3 3 0 2.2-3.7 3.9-8.3 3.9-4.6 0-8.3-1.7-8.3-3.8 0-1 .8-1.9 2.2-2.6.6-.3-.3-2-1-1.6-2.8 1-4.6 2.7-4.6 4.6 0 3.2 5.1 5.7 11.4 5.7 6.2 0 11.3-2.5 11.3-5.7 0-2-2.1-3.9-5.4-5-.7-.1-1.2 1.3-.7 1.5z"/><path class="mePin" d="M21.6 8.1a4 4 0 0 0 4-4 4 4 0 0 0-4-4.1 4.1 4.1 0 0 0-4.1 4 4 4 0 0 0 4 4.1zm4.9 8v-3.7c0-1.2-.6-2.2-1.7-2.6-1-.4-1.9-.6-2.8-.6h-.9c-1 0-2 .2-2.8.6-1.2.4-1.8 1.4-1.8 2.6V16c0 .9 0 2 .2 2.8.2.8.8 1.5 1 2.3l.2.3.4 1 .1.8.2.7.6 3.6c-.6.3-.9.7-.9 1.2 0 .9 1.4 1.7 3.2 1.7 1.8 0 3.2-.8 3.2-1.7 0-.5-.3-.9-.8-1.2l.6-3.6.1-.7.2-.8.3-1 .1-.3c.3-.8 1-1.5 1.1-2.3.2-.8.2-2 .2-2.8z" fill="#282828"/></svg>';
+
+    // Define a variable holding SVG mark-up that defines an animated icon image:
+    animatedSvg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" ' + 
+    'y="0px" style="margin:-112px 0 0 -32px" width="136px"' + 
+    'height="150px" viewBox="0 0 136 150"><ellipse fill="#000" ' +
+    'cx="32" cy="128" rx="36" ry="4"><animate attributeName="cx" ' + 
+    'from="32" to="32" begin="0s" dur="1.5s" values="96;32;96" ' + 
+    'keySplines=".6 .1 .8 .1; .1 .8 .1 1" keyTimes="0;0.4;1"' + 
+    'calcMode="spline" repeatCount="indefinite"/>' +    
+    '<animate attributeName="rx" from="36" to="36" begin="0s"' +
+    'dur="1.5s" values="36;10;36" keySplines=".6 .0 .8 .0; .0 .8 .0 1"' + 
+    'keyTimes="0;0.4;1" calcMode="spline" repeatCount="indefinite"/>' +
+    '<animate attributeName="opacity" from=".2" to=".2"  begin="0s" ' +
+    ' dur="1.5s" values=".1;.7;.1" keySplines=" .6.0 .8 .0; .0 .8 .0 1" ' +
+    'keyTimes=" 0;0.4;1" calcMode="spline" ' +
+    'repeatCount="indefinite"/></ellipse><ellipse fill="#1b468d" ' +
+    'cx="26" cy="20" rx="16" ry="12"><animate attributeName="cy" ' +
+    'from="20" to="20" begin="0s" dur="1.5s" values="20;112;20" ' +
+    'keySplines=".6 .1 .8 .1; .1 .8 .1 1" keyTimes=" 0;0.4;1" ' +
+    'calcMode="spline" repeatCount="indefinite"/> ' +
+    '<animate attributeName="ry" from="16" to="16" begin="0s" ' + 
+    'dur="1.5s" values="16;12;16" keySplines=".6 .0 .8 .0; .0 .8 .0 1" ' +
+    'keyTimes="0;0.4;1" calcMode="spline" ' +
+    'repeatCount="indefinite"/></ellipse></svg>';
+
+    var svgAnimated = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<g fill="none" stroke-width="3" transform="translate(11,11)">
+<circle id="my-circle" cx="0" cy="0" r="9" stroke="darkorange" fill="seagreen" />
+<animate href="#my-circle" attributeName="opacity"  values="1;-2" dur="1s" repeatCount="indefinite" /> </g> </svg>`;
+
+    domIcon = new H.map.DomIcon(svg),
+    animatedDomIcon = new H.map.DomIcon(svgAnimated);
+    markers_BasementFloor = [],
+    markers_FirstFloor = [],
+    markers_SecondFloor = [],
+
+     initialInputs = {
+    WaliedCheetos:{
+    detections:[
+        {
+            id:"detect_01",
+            object:{
+                type:"vehicle",
+                subtype:"light vehicle",
+                id:"obj_01"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"bathroom"
+                },
+                coordinates:{lat:47.4523, lng:8.5612}
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_02",
+            object:{
+                "type":"vehicle",
+                "subtype":"heavy vehicle",
+                id:"obj_02"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:{lat:47.4523, lng:8.5613}
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_03",
+            object:{
+                "type":"person",
+                "subtype":"safety engineer",
+                id:"obj_03"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:{lat:47.4536, lng:8.5615}
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_04",
+            object:{
+                "type":"person",
+                "subtype":"maintenance engineer",
+                id:"obj_04"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:{lat:47.4529, lng:8.5611}
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_05",
+            object:{
+                "type":"person",
+                "subtype":"service engineer",
+                id:"obj_05"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:{lat:47.4515, lng:8.5613}
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        },
+        {
+            id:"detect_06",
+            object:{
+                "type":"person",
+                "subtype":"vehicle owner",
+                id:"obj_06"
+            },
+            location:{
+                venue_info:{
+                    id:"venue_01",
+                    name:"WaliedCheetos_Venue_01",
+                    level:1,
+                    space:"retail"
+                },
+                coordinates:{lat:47.4515, lng:8.5608}
+            },
+            timestamp:"",
+            timestamp:"#WaliedCheetos|#BMW|#AGMC"
+        }
+    ],
+    vehciles_types:["light vehicle", "heavy vehicle"],
+    persons_types:["safety engineer", "service engineer", "vehicle owner"]
+}
+};
+
+
+//create markers
+
+marker_fireFighter01 = new H.map.DomMarker({lat:fireFighter01[0][0], lng: fireFighter01[0][1]}, {
+        icon: domIcon
+      });
+
+      // add markers to map
+        map.addObject(marker_fireFighter01);
+
+        try {
+                  //logic to add map object (marker) to the current active venue
+        venuesProvider.activeVenue.setMapObjects(
+          [marker_fireFighter01],
+          venuesProvider.activeVenue.getActiveLevelIndex(),
+          venuesProvider.activeVenue.getActiveDrawing()
+        );  
+        } catch (error) {
+          console.error(`WaliedCheetoss - ERROR : ${error}`);
+        }
+
+
+        setTimeout(updatefireFighterMarkerPosition, 1500);
+    setInterval(updatefireFighterMarkerPosition, 5000);
+  
+
+    function updatefireFighterMarkerPosition(){
+try{
+      fireFighter01.forEach(element => {
+          console.log(marker_fireFighter01.getGeometry());
+          console.log({lat:element[0], lng:element[1]});
+         
+          var xy = {lat:element[0], lng:element[1]};
+
+ ease(
+   marker_fireFighter01.getGeometry(),
+                xy,
+                4000,
+                function(xy) {
+                  marker_fireFighter01.setGeometry(xy);
+                });
+      });
+
+        } catch (error) {
+          console.error(`WaliedCheetos - ERROR : ${error}`);
+        }
+      }
+
+    } catch (error) {
+          console.error(`WaliedCheetos - ERROR : ${error}`);
+        }
+      }
+
+
+
+//#endregion
+
 
     </script>
   </body>

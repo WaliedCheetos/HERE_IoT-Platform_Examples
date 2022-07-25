@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Aramex geocoding tests</title>
+
+        <style>
+       .td-200 {
+    max-width: 200px;
+    min-width: 150px;
+    word-wrap: break-word;
+}
+
+.td-100 {
+    max-width: 100px;
+    min-width: 50px;
+    word-wrap: break-word;
+}
+
+th {
+  background: gray;
+  position: sticky;
+  top: 0;
+}
+
+
+            .input{
+                border:none;
+                font-size:10px;
+            }
+            .input:focus{
+                outline:none;
+            }
+
+            .right {
+                flex:1;
+                background-color: lightblue;
+                overflow: auto;
+                scroll-behavior: smooth;
+            }
+            .H_ib_body {
+                width: 333px;
+            }
+          </style>
+
+        <!-- helper libs -->
+        <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+
+        <!-- JS API -->
+        <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+
+    </head>
+
+    <body>
+        <div id="indicators" style="width: 63vw;height: 3vh;">
+            <div id="statusIndicator">Status : ...!</div>
+        </div>
+
+        <div id="helperContainers" style="width: 63vw;height: 7vh;">
+            <!-- <input type="text" id="inputtext_test">
+            <input type="button" value="test" id="inputbutton_test" onclick="test"> -->
+            <input type="file" id="input" value="Click here to choose an *.xlsx file">
+        </div>
+
+        <div id="maps" style="float: left; width: 49vw;height: 63vh;">
+            <div id="map_HERE" style="width:49vw;height:63vh;">
+            </div>
+        </div>
+
+        <div id="resultsTable" class="right" style="height: 63vh; z-index: 5000;" >
+            <table id="geocodingResultsTable" border="2" cellspacing="1" cellpadding="8" class="table">
+                <tr>
+                    <th class="tb-200">Address text</th>
+                    <th class="tb-200">Geocoded address title</th>
+                    <th class="tb-100">Result type</th>
+                    <th class="tb-100">Proximity</th>
+                    <th class="tb-100">Query score</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="charts" style="width: 100vw;height: 37vh;">
+            <div style="width: 40vw; height: 37vh; float:left">
+                <canvas id="chart01" ></canvas>
+            </div>
+            <div style="width: 40vw; height: 37vh; float:right">
+                <canvas id="chart02" ></canvas>
+            </div>
+        </div>
+
+
+        
+
+        <script type="module" src="./js/app.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Map with Route from A to B using Public Transport</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <link rel="stylesheet" type="text/css" href="demo.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="../template.css" />
+    <script type="text/javascript" src='../test-credentials.js'></script>    
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+    <style type="text/css">
+      .directions li span.arrow {
+        display:inline-block;
+        min-width:28px;
+        min-height:28px;
+        background-position:0px;
+        background-image: url("https://heremaps.github.io/maps-api-for-javascript-examples/map-with-pedestrian-route-from-a-to-b/img/arrows.png");
+        position:relative;
+        top:8px;
+      }
+      .directions li span.depart  {
+        background-position:-28px;
+      }
+      .directions li span.rightturn  {
+        background-position:-224px;
+      }
+      .directions li span.leftturn{
+        background-position:-252px;
+      }
+      .directions li span.arrive  {
+        background-position:-1288px;
+      }
+      </style>
+
+      <style type="text/css">
+        
+#map-with-route #map {
+    display: block;
+    width: 95%;
+    margin-bottom: 3px;
+    height: 450px;
+    background: grey;
+}
+
+#map-with-route #panel {
+    display: block;
+    width: 95%;
+    min-height: 450px;
+    max-height: 450px;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+
+#map-with-route #panel h3 {
+    margin-left: 2.5%;
+}
+
+      </style>
+
+  <body id="map-with-route">
+    <div class="page-header">
+        <h1>Map with Route from A to B using Public Transport</h1>
+        <p>Request a route from A to B using public transport and display it on the map.</p>
+    </div>
+    <p>This example calculates a route from the <b>Fernsehturm</b> at Panoramastraße in Berlin 
+      <i>(52.5208°N, 13.4093°E)</i> to <b>Kurfürstendamm</b> <i>(52.5034°N, 13.3295°E)</i> in the west of the 
+      city using Public Transit API v8, and displays it on the map. The calculation 
+      finds the fastest available route using public transport.</p>
+    <div id="map"></div>
+    <div id="panel"></div>
+
+    <script type="text/javascript">
+
+const config = {
+   attribution: 'WaliedCheetos - &copy; HERE 2021',
+   hereCredentials : {
+      appid: 'Lrw0yF4Z4nFpEe7jJxcd',
+      appcode: '9zhfUoi6kIHQqt85SunXuw',
+      apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E'
+   },
+   map:{
+   center : { 
+      lat: 23.755399865802094,
+      lng: 54.66024872659155
+   },
+   view:{
+    tilt:45,
+      zoom:12,
+      heading: 169,
+      text: 'Dubai, ARE'
+   }
+},
+services:{
+  reverseGeocoding: "https://revgeocode.search.hereapi.com/v1/revgeocode?lang=en-US"
+}
+};
+
+
+function calculateNextDepartures() {
+  try {
+    // Assign handlers immediately after making the request,
+// and remember the jqxhr object for this request
+var jqxhr = $.getJSON( "https://transit.api.here.com/v3/board.json?stnId=704042478&time=2022-01-21T16:25:00&app_id=C6MkoQPHmIpHaCULJZIE&app_code=aX7VVDRUfWKWFEGZEw6alA&max=50", function() {
+  console.log( "success" );
+})
+  .done(function(data) {
+    console.log( "second success" );
+    $.each( data.items, function( i, item ) {
+        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+        if ( i === 3 ) {
+          return false;
+        }
+      });
+  })
+  .fail(function() {
+    console.log( "error" );
+  })
+  .always(function() {
+    console.log( "complete" );
+  });
+ 
+// Perform other work here ...
+ 
+// Set another completion function for the request above
+jqxhr.always(function() {
+  console.log( "second complete" );
+});
+  } catch (error) {
+    console.error(`WaliedCheetos : EXCEPTION - ${error}`);
+  }
+}
+
+
+/**
+ * * Calculates and displays a public trasnsport route from the Fernsehturm in Berlin
+ * to Kurfürstendamm in the west of the city
+ *
+ * A full list of available request parameters can be found in the Routing API documentation.
+ * see:  http://developer.here.com/rest-apis/documentation/routing/topics/resource-calculate-route.html
+ *
+ * @param   {H.service.Platform} platform    A stub class to access HERE services
+ */
+ function calculateRouteFromAtoB (platform) {
+  var router = platform.getPublicTransitService(),
+      routeRequestParams = {
+        origin: '25.19728,55.23746', // the Dubai Mall, Dubai, UAE
+        destination: '25.07835,55.20605',  // Sustainability Pavilion, Madinat Al Mataar, Dubai, United Arab Emirates
+        return: 'polyline,actions,travelSummary'
+      };
+
+
+  router.getRoutes(
+    routeRequestParams,
+    onSuccess,
+    onError
+  );
+}
+
+/**
+ * This function will be called once the Routing REST API provides a response
+ * @param  {Object} result          A JSONP object representing the calculated route
+ *
+ * see: http://developer.here.com/rest-apis/documentation/routing/topics/resource-type-calculate-route.html
+ */
+function onSuccess(result) {
+  var route = result.routes[0];
+
+ /*
+  * The styling of the route response on the map is entirely under the developer's control.
+  * A representitive styling can be found the full JS + HTML code of this example
+  * in the functions below:
+  */
+  addRouteShapeToMap(route);
+  addManueversToMap(route);
+  addManueversToPanel(route);
+  addSummaryToPanel(route);
+  // ... etc.
+}
+
+/**
+ * This function will be called if a communication error occurs during the JSON-P request
+ * @param  {Object} error  The error message received.
+ */
+function onError(error) {
+  alert('Can\'t reach the remote server');
+}
+
+/**
+ * Boilerplate map initialization code starts below:
+ */
+
+// set up containers for the map  + panel
+var mapContainer = document.getElementById('map'),
+  routeInstructionsContainer = document.getElementById('panel');
+
+//Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: config.hereCredentials.apikey
+});
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map - this map is centered over Berlin
+var map = new H.Map(mapContainer,
+  defaultLayers.vector.normal.map,{
+  center: config.map.center,
+  zoom: config.map.view.zoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+// Hold a reference to any infobubble opened
+var bubble;
+
+/**
+ * Opens/Closes a infobubble
+ * @param  {H.geo.Point} position     The location on the map.
+ * @param  {String} text              The contents of the infobubble.
+ */
+function openBubble(position, text){
+ if(!bubble){
+    bubble =  new H.ui.InfoBubble(
+      position,
+      // The FO property holds the province name.
+      {content: text});
+    ui.addBubble(bubble);
+  } else {
+    bubble.setPosition(position);
+    bubble.setContent(text);
+    bubble.open();
+  }
+}
+
+
+/**
+ * Creates a H.map.Polyline from the shape of the route and adds it to the map.
+ * @param {Object} route A route as received from the H.service.RoutingService
+ */
+function addRouteShapeToMap(route){
+  var group = new H.map.Group();
+
+  route.sections.forEach(function(section) {
+    group.addObject(
+      new H.map.Polyline(
+        H.geo.LineString.fromFlexiblePolyline(section.polyline), {
+          style: {
+            lineWidth: 4,
+            strokeColor: 'rgba(0, 128, 255, 0.7)'
+          }
+        }
+      )
+    );
+  });
+
+  // Add the polyline to the map
+  map.addObject(group);
+  // And zoom to its bounding rectangle
+  map.getViewModel().setLookAtData({
+    bounds: group.getBoundingBox()
+  });
+}
+
+/**
+ * Creates a series of H.map.Marker points from the route and adds them to the map.
+ * @param {Object} route  A route as received from the H.service.RoutingService
+ */
+function addManueversToMap(route){
+  var svgMarkup = '<svg width="18" height="18" ' +
+    'xmlns="http://www.w3.org/2000/svg">' +
+    '<circle cx="8" cy="8" r="8" ' +
+      'fill="#1b468d" stroke="white" stroke-width="1"  />' +
+    '</svg>',
+    dotIcon = new H.map.Icon(svgMarkup, {anchor: {x:8, y:8}}),
+    group = new  H.map.Group(),
+    i;
+
+    route.sections.forEach((section) => {
+      let poly = H.geo.LineString.fromFlexiblePolyline(section.polyline).getLatLngAltArray();
+    
+      let actions = section.actions;
+      // Add a marker for each maneuver
+      if (actions) {
+        for (i = 0;  i < actions.length; i += 1) {
+          let action = actions[i];
+          var marker =  new H.map.Marker({
+            lat: poly[action.offset * 3],
+            lng: poly[action.offset * 3 + 1]},
+            {icon: dotIcon});
+          marker.instruction = action.instruction;
+          group.addObject(marker);
+        }
+      }
+    });
+
+    group.addEventListener('tap', function (evt) {
+      map.setCenter(evt.target.getGeometry());
+      openBubble(
+        evt.target.getGeometry(), evt.target.instruction);
+    }, false);
+  
+    // Add the maneuvers group to the map
+    map.addObject(group);
+}
+
+/**
+ * Creates a series of H.map.Marker points from the route and adds them to the map.
+ * @param {Object} route  A route as received from the H.service.RoutingService
+ */
+function addSummaryToPanel(route){
+  let duration = 0,
+      distance = 0;
+
+  route.sections.forEach((section) => {
+    distance += section.travelSummary.length;
+    duration += section.travelSummary.duration;
+  });
+
+  var summaryDiv = document.createElement('div'),
+   content = '';
+   content += '<b>Total distance</b>: ' + distance  + 'm. <br/>';
+   content += '<b>Travel Time</b>: ' + duration.toMMSS();
+
+
+  summaryDiv.style.fontSize = 'small';
+  summaryDiv.style.marginLeft ='5%';
+  summaryDiv.style.marginRight ='5%';
+  summaryDiv.innerHTML = content;
+  routeInstructionsContainer.appendChild(summaryDiv);
+}
+
+/**
+ * Creates a series of H.map.Marker points from the route and adds them to the map.
+ * @param {Object} route  A route as received from the H.service.RoutingService
+ */
+function addManueversToPanel(route){
+  var nodeOL = document.createElement('ol');
+
+  nodeOL.style.fontSize = 'small';
+  nodeOL.style.marginLeft ='5%';
+  nodeOL.style.marginRight ='5%';
+  nodeOL.className = 'directions';
+
+  route.sections.forEach((section) => {
+    if (section.actions) {
+      section.actions.forEach((action, idx) => {
+        var li = document.createElement('li'),
+            spanArrow = document.createElement('span'),
+            spanInstruction = document.createElement('span');
+
+        spanArrow.className = 'arrow ' + (action.direction || '') + action.action;
+        spanInstruction.innerHTML = section.actions[idx].instruction;
+        li.appendChild(spanArrow);
+        li.appendChild(spanInstruction);
+
+        nodeOL.appendChild(li);
+      });
+    }
+  });
+
+  routeInstructionsContainer.appendChild(nodeOL);
+}
+
+
+Number.prototype.toMMSS = function () {
+  return  Math.floor(this / 60)  +' minutes '+ (this % 60)  + ' seconds.';
+}
+
+// Now use the map as required...
+calculateRouteFromAtoB (platform);
+
+
+    </script>
+  </body>
+</html>

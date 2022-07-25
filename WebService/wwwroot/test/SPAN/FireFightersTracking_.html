@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="description" content="Here Venues API ot load and visualize data on the map">
+    <title>Fire Fighters Tracking</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/SPAN/index.css" />
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-venues.js"></script>
+
+    <script src="https://unpkg.com/@here/tracking-js@2.0.40/lib/HERETracking.min.js"></script>
+    <!-- <script src="../../js/SPAN/credentials.js"></script> -->
+
+    <script src="../../js/SPAN/config.js"></script>
+    <script src="../../js/SPAN/HEREAccountHelper.js"></script>
+
+    <body class="mapView">
+    <h1></h1>
+    <div id="mapContainer" style="width:63vw; height:63vh;"></div>
+    <div id="info">
+      <address></address>
+      <time></time>
+    </div>
+
+    <div id="loading"></div>
+    </body>
+
+    <script type="text/javascript">
+        /**
+ * Load and add indoor data on the map.
+ *
+ * @param  {H.Map} map A HERE Map instance
+ */
+function addVenueToMap(map) {
+  // Get an instance of the Indoor Maps service using a valid apikey for Indoor Maps
+  //const venuesService = platform.getVenuesService({ apikey: config.hereCredentials.apikey_venues });
+  const venuesService = platform.getVenuesService({ apikey: 'QICW7garcjxE7C7sSguJcNolMZXqYCJ9m5o6Qq3ygjg' });
+
+  // Indoor Maps provider interacts with a tile layer to visualize and control the Indoor Map
+  const venuesProvider = new H.venues.Provider();
+
+  // Indoor Maps service provides a loadVenue method
+  // venuesService.loadVenue(26431).then((venue) => {
+  // venuesService.loadVenue(27475).then((venue) => {
+  // venuesService.loadVenue(27608).then((venue) => {
+  venuesService.loadVenue(config.venues.id).then((venue) => {
+  // venuesService.loadVenue(7348).then((venue) => {
+    // add Indoor Maps data to the Indoor Maps provider
+    venuesProvider.addVenue(venue);
+    venuesProvider.setActiveVenue(venue);
+
+    // create a tile layer for the Indoor Maps provider
+    map.addLayer(new H.map.layer.TileLayer(venuesProvider));
+
+    // optionally select a different level
+    // venue.setActiveDrawing(7880);
+    // venue.setActiveDrawing(7880);
+
+    // create a level control
+    const levelControl = new H.venues.ui.LevelControl(venue);
+    ui.addControl('level-control', levelControl);
+
+    // create a drawing control:
+    const drawingControl = new H.venues.ui.DrawingControl(venue);
+    ui.addControl('drawing-control', drawingControl);
+  });
+}
+
+
+
+
+
+var hereTracking;
+function initiateHERETracking(){
+    try {
+
+        //Create a new HERETracking object:
+        hereTracking = new HERETracking();
+
+        //set the environment you want to run against.
+        //The options are 'cit' (Customer Integration Testing) or 'production'.
+        hereTracking.environment = config.hereCredentials.tracking.environment;
+        // hereTracking.environment = 'production';
+        // hereTracking.environment = 'cit';
+
+        //Log in a user:
+        hereTracking.users.login('***', '***')
+        .then(loginData => {
+            console.log(loginData);
+        });
+        
+        // //List a user's registered devices:
+        // hereTracking.users.listDevices({ token: 'h1.userTokenHere' })
+        // .then(devices => {
+        //     console.log(devices);
+        // });
+
+    } catch (error) {
+        console.error(`WaliedCheetos  - EXPCETION : ${error}`);
+    }
+}
+
+/**
+ * Boilerplate map initialization code starts below:
+ */
+
+// Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: config.hereCredentials.apikey
+});
+var defaultLayers = platform.createDefaultLayers();
+
+// Step 2: initialize a map
+var HEREMap = new H.Map(
+  document.getElementById('mapContainer'),
+  defaultLayers.vector.normal.map, {
+    zoom: config.mapCenter.zoom,
+    center: { lat: config.mapCenter.lat, lng: config.mapCenter.lng },
+    // center: { lat: 25.204247, lng: 55.3733013 },
+  // center: { lat: 47.452353, lng: 8.562455 },
+  pixelRatio: window.devicePixelRatio || 1
+});
+
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => HEREMap.getViewPort().resize());
+
+// Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(HEREMap));
+
+// Step 4: create the default UI component, for displaying bubbles
+var ui = H.ui.UI.createDefault(HEREMap, defaultLayers);
+
+// Step 5: add the Indoor Map
+//addVenueToMap(HEREMap);
+
+//#region setup HERE tracking
+
+// Create new HERETracking object
+const tracking = new HERETracking();
+
+// Set environment to production
+tracking.environment = config.hereCredentials.tracking.environment;
+
+  // Auth logic
+  const ha = hereAccountHelper(config.hereCredentials);
+
+
+  // Web viewer logic
+  const query = parseQuery(window.location.search);
+  const trackingId = query.trackingId;
+
+  var map, mapSnapped = true,
+    updateTimer, tracePolyline, pingCircleContainer, //showTrace = false,
+    marker;
+
+    //addEventListeners();
+    //map = HEREMap.map(document.querySelector('#map'), [52.5, 13.4], 14);
+
+    // Now use the map as required...
+window.onload = function () {
+  update();
+}
+
+// If we aren't logged in, redirect to login page
+if (ha.isLoggedIn() && trackingId) {
+  update();  
+  // HEREMap.onLoad(update);
+    addEventListeners();
+    // map = HEREMap.map(document.querySelector('#map'), [52.5, 13.4], 14);
+  } else {
+    // window.location = "login.html?returnTo=" + encodeURIComponent(window.location);
+    console.error(`WaliedCheetos  - ERROR : please check your HERE tracking credintials`);
+  }
+
+  
+  // Fetch the device shadow and trace
+  function update(){
+    try {
+      clearTimeout(updateTimer);
+
+var requestOptions = {
+  token: ha.getToken()
+};
+
+tracking.shadows.get(trackingId, requestOptions)
+  .then(function(data) {
+    document.querySelector('h1').innerText = data.name || trackingId;
+    // If there's a position reported
+    if (data && data.reported &&
+      data.reported.position &&
+      data.reported.position.lat) {
+      // updateAddress(data);
+      updateMap(data);
+    } else {
+      setLoading(false);
+      alert('This device has not reported a position');
+    }
+    updateTimer = setTimeout(update, 30000);
+  });
+if (config.hereCredentials.tracking.showTrace) {
+
+  // Only request the last 24 hours
+  tracking.traces.get(trackingId, { after: +new Date() - (24 * 60 * 60 * 1000) }, requestOptions)
+    .then(function(data) {
+      data.data.reverse();
+      drawTrace(data.data);
+    })
+    .catch(function(err) {
+      if (err.name === 'SyntaxError') {
+        showTrace = false;
+      } else {
+        console.error(`WaliedCheetos  - ERROR : ${err}`);
+        throw err;
+      }
+    })
+} else {
+  // hideTrace();
+}
+    } catch (error) {
+      console.error(`WaliedCheetos  - EXPCETION : ${error}`);
+    }
+  }
+
+  function addEventListeners(){
+    try {
+      
+    } catch (error) {
+      console.error(`WaliedCheetos  - EXPCETION : ${error}`);
+    }
+  }
+
+  // Update the state of the map
+  function updateMap(data) {
+
+try {
+    // const latitude = data.reported.position.lat;
+    // const longitude = data.reported.position.lng;
+
+    // Create the marker if necessary
+    if (!marker) {
+      // then add it to the map
+      var position = normalisePosition(data.reported.position);
+         marker = new H.map.Marker(position);
+        //  marker = new H.map.Marker(position, options);
+        HEREMap.addObject(marker);
+
+      //marker = HEREMap.marker(map, [latitude, longitude]);
+    } else {
+      // Otherwise, update its position
+      marker.setPosition(normalisePosition(data.reported.position));
+    }
+
+    // Only jump to the marker if we're not looking elsewhere
+    // if (mapSnapped) {
+    //   HEREMap.center(map, [latitude, longitude]);
+    //   HEREMap.zoom(map, 18);
+    // }
+
+    // Show the time the shadow was last updated
+    document.querySelector('time').innerHTML = 'Last updated: ' + (new Date(data.reported.timestamp));
+
+    setLoading(false);
+
+  } catch (error) {
+    console.error(`WaliedCheetos  - EXPCETION : ${error}`);
+  }
+}
+
+function normalisePosition(latitude, longitude) {
+        var normal = {
+            lat: false,
+            lng: false
+        };
+        if (typeof latitude === "number" && typeof longitude === "number") {
+            return {
+                lat: latitude,
+                lng: longitude
+            };
+        } else if (latitude instanceof Array && latitude.length >= 2) {
+            return {
+                lat: latitude[0],
+                lng: latitude[1]
+            }
+        } else {
+            return {
+                lat: latitude.latitude || latitude.lat,
+                lng: latitude.longitude || latitude.long || latitude.lon || latitude.lng
+            }
+        }
+    }
+
+    function parseQuery(qstr) {
+    var query = {};
+    var a = qstr.substr(1).split('&');
+    for (var i = 0; i < a.length; i++) {
+      var b = a[i].split('=');
+      query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    }
+    return query;
+  }
+
+  function setLoading(isLoading) {
+    if (isLoading) {
+      loading.style.display = 'block';
+    } else {
+      loading.style.display = 'none';
+      document.querySelector('#refresh img').classList.remove('loading');
+    }
+  }
+
+  //#endregion
+
+
+
+// initiateHERETracking();
+
+/*
+//#region setup HERE tracking
+
+var map, mapSnapped = true,
+    updateTimer, tracePolyline, pingCircleContainer, showTrace = false,
+    marker;
+
+// Create new HERETracking object
+const tracking = new HERETracking();
+
+// Set environment to production
+tracking.environment = config.hereCredentials.tracking.environment;
+
+// Auth logic
+const ha = hereAccountHelper(config.hereCredentials.tracking);
+
+ // If we aren't logged in, redirect to login page
+ if (ha.isLoggedIn() && trackingId) {
+    HEREMap.onLoad(update);
+    addEventListeners();
+    map = HEREMap.map(document.querySelector('#map'), [52.5, 13.4], 14);
+  } else {
+    window.location = "login.html?returnTo=" + encodeURIComponent(window.location);
+  }
+
+
+   // Fetch the device shadow and trace
+   function update() {
+    clearTimeout(updateTimer);
+
+    var requestOptions = {
+      token: ha.getToken()
+    };
+
+    tracking.shadows.get(trackingId, requestOptions)
+      .then(function(data) {
+        document.querySelector('h1').innerText = data.name || trackingId;
+        // If there's a position reported
+        if (data && data.reported &&
+          data.reported.position &&
+          data.reported.position.lat) {
+          updateAddress(data);
+          updateMap(data);
+        } else {
+          setLoading(false);
+          alert('This device has not reported a position');
+        }
+        updateTimer = setTimeout(update, 30000);
+      });
+    if (showTrace) {
+
+      // Only request the last 24 hours
+      tracking.traces.get(trackingId, { after: +new Date() - (24 * 60 * 60 * 1000) }, requestOptions)
+        .then(function(data) {
+          data.data.reverse();
+          drawTrace(data.data);
+        })
+        .catch(function(err) {
+          if (err.name === 'SyntaxError') {
+            showTrace = false;
+          } else {
+            throw err;
+          }
+        })
+    } else {
+      hideTrace();
+    }
+
+  }
+
+
+  //#endregion
+
+  */
+
+    </script>

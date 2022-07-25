@@ -47,7 +47,7 @@ const config = {
        logLevel:'TRACE'
    },
    customerSample:{
-       sampleSize : 250s,
+       sampleSize : 250,
        includeVerifiedLocation : false,
        country : 'United Arab Emirates',
        countrycode: 'ARE',
