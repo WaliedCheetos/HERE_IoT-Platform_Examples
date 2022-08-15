@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+    <title>Map at a specified location</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+     
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core-legacy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service-legacy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body >
+    <div id="map" style="width: 90vw; height:90vh"></div>
+    <script type="text/javascript">
+        var config = {
+            apikey: '***',
+            center : {lat:53.46316, lng:-2.29147},
+            zoom: 13
+        }
+
+        //Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: config.apikey
+});
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map - this map is centered over Europe
+var map = new H.Map(document.getElementById('map'),
+  defaultLayers.raster.normal.map,{
+  center: config.center,
+  zoom: config.zoom,
+  pixelRatio: window.devicePixelRatio || 1,
+  engineType: H.map.render.RenderEngine.EngineType.P2D
+});
+
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// // Assumption: the platform is instantiated
+// var trafficService = platform.getTrafficService(),
+//     provider = new H.service.traffic.flow.Provider(trafficService, H.map.render.RenderEngine.EngineType.P2D),
+//     trafficTiles = new H.map.layer.TileLayer(provider);
+
+var trafficService = platform.getMapTileService({type: 'traffic'}); 
+var trafficLayer = trafficService.createTileLayer(
+  'flowtile',
+//   'traffictile',
+  'normal.traffic.day', // 'hybrid.traffic.day' for satellite + traffic
+  512, 'png',
+  {'ppi' : ((window.devicePixelRatio || 1) >= 2) ? 250 : 72}
+);
+
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+//remove default mapsettings control
+ui.removeControl("mapsettings");
+// create custom one
+var customerMapSettingCtrl = new H.ui.MapSettingsControl( {
+    baseLayers : [ { 
+      label:"normal",layer:defaultLayers.raster.normal.map
+    },{
+      label:"satellite",layer:defaultLayers.raster.satellite.map
+    }, {
+      label:"terrain",layer:defaultLayers.raster.terrain.map
+    }
+    ],
+    layers: [ 
+        { label: 'layer.traffic', layer: trafficLayer }, 
+        // { label: 'layer.incidents', layer: defaultLayers.vector.normal.trafficincidents }
+    ]
+  });
+ui.addControl("WaliedCheetos",customerMapSettingCtrl);
+
+customerMapSettingCtrl.setAlignment('top-right');
+
+// Now use the map as required...
+window.onload = function () {
+
+}
+    </script>
+  </body>
+</html>
