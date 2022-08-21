@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+    <title>WaliedCheetos</title>
+
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <style type="text/css">
+        body,html,#map{height:100%;margin:0;}
+#map .centerMarker{
+  position:absolute;
+  /*url of the marker*/
+
+  /* background:url(http://maps.gstatic.com/mapfiles/markers2/marker.png) no-repeat; */
+  /*center the marker*/
+  /* top:50%;left:50%; */
+  /* z-index:1; */
+  /* fix offset when needed */
+  /* margin-left:-10px; */
+  /* margin-top:-34px; */
+  /*size of the image*/
+  /* height:34px; */
+  /* width:20px; */
+
+    /* background:url(UserLocation.gif) no-repeat; */
+    /* background:url(https://img.icons8.com/color/96/000000/user-location.png) no-repeat; */
+    background:url(https://img.icons8.com/doodle/48/000000/user-location.png) no-repeat;
+
+  top:50%;left:50%;
+  z-index:1;
+  /*fix offset when needed*/
+  margin-left:-10px;
+  margin-top:-34px;
+  /*size of the image*/
+  height: 48px;
+  width:48px;
+
+  cursor:pointer;
+}
+    </style>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  </head>
+  <body>
+
+    <div id="map"></div>
+
+    <script type="text/javascript">
+
+var config = {
+    apikey: 'pmYeJOpIGhJHSyyizwSKKPJoAHdjJ_bj12yfckgiT4E',
+    mapCenter: {lat: 30.045022683066097, lng: 31.22236332891281},
+    mapZoom: '13',
+    hereRGC7: 'https://search.hereapi.com/v1/revgeocode?limit=1&lang=en-US&types=street&show=hmcReference',
+    // hereRGC7: 'https://ci.opensearch.dev.api.here.com/v1/revgeocode&lang=en-US&types=street&show=hmcReference',
+    hereMapAttributes: ''
+}
+
+
+//Step 1: initialize communication with the platform
+// In your own code, replace variable window.apikey with your own apikey
+var platform = new H.service.Platform({
+  apikey: config.apikey
+});
+var defaultLayers = platform.createDefaultLayers({pois: true});
+
+//Step 2: initialize a map - this map is centered over Europe
+var map = new H.Map(document.getElementById('map'),
+  defaultLayers.vector.normal.map,{
+  center: config.mapCenter,
+  zoom: config.mapZoom,
+  pixelRatio: window.devicePixelRatio || 1
+});
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+
+// Enable the event system on the map instance:
+var mapEvents = new H.mapevents.MapEvents(map);
+
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(mapEvents);
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+
+
+// Add event listener:
+map.addEventListener('dragend', function(evt) {
+    // Log 'tap' and 'mouse' events:
+    //console.log(evt.type, evt.currentPointer.type); 
+        //console.log(evt.type, evt.currentPointer.type); 
+        console.log(`Map is centered @ ${map.getCenter().lat}, ${map.getCenter().lng}`);
+        getSpeedLimits(map.getCenter().lat, map.getCenter().lng);
+    //alert(`Map is centered @ ${map.getCenter().lat}, ${map.getCenter().lng}`);
+
+
+});
+
+
+// We have to get chips after we get fish...
+// async getFishAndChips(lat, lng) {
+//     const fish = await fetch(`${config.hereRGC7}&at=${lat},${lng}&apikey=${config.apikey}`).then(response => response.json());
+//     this.fish = fish;
+
+//     const fishIds = fish.map(fish => fish.id),
+//       chipReqOpts = { method: 'POST', body: JSON.stringify({ fishIds }) };
+
+//     const chips = await fetch(this.chipsApiUrl, chipReqOpts).then(response => response.json());
+//     this.chips = chips;
+// }
+
+
+function loadUsers() {
+    fetch('/article/promise-chaining/user.json')
+  .then(response => response.json())
+  .then(user => fetch(`https://api.github.com/users/${user.name}`))
+  .then(response => response.json())
+  .then(githubUser => new Promise(function(resolve, reject) { // (*)
+    let img = document.createElement('img');
+    img.src = githubUser.avatar_url;
+    img.className = "promise-avatar-example";
+    document.body.append(img);
+
+    setTimeout(() => {
+      img.remove();
+      resolve(githubUser); // (**)
+    }, 3000);
+  }))
+  // triggers after 3 seconds
+  .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+}
+
+async function getSpeedLimits(lat, lng) {
+    const rgc = await fetch(`${config.hereRGC7}&at=${lat},${lng}&apikey=${config.apikey}`).then(response => response.json());
+    this.rgc = rgc;
+    
+    console.debug(rgc.items[0].title);
+    
+    hmcRef = rgc.items[0].hmc;
+    console.debug(hmcRef);
+
+
+    // const mapAttributes = await fetch(`${config.hereMapAttributes}&apikey=${config.apikey}&segmentId=${hmc.ref}`);
+    // this.mapAttributes = mapAttributes;
+}
+
+// Now use the map as required...
+window.onload = function () {
+        $('<div/>').addClass('centerMarker').appendTo(document.getElementById('map'));
+}
+
+
+//listen to map drag end event
+//get map center coordinates
+//request a promise to HERE reverse geocoding at the map center coordinates
+//once the promise is resolved request HERE map attributes to get speed limit at the map center coordinates
+
+
+    </script>
+  </body>
+</html>
